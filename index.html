@@ -114,57 +114,52 @@
 <header
   style="
     position: relative;
-    height: 60px;                                            /* fixed banner height */
+    height: 60px;                                   /* fixed banner height */
+    padding: 0 32px;                                /* horizontal gutter */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;                 /* logo left, nav right */
     background: linear-gradient(to right, #ff5e3a, #8e44ad);
-    padding: 0 24px;                                         /* horizontal padding only */
-    overflow: visible;                                       /* show overflowing logo */
+    box-sizing: border-box;
+    overflow: visible;                              /* show oversized badge */
   "
 >
-  <!-- Absolutely positioned logo container -->
+  <!-- LOGO BADGE -->
   <div
     style="
       position: absolute;
-      left: 24px;                                             /* same as header padding */
-      top: 50%;                                               /* halfway down banner */
-      transform: translateY(-50%);                           /* center vertically */
-      background: white;                                      /* make tag pop */
-      padding: 4px 8px;
-      border-radius: 4px;
+      left: 16px;                                   /* flush to the edge */
+      top: 50%;                                     /* vertical center */
+      transform: translateY(-50%);
+      background: #ffffff;
+      padding: 6px 10px;
+      border-radius: 6px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
     "
   >
     <a href="/" style="display: block;">
       <img
         src="swiftora_logo_transparent.png"
         alt="Swiftora Logo"
-        style="
-          height: 80px;                                       /* tune this up/down */
-          width: auto;                                        /* keep aspect ratio */
-          display: block;
-        "
+        style="height: 100px; width: auto; display: block;"  <!-- adjust height here -->
       />
     </a>
   </div>
 
-  <!-- Nav: full-height flex container for vertical centering -->
+  <!-- NAVIGATION -->
   <nav
     style="
-      height: 100%;
+      margin-left: auto;                            /* push far right */
       display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 32px;
+      gap: 40px;
+      font-weight: 700;                             /* bold */
     "
   >
-    <a href="index.html" style="color: white; text-decoration: none; font-weight: bold;">
-      Home
-    </a>
-    <a href="about.html" style="color: white; text-decoration: none; font-weight: bold;">
-      About
-    </a>
-    <a href="demo.html" style="color: white; text-decoration: none; font-weight: bold;">
-      Demo
-    </a>
+    <a href="index.html" style="color:#fff;text-decoration:none;">Home</a>
+    <a href="about.html" style="color:#fff;text-decoration:none;">About</a>
+    <a href="demo.html"  style="color:#fff;text-decoration:none;">Demo</a>
   </nav>
 </header>
 
@@ -262,6 +257,7 @@
 
 </body>
 </html>
+
 
 
 
