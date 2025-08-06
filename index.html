@@ -32,16 +32,38 @@
     display:flex;align-items:center;justify-content:flex-end;
     box-shadow:0 2px 4px rgb(0 0 0 / 10%);overflow:visible;
   }
-  .logo-badge{
-    position:absolute;left:16px;top:50%;transform:translateY(-50%);
-    background:#fff;padding:0 4px;border-radius:4px;
-    box-shadow:0 2px 4px rgb(0 0 0 / 12%);
-    display:flex;align-items:center;
-  }
-  .logo-badge img{height:150px;width:auto;display:block}
+/* --- Logo badge (flush white capsule) --- */
+.logo-badge {
+  position: absolute;
+  left: 16px;                 /* distance from left edge */
+  top: 50%;                   /* vertical center of 60-px bar */
+  transform: translateY(-50%);
+  background: #fff;
+  padding: 0 4px;             /* no top/bottom padding, 4 px left/right */
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 12%);
+  display: flex;
+  align-items: center;
+}
 
-  nav{display:flex;align-items:center;gap:40px;font-weight:700}
-  nav a{color:#fff}
+.logo-badge img {
+  height: 150px;              /* increase / decrease to taste */
+  width: auto;
+  display: block;
+}
+
+/* --- Navigation links (right-aligned, bold, white) --- */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  font-weight: 700;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+}
 
   /* ---------- HERO ---------- */
   main{padding:3rem 2rem;text-align:center}
@@ -141,3 +163,4 @@
   </footer>
 </body>
 </html>
+
