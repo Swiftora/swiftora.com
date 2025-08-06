@@ -113,25 +113,37 @@
 <!-- HEADER -->
 <header
   style="
-    padding: 12px 24px;
+    position: relative;
+    height: 60px;                      /* fixed banner height */
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(to right, #ff5e3a, #8e44ad);
+    padding: 0 24px;                   /* no vertical padding */
+    overflow: visible;                 /* allow logo overflow */
   "
 >
-  <!-- Logo (fixed width, auto height) -->
+  <!-- Logo (overflows banner) -->
   <a href="/" style="display: flex; align-items: center;">
     <img
       src="swiftora_logo_transparent.png"
       alt="Swiftora Logo"
       style="
-        width: 200px;      /* set your desired width */
-        height: 60px;      /* maintain aspect ratio */
+        height: 100px;                 /* taller than banner */
+        width: auto;                   /* maintain aspect ratio */
+        margin-top: -20px;             /* center within 60px (100–60)/2 */
         margin-right: 12px;
       "
     />
   </a>
+
+  <!-- Navigation aligned to the right -->
+  <nav style="display: flex; gap: 32px;">
+    <a href="index.html" style="color: white; text-decoration: none; font-weight: 500;">Home</a>
+    <a href="about.html" style="color: white; text-decoration: none; font-weight: 500;">About</a>
+    <a href="demo.html" style="color: white; text-decoration: none; font-weight: 500;">Demo</a>
+  </nav>
+</header>
 
   <!-- Navigation aligned to the right -->
   <nav style="display: flex; gap: 32px;">
@@ -183,6 +195,7 @@
 
 </body>
 </html>
+
 
 
 
