@@ -102,11 +102,28 @@
 <body>
   <!-- HEADER -->
   <header>
-    <div class="logo-badge">
-      <a href="/">
-        <img src="swiftora_logo_transparent.png" alt="Swiftora logo" />
-      </a>
-    </div>
+<div
+  style="
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffffff;
+    padding: 0 8px;                /* slim white band */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 12%);
+    display: flex;
+    align-items: center;
+  "
+>
+  <a href="/" style="display: block;">
+    <img
+      src="swiftora_logo_transparent.png"
+      alt="Swiftora logo"
+      style="height: 110px; width: auto;"  <!-- adjust height if you want it bigger/smaller -->
+    />
+  </a>
+</div>
 
     <nav>
       <a href="index.html">Home</a>
@@ -158,3 +175,4 @@
   </footer>
 </body>
 </html>
+
