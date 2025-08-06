@@ -8,21 +8,25 @@
   --text-color: #333;
   --heading-color: #222;
 }
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 body {
   font-family: 'Montserrat', Arial, sans-serif;
   background-color: #fff;
   color: var(--text-color);
   line-height: 1.6;
 }
+
 a {
-  color: inherit;
   text-decoration: none;
+  color: inherit;
 }
+
 /* Header and Nav */
 .site-header {
   position: sticky;
@@ -36,53 +40,63 @@ a {
   align-items: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
 .site-header .logo {
   display: flex;
   align-items: center;
   font-size: 1.4rem;
   font-weight: bold;
 }
+
 .site-header .logo img {
-  height: 48px;
+  height: 40px;
   width: auto;
   margin-right: 8px;
 }
+
 .site-header .main-nav ul {
   list-style: none;
   display: flex;
   gap: 24px;
 }
+
 .site-header .main-nav ul li a {
   color: #fff;
   font-weight: 500;
   transition: opacity .2s ease;
 }
+
 .site-header .main-nav ul li a:hover {
   opacity: .8;
 }
-/* Hero Section */
+
+/* Hero section */
 .hero {
   background: var(--light-gray);
   padding: 4rem 2rem;
   text-align: center;
 }
+
 .hero h1 {
   font-size: 2.4rem;
   margin-bottom: 1rem;
   color: var(--heading-color);
   font-weight: 700;
 }
+
 .hero p {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
   color: #555;
 }
+
 .cta-buttons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
 }
+
 .btn {
   display: inline-block;
   padding: 0.8rem 1.6rem;
@@ -92,35 +106,43 @@ a {
   cursor: pointer;
   border: none;
 }
+
 .primary-btn {
   background-color: var(--primary);
   color: #fff;
 }
+
 .primary-btn:hover {
   background-color: var(--primary-dark);
 }
+
 .secondary-btn {
   background-color: var(--secondary);
   color: #fff;
 }
+
 .secondary-btn:hover {
   background-color: var(--secondary-dark);
 }
-/* Signup Section */
+
+/* Signup section */
 .signup {
   padding: 4rem 2rem;
   text-align: center;
 }
+
 .signup h2 {
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
   color: var(--heading-color);
 }
+
 .signup p {
   font-size: 1rem;
   margin-bottom: 1.5rem;
   color: #555;
 }
+
 .signup form {
   display: flex;
   flex-wrap: wrap;
@@ -129,6 +151,7 @@ a {
   max-width: 600px;
   margin: auto;
 }
+
 .signup input {
   padding: 0.8rem 1rem;
   border: 1px solid #ccc;
@@ -136,6 +159,7 @@ a {
   font-size: 1rem;
   min-width: 200px;
 }
+
 .signup button {
   background-color: var(--primary);
   color: #fff;
@@ -145,21 +169,25 @@ a {
   font-weight: 600;
   cursor: pointer;
 }
+
 .signup button:hover {
   background-color: var(--primary-dark);
 }
-/* Features Section */
+
+/* Features section */
 .features {
   padding: 4rem 2rem;
   background-color: var(--light-gray);
   text-align: center;
 }
+
 .features h2 {
   font-size: 2rem;
   margin-bottom: 2rem;
   color: var(--heading-color);
   font-weight: 700;
 }
+
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -167,6 +195,7 @@ a {
   max-width: 900px;
   margin: auto;
 }
+
 .feature-card {
   background: #fff;
   border: 1px solid #eee;
@@ -175,60 +204,73 @@ a {
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   text-align: center;
 }
+
 .feature-card h3 {
-  margin: 1rem 0 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
   font-size: 1.2rem;
   color: var(--heading-color);
 }
+
 .feature-card p {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #555;
 }
+
 .feature-card .feature-icon {
   font-size: 2rem;
   color: var(--primary);
 }
-/* General content section (About, Privacy, Thank You) */
+
+/* General content section */
 .content-section {
   max-width: 800px;
   margin: 0 auto;
   padding: 4rem 2rem;
   line-height: 1.6;
 }
+
 .content-section h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
   color: var(--heading-color);
   font-weight: 700;
 }
+
 .content-section ul {
   margin: 1rem 0 1rem 1.5rem;
   padding-left: 1rem;
 }
+
 .content-section ul li {
   margin-bottom: 0.8rem;
   font-size: 1rem;
 }
+
 .content-section a {
   color: var(--secondary);
   text-decoration: none;
 }
+
 .content-section a:hover {
   text-decoration: underline;
 }
-/* Demo page specific */
+
+/* Demo page */
 .demo-wrapper {
   max-width: 900px;
   margin: 0 auto;
   padding: 4rem 2rem;
   background: #fafafa;
 }
+
 .stepper {
   display: flex;
   justify-content: center;
   gap: 1rem;
   margin: 1.5rem 0;
 }
+
 .stepper .dot {
   width: 28px;
   height: 28px;
@@ -242,11 +284,13 @@ a {
   color: #777;
   background: #fff;
 }
+
 .stepper .dot.active {
   border-color: var(--secondary);
   background: var(--secondary);
   color: #fff;
 }
+
 .demo-panel {
   background: #fff;
   border: 1px solid #e2e2e2;
@@ -256,16 +300,19 @@ a {
   margin-bottom: 2rem;
   text-align: center;
 }
+
 .demo-panel h2 {
   margin-bottom: 1rem;
   font-size: 1.4rem;
 }
+
 .demo-panel input[type="file"] {
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 0.9rem;
 }
+
 .demo-panel img.preview {
   max-width: 240px;
   border: 1px solid #e0e0e0;
@@ -273,6 +320,8 @@ a {
   margin: 1rem auto 0;
   display: none;
 }
+
+/* Output cards */
 .out-card {
   background: #f9f9ff;
   border: 1px dashed #c9c6ff;
@@ -283,9 +332,11 @@ a {
   margin: 1.2rem auto;
   font-size: 0.95rem;
 }
+
 .out-card strong {
   color: var(--secondary);
 }
+
 .disclaimer {
   text-align: center;
   font-size: 0.8rem;
@@ -293,6 +344,7 @@ a {
   margin-top: 1rem;
   font-style: italic;
 }
+
 .next-btn {
   background: var(--primary);
   color: #fff;
@@ -305,9 +357,42 @@ a {
   margin-top: 1.2rem;
   transition: background .25s;
 }
+
 .next-btn:hover {
   background: var(--primary-dark);
 }
+
+/* Confidence & Gamification cards */
+.confidence-card {
+  background: #f0fff3;
+  border: 1px dashed #b3e6c5;
+  padding: 1.2rem;
+  border-radius: 8px;
+  text-align: left;
+  max-width: 600px;
+  margin: 1.2rem auto;
+  font-size: 0.95rem;
+}
+
+.confidence-card strong {
+  color: #2c8a51;
+}
+
+.gamify-card {
+  background: #fff8e1;
+  border: 1px dashed #ffe0b2;
+  padding: 1.2rem;
+  border-radius: 8px;
+  text-align: left;
+  max-width: 600px;
+  margin: 1.2rem auto;
+  font-size: 0.95rem;
+}
+
+.gamify-card strong {
+  color: #d35400;
+}
+
 /* Footer */
 .site-footer {
   background: #f5f5f5;
@@ -316,26 +401,35 @@ a {
   text-align: center;
   font-size: 0.9rem;
 }
+
 .site-footer a {
   color: var(--secondary);
   font-weight: 500;
   text-decoration: none;
 }
+
 .site-footer a:hover {
   text-decoration: underline;
 }
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
   .site-header .logo img {
-    height: 40px;
+    height: 32px;
   }
   .site-header .main-nav ul {
     gap: 16px;
   }
+  .hero h1 {
+    font-size: 2rem;
+  }
   .cta-buttons {
     flex-direction: column;
+  }
+  .feature-grid {
+    gap: 1rem;
+  }
+  .features h2 {
+    font-size: 1.6rem;
   }
 }
