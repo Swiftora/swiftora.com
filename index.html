@@ -2,106 +2,118 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Swiftora is an AI-powered tool for vintage and secondhand resellers to automate listings, price smarter, and track ROI. Join our early-access list!">
+  <meta property="og:title" content="Swiftora – AI that lists smarter, not harder">
+  <meta property="og:description" content="Automate listings, improve pricing guidance, and track ROI for vintage and secondhand items. Early-access sign-up open now!">
+  <meta property="og:image" content="swiftora_logo.jpeg">
   <title>Swiftora | Smarter Selling Starts Here</title>
   <link rel="icon" href="swiftora_logo.jpeg">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap">
   <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      background: #fff;
-      color: #333;
-    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', Arial, sans-serif; background: #fff; color: #333; margin: 0 }
     header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       background: linear-gradient(to right, #ff6b00, #8e2de2);
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      color: #fff;
       padding: 1rem 2rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .logo {
       display: flex;
       align-items: center;
-      font-size: 1.5rem;
-      font-weight: bold;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
     }
     .logo img {
-      height: 40px;
-      margin-right: 10px;
+      height: 50px;
+      margin-right: 8px;
     }
+    .logo { display: flex; align-items: center; font-size: 1.3rem; font-weight: bold; }
     nav a {
-      color: white;
-      margin-left: 20px;
+      color: #fff;
+      margin: 0 1rem;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 500
     }
-    main {
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-    .tagline {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    .cta input, .cta button {
-      padding: 0.8rem;
-      margin: 0.5rem;
+    main { padding: 3rem 2rem; text-align: center }
+    .tagline { font-size: 2rem; margin-top: 2rem }
+    .cta form { margin-top: 2rem }
+    .cta input[type=text], .cta input[type=email] {
+      padding: .8rem;
+      width: 200px;
+      margin: .5rem;
       border-radius: 4px;
-      border: 1px solid #ccc;
+      border: 1px solid #ccc
     }
     .cta button {
-      background-color: #ff6b00;
-      color: white;
+      padding: .9rem 1.5rem;
+      background: #ff6b00;
+      color: #fff;
       border: none;
+      border-radius: 4px;
       cursor: pointer;
-      font-weight: bold;
-    }
-    .demo-button {
-      margin-top: 2rem;
-    }
-    .demo-button a {
-      padding: 1rem 2rem;
-      background-color: #8e2de2;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
       font-weight: 600;
+      font-size: 1rem
     }
+    .demo-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: .9rem 1.5rem;
+      background: #7b2cbf;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background .3s ease
+    }
+    .demo-btn:hover {
+      background: #5a189a;
+    }
+    #features { padding: 4rem 2rem; text-align: center }
     .features {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
-      margin-top: 3rem;
+      justify-content: center;
+      margin-top: 2rem
     }
     .feature {
-      flex: 1 1 250px;
-      padding: 1rem;
+      flex: 1 1 240px;
       margin: 1rem;
+      padding: 1.5rem;
       border: 1px solid #eee;
       border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05)
+    }
+    .feature h3 {
+      margin-bottom: .5rem;
+      font-size: 1.1rem
+    }
+    .feature p {
+      font-size: .9rem;
+      color: #555
     }
     footer {
-      background-color: #eee;
-      text-align: center;
+      background: #f2f2f2;
       padding: 1rem;
-      font-size: 0.9rem;
+      text-align: center;
+      font-size: .9rem
     }
-    @media (max-width: 600px) {
-      .tagline { font-size: 1.5rem; }
-      nav a { margin-left: 10px; }
+    @media(max-width:600px){
+      .tagline{font-size:1.6rem}
+      nav a{margin:0 .5rem}
+      .features{flex-direction:column}
+      .cta input[type=text], .cta input[type=email]{width:100%}
     }
   </style>
 </head>
 <body>
+
+  <!-- HEADER -->
   <header>
     <div class="logo">
       <img src="swiftora_logo.jpeg" alt="Swiftora logo">
-      Swiftora
     </div>
     <nav>
       <a href="index.html">Home</a>
@@ -110,22 +122,26 @@
     </nav>
   </header>
 
+  <!-- HERO + CTA -->
   <main>
     <h1 class="tagline">AI that lists smarter, not harder.</h1>
     <p>Swiftora helps resellers automate listings, improve pricing, and track ROI — without the manual hassle.</p>
     <div class="cta">
       <form action="https://formspree.io/f/mdkdwvqp" method="POST">
-        <input type="text" name="name" placeholder="Your name" required>
+        <input type="text"  name="name"  placeholder="Your name" required>
         <input type="email" name="email" placeholder="Your email" required>
         <input type="hidden" name="_next" value="https://swiftora.com/thank-you.html">
         <button type="submit">Get Early Access</button>
       </form>
+      <br>
+      <a class="demo-btn" href="demo.html">Try the Interactive Demo</a>
     </div>
-    <div class="demo-button">
-      <a href="demo.html">Try the Interactive Demo</a>
-    </div>
+  </main>
 
-    <section class="features">
+  <!-- KEY FEATURES -->
+  <section id="features">
+    <h2>Key Features</h2>
+    <div class="features">
       <div class="feature">
         <h3>AI Listing Generator</h3>
         <p>Snap or upload photos and let Swiftora craft titles & descriptions optimized for each marketplace.</p>
@@ -138,12 +154,15 @@
         <h3>ROI Tracker</h3>
         <p>Easily calculate fees, shipping, and profit margins so you focus on your most lucrative flips.</p>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
+  <!-- FOOTER -->
   <footer>
     &copy; 2025 Swiftora. All rights reserved. | <a href="privacy.html">Privacy Policy</a>
   </footer>
+
 </body>
 </html>
+
 
