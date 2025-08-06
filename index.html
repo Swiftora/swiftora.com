@@ -12,50 +12,25 @@
   <style>
     html { scroll-behavior: smooth; }
     body { font-family: 'Montserrat', Arial, sans-serif; background: #fff; color: #333; margin: 0; }
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: linear-gradient(to right, #ff6b00, #8e2de2);
-      color: #fff; padding: 1rem 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+    header { position: sticky; top: 0; z-index: 100; background: linear-gradient(to right, #ff6b00, #8e2de2); color: #fff; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
     .logo { display: flex; align-items: center; font-size: 1.5rem; font-weight: bold; }
     .logo img { height: 60px; margin-right: 12px; }
     nav a { color: #fff; margin: 0 1rem; text-decoration: none; font-weight: 500; }
     main { padding: 3rem 2rem; text-align: center; }
     .tagline { font-size: 2rem; margin-top: 2rem; }
     .cta form { margin-top: 2rem; }
-    .cta input[type=text],
-    .cta input[type=email] {
-      padding: .8rem; width: 250px; margin: .5rem;
-      border-radius: 4px; border: 1px solid #ccc;
-    }
-    .cta button {
-      padding: .9rem 1.8rem; background: #ff6b00; color: #fff;
-      border: none; border-radius: 4px; cursor: pointer;
-      font-weight: 600; font-size: 1rem;
-    }
+    .cta input[type=text], .cta input[type=email] { padding: .8rem; width: 250px; margin: .5rem; border-radius: 4px; border: 1px solid #ccc; }
+    .cta button { padding: .9rem 1.8rem; background: #ff6b00; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 1rem; }
     #features { padding: 4rem 2rem; text-align: center; }
-    .features {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      margin-top: 2rem;
-    }
-    .feature {
-      flex: 1 1 240px; margin: 1rem; padding: 1rem;
-      border: 1px solid #eee; border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
+    .features { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 2rem; }
+    .feature { flex: 1 1 240px; margin: 1rem; padding: 1rem; border: 1px solid #eee; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
     .feature h3 { margin-bottom: .5rem; font-size: 1.1rem; }
     .feature p { font-size: .9rem; color: #555; }
-    footer {
-      background: #eee; padding: 1rem; text-align: center;
-      font-size: .9rem;
-    }
-    @media(max-width:600px) {
-      .tagline { font-size: 1.6rem; }
-      nav a { margin: 0 .5rem; }
-      .features { flex-direction: column; }
-    }
+    #mock-ai-demo { padding: 4rem 2rem; background: #f9f9f9; text-align: center; }
+    .mock-upload { margin-top: 2rem; }
+    .mock-output { margin-top: 1rem; font-style: italic; color: #444; }
+    footer { background: #eee; padding: 1rem; text-align: center; font-size: .9rem; }
+    @media(max-width:600px) { .tagline { font-size: 1.6rem; } nav a { margin: 0 .5rem; } .features { flex-direction: column; } }
   </style>
 </head>
 <body>
@@ -77,14 +52,24 @@
     <h1 class="tagline">AI that lists smarter, not harder.</h1>
     <p>Swiftora helps resellers automate listings, improve pricing, and track ROI&nbsp;— without the manual hassle.</p>
     <div class="cta">
-      <form id="signupForm" action="https://formspree.io/f/mdkdwvqp" method="POST">
-        <input type="text"  name="name"  placeholder="Your name"  required>
+      <form action="https://formspree.io/f/mdkdwvqp" method="POST">
+        <input type="text"  name="name"  placeholder="Your name" required>
         <input type="email" name="email" placeholder="Your email" required>
         <input type="hidden" name="_next" value="https://swiftora.com/thank-you.html">
         <button type="submit">Get Early Access</button>
       </form>
     </div>
   </main>
+
+  <!-- MOCK AI DEMO -->
+  <section id="mock-ai-demo">
+    <h2>Try a Demo</h2>
+    <p>Upload a photo and see a sample listing Swiftora could generate:</p>
+    <div class="mock-upload">
+      <input type="file" id="demoUpload" accept="image/*">
+      <div class="mock-output" id="demoOutput"></div>
+    </div>
+  </section>
 
   <!-- KEY FEATURES -->
   <section id="features">
@@ -107,34 +92,25 @@
 
   <!-- FOOTER -->
   <footer>
-    &copy; 2025 Swiftora. All rights reserved. &nbsp;|&nbsp;
+    &copy; 2025 Swiftora. All rights reserved. |
     <a href="privacy.html" style="color:#8e2de2;text-decoration:none;">Privacy Policy</a>
   </footer>
 
-  <!-- AJAX SUBMIT → CUSTOM THANK-YOU REDIRECT -->
   <script>
-    document.getElementById('signupForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const form = e.target;
-      fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location = 'thank-you.html';
-        } else {
-          return response.json().then(data => {
-            throw new Error(data.error || 'Submission failed');
-          });
-        }
-      })
-      .catch(err => {
-        alert('Oops! ' + err.message);
-      });
+    const demoUpload = document.getElementById('demoUpload');
+    const demoOutput = document.getElementById('demoOutput');
+
+    demoUpload.addEventListener('change', function() {
+      if (demoUpload.files.length > 0) {
+        const examples = [
+          'Title: Vintage Mid-Century Amber Glass Vase | Description: Elegant ribbed vase from the 1960s. Perfect for boho or retro decor.',
+          'Title: Antique Brass Candle Holder | Description: Ornate solid brass with patina, ideal for vintage-inspired spaces.',
+          'Title: Retro 1980s Digital Alarm Clock | Description: Fully functional with bold red LED display, classic 80s nostalgia piece.'
+        ];
+        const sample = examples[Math.floor(Math.random() * examples.length)];
+        demoOutput.textContent = sample;
+      }
     });
   </script>
-
 </body>
 </html>
