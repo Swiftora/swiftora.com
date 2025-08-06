@@ -16,15 +16,16 @@ function nextStep() {
   document.getElementById(`step${current}`).style.display = 'block';
   document.querySelectorAll('#stepper .dot')[current - 1].classList.add('active');
 }
-const upload   = document.getElementById('upload');
-const preview  = document.getElementById('preview');
-const btnNext  = document.getElementById('step1Btn');
+const upload = document.getElementById('upload');
+const preview = document.getElementById('preview');
+const btnNext = document.getElementById('step1Btn');
 upload.addEventListener('change', () => {
   if (upload.files.length) {
     const file = upload.files[0];
     preview.src = URL.createObjectURL(file);
     preview.style.display = 'block';
     btnNext.disabled = false;
+    // Sample listing & profit
     const idx = Math.floor(Math.random() * examples.length);
     const ex  = examples[idx];
     document.getElementById('listingCard').innerHTML =
@@ -38,6 +39,14 @@ upload.addEventListener('change', () => {
       `<strong>Platform Fees:</strong> $${f.fee}<br>` +
       `<strong>Item Cost:</strong> $${f.cost}<br>` +
       `<strong>Net Profit:</strong> $${profit}`;
+    // Confidence & XP
+    const conf = Math.floor(Math.random() * 26) + 70; // 70–95%
+    document.getElementById('confidenceCard').innerHTML =
+      `<strong>Confidence Score:</strong> ${conf}%<br>` +
+      `<p>We compared your item against thousands of similar listings and computed our confidence in the suggested price based on image match, description keywords, and sold comps.</p>`;
+    const xp = Math.floor(Math.random() * 26) + 15; // 15–40 XP
+    document.getElementById('gamifyCard').innerHTML =
+      `<strong>XP Earned:</strong> ${xp} XP<br>` +
+      `<p>Keep listing items to level up, earn badges, and unlock streak bonuses!</p>`;
   }
 });
-
