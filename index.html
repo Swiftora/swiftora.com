@@ -13,7 +13,7 @@
     main{text-align:center;padding:3rem 2rem}
     form{margin-top:2rem}
     input[type=text],input[type=email]{padding:.8rem;width:250px;margin:.5rem;border-radius:4px;border:1px solid #ccc}
-    button{padding:.8rem 1.5rem;background:#8e2de2;color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:600}
+    button{padding:.9rem 1.8rem;background:#ff6b00;color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:600;font-size:1rem}
     .features{display:flex;flex-wrap:wrap;justify-content:center;margin-top:3rem}
     .feature{flex:1 1 200px;margin:1rem;font-weight:bold}
     footer{background:#eee;padding:1rem;text-align:center;font-size:.9rem}
@@ -21,28 +21,33 @@
   </style>
 </head>
 <body>
-  <header>
+
+  <!-- HEADER -->
+  <header id="top">
     <div class="logo">
-      <img src="swiftora_logo.jpeg" alt="Swiftora Logo" style="height:40px;vertical-align:middle;margin-right:8px;">
+      <img src="swiftora_logo.jpeg" alt="Swiftora logo"
+           style="height:60px;vertical-align:middle;margin-right:12px;">
       Swiftora
     </div>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">About</a>
+      <a href="#top">Home</a>
+      <a href="#about">About</a>
     </nav>
   </header>
 
+  <!-- HERO -->
   <main>
     <h1 class="tagline">AI that lists smarter, not harder.</h1>
-    <p>Swiftora helps resellers automate listings, improve pricing, and track ROI — without the manual hassle.</p>
+    <p>Swiftora helps resellers automate listings, improve pricing, and track ROI&nbsp;— without the manual hassle.</p>
 
-    <!-- simple mailto capture -->
+    <!-- EARLY-ACCESS CTA -->
     <form action="mailto:info@swiftora.com" method="post" enctype="text/plain">
       <input type="text"  name="name"  placeholder="Your name">
       <input type="email" name="email" placeholder="Your email" required>
-      <button type="submit">Notify Me</button>
+      <button type="submit">Get&nbsp;Early&nbsp;Access</button>
     </form>
 
+    <!-- FEATURES -->
     <div class="features">
       <div class="feature">⚡ List Faster</div>
       <div class="feature">💡 Price Smarter</div>
@@ -50,6 +55,18 @@
     </div>
   </main>
 
+  <!-- ABOUT -->
+  <section id="about" style="padding:4rem 2rem;text-align:center;">
+    <h2>About Swiftora</h2>
+    <p style="max-width:600px;margin:0 auto;">
+      Swiftora is building the first AI toolkit designed specifically for vintage
+      and second-hand resellers. Join our early-access list to shape the product
+      and be the first to benefit.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
   <footer>&copy; 2025 Swiftora. All rights reserved. | <a href="#" style="color:#333;text-decoration:none;">Privacy Policy</a></footer>
+
 </body>
 </html>
