@@ -123,21 +123,27 @@
     overflow: visible;                             /* allow logo overflow */
   "
 >
-  <!-- Logo (overflowing & centered) -->
-  <a href="/" style="display: flex; align-items: center;">
+  <!-- Logo (flex-start inside to let margin-top do the centering) -->
+  <a href="/" style="display: flex; align-items: flex-start;">
     <img
       src="swiftora_logo_transparent.png"
       alt="Swiftora Logo"
       style="
-        height: 120px;                             /* make the logo big */
-        width: auto;                               /* preserve aspect ratio */
-        position: relative;
-        top: 50%;                                  /* move down half of banner */
-        transform: translateY(-50%);               /* pull up half of logo */
+        height: 120px;                             /* big, legible logo */
+        width: auto;                               /* maintain aspect */
+        margin-top: -30px;                         /* (120−60)/2 centers it */
         margin-right: 16px;
       "
     />
   </a>
+
+  <!-- Navigation aligned to the right & bold -->
+  <nav style="display: flex; align-items: center; gap: 32px;">
+    <a href="index.html" style="color: white; text-decoration: none; font-weight: bold;">Home</a>
+    <a href="about.html" style="color: white; text-decoration: none; font-weight: bold;">About</a>
+    <a href="demo.html" style="color: white; text-decoration: none; font-weight: bold;">Demo</a>
+  </nav>
+</header>
 
   <!-- Nav (right-aligned & bold) -->
   <nav style="display: flex; align-items: center; gap: 32px;">
@@ -205,6 +211,7 @@
 
 </body>
 </html>
+
 
 
 
