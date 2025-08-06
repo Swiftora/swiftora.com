@@ -114,28 +114,38 @@
 <header
   style="
     position: relative;
-    height: 60px;                      /* fixed banner height */
+    height: 60px;                                  /* fixed banner height */
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(to right, #ff5e3a, #8e44ad);
-    padding: 0 24px;                   /* no vertical padding */
-    overflow: visible;                 /* allow logo overflow */
+    padding: 0 24px;                               /* no vertical padding */
+    overflow: visible;                             /* allow logo overflow */
   "
 >
-  <!-- Logo (overflows banner) -->
+  <!-- Logo (overflowing & centered) -->
   <a href="/" style="display: flex; align-items: center;">
     <img
       src="swiftora_logo_transparent.png"
       alt="Swiftora Logo"
       style="
-        height: 100px;                 /* taller than banner */
-        width: auto;                   /* maintain aspect ratio */
-        margin-top: -20px;             /* center within 60px (100–60)/2 */
-        margin-right: 12px;
+        height: 120px;                             /* make the logo big */
+        width: auto;                               /* preserve aspect ratio */
+        position: relative;
+        top: 50%;                                  /* move down half of banner */
+        transform: translateY(-50%);               /* pull up half of logo */
+        margin-right: 16px;
       "
     />
   </a>
+
+  <!-- Nav (right-aligned & bold) -->
+  <nav style="display: flex; align-items: center; gap: 32px;">
+    <a href="index.html" style="color: white; text-decoration: none; font-weight: bold;">Home</a>
+    <a href="about.html" style="color: white; text-decoration: none; font-weight: bold;">About</a>
+    <a href="demo.html" style="color: white; text-decoration: none; font-weight: bold;">Demo</a>
+  </nav>
+</header>
 
   <!-- Navigation aligned to the right -->
   <nav style="display: flex; gap: 32px;">
@@ -195,6 +205,7 @@
 
 </body>
 </html>
+
 
 
 
