@@ -2,256 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Swiftora is an AI-powered tool for vintage and second-hand resellers to automate listings, price smarter, and track ROI." />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="description" content="Swiftora is an AI-powered tool for antique and oddity resellers to automate listings, price smarter, and track ROI.">
   <title>Swiftora | Smarter Selling Starts Here</title>
   <link rel="icon" href="swiftora_logo_transparent v2.png" />
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
-
-  <style>
-    :root {
-      --grad-left: #ff6b00;
-      --grad-right: #8e44ad;
-      --purple: #7b2cbf;
-      --purple-hover: #5a189a;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font: 400 16px/1.45 "Montserrat", Arial, sans-serif;
-      color: #333;
-      background: #fff;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      height: 60px;
-      padding: 0 32px;
-      background: linear-gradient(to right, var(--grad-left), var(--grad-right));
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
-    }
-
-    .logo-badge {
-      display: flex;
-      align-items: center;
-      height: 100%;
-    }
-
-    .logo-container {
-      background: #fff;
-      padding: 4px 8px;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-      display: flex;
-      align-items: center;
-      height: 100%;
-    }
-
-    .logo-container img {
-      height: 40px;
-      width: auto;
-      display: block;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      font-weight: 700;
-    }
-
-    nav a {
-      color: #fff;
-    }
-
-    main {
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      margin: 2rem 0;
-    }
-
-    .cta form {
-      margin-top: 2rem;
-    }
-
-    .cta input {
-      width: 220px;
-      padding: 0.8rem;
-      margin: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .cta button {
-      padding: 0.9rem 1.6rem;
-      background: var(--grad-left);
-      color: #fff;
-      border: 0;
-      border-radius: 4px;
-      font: 600 1rem/1 "Montserrat";
-      cursor: pointer;
-    }
-
-    .demo-btn {
-      display: inline-block;
-      margin-top: 1.2rem;
-      padding: 0.9rem 1.6rem;
-      background: var(--purple);
-      color: #fff;
-      border-radius: 4px;
-      font: 600 1rem/1 "Montserrat";
-      transition: background 0.3s;
-    }
-
-    .demo-btn:hover {
-      background: var(--purple-hover);
-    }
-
-    #features {
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 2rem;
-    }
-
-    .feature {
-      flex: 1 1 240px;
-      margin: 1rem;
-      padding: 1.6rem;
-      border: 1px solid #eee;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgb(0 0 0 / 5%);
-    }
-
-    .feature h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.15rem;
-    }
-
-    .feature p {
-      font-size: 0.9rem;
-      color: #555;
-    }
-
-    footer {
-      background: #f2f2f2;
-      padding: 1rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.7rem;
-      }
-
-      nav {
-        gap: 24px;
-      }
-
-      .features {
-        flex-direction: column;
-      }
-
-      .cta input {
-        width: 100%;
-      }
-
-      .logo-container img {
-        height: 32px;
-      }
-
-      .logo-container {
-        padding: 3px 6px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="logo-badge">
-      <a href="/">
-        <div class="logo-container">
-          <img src="swiftora_logo_transparent v2.png" alt="Swiftora logo" />
-        </div>
-      </a>
+  <header class="site-header">
+    <div class="logo">
+      <a href="index.html"><img src="swiftora_logo_transparent v2.png" alt="Swiftora logo"><span>Swiftora</span></a>
     </div>
-
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="demo.html">Demo</a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="demo.html">Demo</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+      </ul>
     </nav>
   </header>
 
-  <!-- HERO / CTA -->
-  <main>
+  <section class="hero">
     <h1>AI that lists smarter, not harder.</h1>
-    <p>Swiftora helps resellers automate listings, improve pricing, and track ROI — without the manual hassle.</p>
-
-    <div class="cta">
-      <form action="https://formspree.io/f/mdkdwvqp" method="POST">
-        <input type="text" name="name" placeholder="Your name" required />
-        <input type="email" name="email" placeholder="Your email" required />
-        <input type="hidden" name="_next" value="https://swiftora.com/thank-you.html" />
-        <button type="submit">Get Early Access</button>
-      </form>
-
-      <a class="demo-btn" href="demo.html">Try the Interactive Demo</a>
+    <p>Swiftora helps resellers of antiques and oddities automate listings, improve pricing, and track ROI — without the manual hassle.</p>
+    <div class="cta-buttons">
+      <a class="btn primary-btn" href="#signup">Get Early Access</a>
+      <a class="btn secondary-btn" href="demo.html">Try the Interactive Demo</a>
     </div>
-  </main>
+  </section>
 
-  <!-- FEATURES -->
-  <section id="features">
+  <section class="signup" id="signup">
+    <h2>Join the Waitlist</h2>
+    <p>Be among the first to try Swiftora. Enter your details and we'll notify you when early access is ready.</p>
+    <form action="https://formspree.io/f/mdkdwvqp" method="POST">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <input type="hidden" name="_next" value="thank-you.html">
+      <button type="submit" class="btn primary-btn">Join Waitlist</button>
+    </form>
+  </section>
+
+  <section class="features">
     <h2>Key Features</h2>
-    <div class="features">
-      <div class="feature">
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-camera-retro"></i></div>
         <h3>AI Listing Generator</h3>
-        <p>Snap or upload photos and let Swiftora craft titles &amp; descriptions optimized for each marketplace.</p>
+        <p>Snap or upload photos and let Swiftora craft titles & descriptions optimized for marketplaces.</p>
       </div>
-      <div class="feature">
-        <h3>Real-Time Pricing Guidance</h3>
-        <p>Get data-driven price suggestions based on live sold comps from multiple platforms.</p>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-tags"></i></div>
+        <h3>Real‑Time Pricing Guidance</h3>
+        <p>Get data‑driven price suggestions based on live comps from multiple platforms.</p>
       </div>
-      <div class="feature">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
         <h3>ROI Tracker</h3>
-        <p>Easily calculate fees, shipping, and profit margins so you focus on your most lucrative flips.</p>
+        <p>Easily calculate fees, shipping, and profit margins so you can focus on your most lucrative flips.</p>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    &copy; 2025 Swiftora. All rights reserved. |
-    <a href="privacy.html">Privacy Policy</a>
+  <footer class="site-footer">
+    <p>&copy; 2025 Swiftora. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
   </footer>
 </body>
 </html>
-
-
