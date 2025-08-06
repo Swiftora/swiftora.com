@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description"
         content="Swiftora is an AI-powered tool for vintage and second-hand resellers to automate listings, price smarter, and track ROI." />
   <meta property="og:title"       content="Swiftora – AI that lists smarter, not harder" />
@@ -13,117 +13,122 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* ---------- GLOBAL ---------- */
-    :root {
-      --grad-left: #ff6b00;
-      --grad-right: #8e44ad;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font: 400 16px/1.4 "Montserrat", Arial, sans-serif;
-      color: #333;
-      background: #fff;
-    }
-    a { color: inherit; }
+  /* ---------- GLOBAL ---------- */
+  :root {
+    --grad-left:  #ff6b00;
+    --grad-right: #8e44ad;
+    --purple-btn: #7b2cbf;
+    --purple-btn-hover: #5a189a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font: 400 16px/1.45 "Montserrat", Arial, sans-serif;
+    color: #333;
+    background: #fff;
+  }
+  a { color: inherit; }
 
-    /* ---------- HEADER ---------- */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;          /* nav pushed right */
-      padding: 0 32px;
-      background: linear-gradient(to right, var(--grad-left), var(--grad-right));
-      box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
-      overflow: visible;                  /* let badge overflow */
-      box-sizing: border-box;
-    }
-    .logo-badge {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #fff;
-      padding: 2px 6px;
-      border-radius: 4px;
-      box-shadow: 0 2px 4px rgb(0 0 0 / 12%);
-      display: flex;
-      align-items: center;
-    }
-    .logo-badge img { height: 90px; width: auto; display: block; }
-    nav { display: flex; gap: 40px; font-weight: 700; }
-    nav a { text-decoration: none; color: #fff; }
+  /* ---------- HEADER ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 60px;
+    padding: 0 32px;
+    background: linear-gradient(to right, var(--grad-left), var(--grad-right));
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;     /* nav pushed right */
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+    overflow: visible;             /* show badge overflow */
+  }
+  .logo-badge {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    padding: 0 8px;                /* slim white band */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 12%);
+    display: flex;
+    align-items: center;
+  }
+  .logo-badge img { height: 130px; width: auto; display: block; }
 
-    /* ---------- MAIN / CTA / FEATURES ---------- */
-    main       { padding: 3rem 2rem; text-align: center; }
-    .tagline   { font-size: 2rem; margin: 2rem 0; }
-    .cta form  { margin-top: 2rem; }
-    .cta input[type=text],
-    .cta input[type=email] {
-      width: 200px; padding: .8rem; margin: .5rem;
-      border: 1px solid #ccc; border-radius: 4px;
-    }
-    .cta button,
-    .demo-btn {
-      padding: .9rem 1.5rem; border: 0; border-radius: 4px;
-      font-weight: 600; font-size: 1rem; cursor: pointer;
-      transition: background .3s ease;
-    }
-    .cta button { background: var(--grad-left); color: #fff; }
-    .demo-btn   { background: #7b2cbf; color: #fff; display: inline-block; margin-top: 1rem; text-decoration: none; }
-    .demo-btn:hover { background: #5a189a; }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    font-weight: 700;              /* bold */
+  }
+  nav a { text-decoration: none; color: #fff; }
 
-    /* ---------- FEATURES ---------- */
-    #features         { padding: 4rem 2rem; text-align: center; }
-    .features         { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 2rem; }
-    .feature          { flex: 1 1 240px; margin: 1rem; padding: 1.5rem;
-                        border: 1px solid #eee; border-radius: 8px;
-                        box-shadow: 0 1px 3px rgb(0 0 0 / 5%); }
-    .feature h3       { margin: 0 0 .5rem; font-size: 1.1rem; }
-    .feature p        { font-size: .9rem; color: #555; }
+  /* ---------- HERO ---------- */
+  main        { padding: 3rem 2rem; text-align: center; }
+  .tagline    { font-size: 2.2rem; margin: 2rem 0; }
+  .cta form   { margin-top: 2rem; }
+  .cta input[type=text],
+  .cta input[type=email] {
+    width: 220px; padding: .8rem; margin: .5rem;
+    border: 1px solid #ccc; border-radius: 4px;
+  }
+  .cta button {
+    padding: .9rem 1.6rem;
+    background: var(--grad-left); color: #fff;
+    border: 0; border-radius: 4px;
+    font: 600 1rem/1 "Montserrat", sans-serif;
+    cursor: pointer;
+  }
+  .demo-btn {
+    display: inline-block;
+    margin-top: 1.2rem;
+    padding: .9rem 1.6rem;
+    background: var(--purple-btn); color: #fff;
+    border-radius: 4px;
+    font: 600 1rem/1 "Montserrat", sans-serif;
+    text-decoration: none; transition: background .3s;
+  }
+  .demo-btn:hover { background: var(--purple-btn-hover); }
 
-    /* ---------- FOOTER ---------- */
-    footer { background: #f2f2f2; padding: 1rem; text-align: center; font-size: .9rem; }
+  /* ---------- FEATURES ---------- */
+  #features         { padding: 4rem 2rem; text-align: center; }
+  .features         { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 2rem; }
+  .feature          { flex: 1 1 240px; margin: 1rem; padding: 1.6rem;
+                      border: 1px solid #eee; border-radius: 8px;
+                      box-shadow: 0 1px 3px rgb(0 0 0 / 5%); }
+  .feature h3       { margin: 0 0 .5rem; font-size: 1.15rem; }
+  .feature p        { font-size: .9rem; color: #555; }
 
-    /* ---------- MOBILE ---------- */
-    @media (max-width:600px) {
-      .tagline { font-size: 1.6rem; }
-      nav a    { gap: 24px; }
-      .features { flex-direction: column; }
-      .cta input { width: 100%; }
-    }
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: #f2f2f2;
+    padding: 1rem;
+    text-align: center;
+    font-size: .9rem;
+  }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width:600px) {
+    .tagline    { font-size: 1.7rem; }
+    nav         { gap: 24px; }
+    .features   { flex-direction: column; }
+    .cta input  { width: 100%; }
+    .logo-badge img { height: 100px; } /* scale down on very small screens */
+  }
   </style>
 </head>
 
 <body>
   <!-- HEADER -->
   <header>
-<div
-  style="
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #ffffff;
-    padding: 0 8px;                /* slim white band */
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 12%);
-    display: flex;
-    align-items: center;
-  "
->
-  <a href="/" style="display: block;">
-    <img
-      src="swiftora_logo_transparent.png"
-      alt="Swiftora logo"
-      style="height: 110px; width: auto;"  <!-- adjust height if you want it bigger/smaller -->
-    />
-  </a>
-</div>
+    <div class="logo-badge">
+      <a href="/">
+        <img src="swiftora_logo_transparent.png" alt="Swiftora logo" />
+      </a>
+    </div>
 
     <nav>
       <a href="index.html">Home</a>
@@ -135,7 +140,7 @@
   <!-- HERO / CTA -->
   <main>
     <h1 class="tagline">AI that lists smarter, not harder.</h1>
-    <p>Swiftora helps resellers automate listings, improve pricing, and track ROI — without the manual hassle.</p>
+    <p>Swiftora helps resellers automate listings, improve pricing, and track ROI&nbsp;— without the manual hassle.</p>
 
     <div class="cta">
       <form action="https://formspree.io/f/mdkdwvqp" method="POST">
@@ -157,10 +162,12 @@
         <h3>AI Listing Generator</h3>
         <p>Snap or upload photos and let Swiftora craft titles &amp; descriptions optimized for each marketplace.</p>
       </div>
+
       <div class="feature">
         <h3>Real-Time Pricing Guidance</h3>
         <p>Get data-driven price suggestions based on live sold comps from multiple platforms.</p>
       </div>
+
       <div class="feature">
         <h3>ROI Tracker</h3>
         <p>Easily calculate fees, shipping, and profit margins so you focus on your most lucrative flips.</p>
@@ -171,8 +178,9 @@
   <!-- FOOTER -->
   <footer>
     &copy; 2025 Swiftora. All rights reserved. |
-    <a href="privacy.html">Privacy Policy</a>
+    <a href="privacy.html">Privacy&nbsp;Policy</a>
   </footer>
 </body>
 </html>
+
 
