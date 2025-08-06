@@ -2,93 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Swiftora is an AI-powered tool for vintage and secondhand resellers to automate listings, price smarter, and track ROI. Join our early-access list!">
+  <meta property="og:title" content="Swiftora – AI that lists smarter, not harder">
+  <meta property="og:description" content="Automate listings, improve pricing guidance, and track ROI for vintage and secondhand items. Early-access sign-up open now!">
+  <meta property="og:image" content="swiftora_logo.jpeg">
   <title>Swiftora | Smarter Selling Starts Here</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="swiftora_logo.jpeg">
   <style>
+    html{scroll-behavior:smooth;}
     body{font-family:'Montserrat',Arial,sans-serif;background:#fff;color:#333;margin:0}
-    header{background:linear-gradient(to right,#ff6b00,#8e2de2);color:#fff;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
-    .logo{font-size:1.5rem;font-weight:bold}
+    header{position:sticky;top:0;z-index:100;background:linear-gradient(to right,#ff6b00,#8e2de2);color:#fff;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 4px rgba(0,0,0,0.1)}
+    .logo{display:flex;align-items:center;font-size:1.5rem;font-weight:bold}
+    .logo img{height:60px;margin-right:12px}
     nav a{color:#fff;margin:0 1rem;text-decoration:none;font-weight:500}
+    main{padding:3rem 2rem;text-align:center}
     .tagline{font-size:2rem;margin-top:2rem}
-    main{text-align:center;padding:3rem 2rem}
-    form{margin-top:2rem}
-    input[type=text],input[type=email]{padding:.8rem;width:250px;margin:.5rem;border-radius:4px;border:1px solid #ccc}
-    button{padding:.9rem 1.8rem;background:#ff6b00;color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:600;font-size:1rem}
-    .features{display:flex;flex-wrap:wrap;justify-content:center;margin-top:3rem}
-    .feature{flex:1 1 200px;margin:1rem;font-weight:bold}
+    .cta form{margin-top:2rem}
+    .cta input[type=text], .cta input[type=email]{padding:.8rem;width:250px;margin:.5rem;border-radius:4px;border:1px solid #ccc}
+    .cta button{padding:.9rem 1.8rem;background:#ff6b00;color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:600;font-size:1rem}
+    #features{padding:4rem 2rem;text-align:center}
+    .features{display:flex;flex-wrap:wrap;justify-content:center;margin-top:2rem}
+    .feature{flex:1 1 240px;margin:1rem;padding:1rem;border:1px solid #eee;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .feature h3{margin-bottom:.5rem;font-size:1.1rem}
+    .feature p{font-size:.9rem;color:#555}
     footer{background:#eee;padding:1rem;text-align:center;font-size:.9rem}
-    @media(max-width:600px){.tagline{font-size:1.6rem}nav a{margin:0 .5rem}}
+    @media(max-width:600px){.tagline{font-size:1.6rem}nav a{margin:0 .5rem}.features{flex-direction:column}}
   </style>
 </head>
 <body>
 
   <!-- HEADER -->
-  <header id="top">
+  <header>
     <div class="logo">
-      <img src="swiftora_logo.jpeg" alt="Swiftora logo"
-           style="height:60px;vertical-align:middle;margin-right:12px;">
+      <img src="swiftora_logo.jpeg" alt="Swiftora logo">
       Swiftora
     </div>
     <nav>
-      <a href="#top">Home</a>
-      <a href="#about">About</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
     </nav>
   </header>
 
-  <!-- HERO -->
+  <!-- HERO + CTA -->
   <main>
     <h1 class="tagline">AI that lists smarter, not harder.</h1>
     <p>Swiftora helps resellers automate listings, improve pricing, and track ROI&nbsp;— without the manual hassle.</p>
-
-<!-- EARLY-ACCESS CTA -->
-<form action="https://formspree.io/f/mdkdwvqp" method="POST">
-  <input type="text"  name="name"  placeholder="Your name">
-  <input type="email" name="email" placeholder="Your email" required>
-  <input type="hidden" name="_redirect" value="https://swiftora.com/thank-you.html">
-  <button type="submit">Get&nbsp;Early&nbsp;Access</button>
-</form>
-    
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Thank you – Swiftora</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body{font-family:'Montserrat',Arial,sans-serif;text-align:center;padding:4rem}
-    a{color:#8e2de2;text-decoration:none;font-weight:600}
-  </style>
-</head>
-<body>
-  <h1>🎉 You’re on the list!</h1>
-  <p>We’ll be in touch as soon as early access opens.</p>
-  <p><a href="/">Back to Home</a></p>
-</body>
-</html>
-
-
-    <!-- FEATURES -->
-    <div class="features">
-      <div class="feature">⚡ List Faster</div>
-      <div class="feature">💡 Price Smarter</div>
-      <div class="feature">📊 Track ROI</div>
+    <div class="cta">
+      <form action="https://formspree.io/f/mdkdwvqp" method="POST">
+        <input type="text"  name="name"  placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <input type="hidden" name="_redirect" value="https://swiftora.com/thank-you.html">
+        <button type="submit">Get Early Access</button>
+      </form>
     </div>
   </main>
 
-  <!-- ABOUT -->
-  <section id="about" style="padding:4rem 2rem;text-align:center;">
-    <h2>About Swiftora</h2>
-    <p style="max-width:600px;margin:0 auto;">
-      Swiftora is building the first AI toolkit designed specifically for vintage
-      and second-hand resellers. Join our early-access list to shape the product
-      and be the first to benefit.
-    </p>
+  <!-- KEY FEATURES -->
+  <section id="features">
+    <h2>Key Features</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>AI Listing Generator</h3>
+        <p>Snap or upload photos and let Swiftora craft titles & descriptions optimized for each marketplace.</p>
+      </div>
+      <div class="feature">
+        <h3>Real-Time Pricing Guidance</h3>
+        <p>Get data-driven price suggestions based on live sold comps from multiple platforms.</p>
+      </div>
+      <div class="feature">
+        <h3>ROI Tracker</h3>
+        <p>Easily calculate fees, shipping, and profit margins so you focus on your most lucrative flips.</p>
+      </div>
+    </div>
   </section>
 
   <!-- FOOTER -->
-  <footer>&copy; 2025 Swiftora. All rights reserved. | <a href="#" style="color:#333;text-decoration:none;">Privacy Policy</a></footer>
+  <footer>&copy; 2025 Swiftora. All rights reserved. | <a href="#">Privacy Policy</a></footer>
 
 </body>
 </html>
-
-
