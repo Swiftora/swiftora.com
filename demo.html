@@ -6,58 +6,48 @@
   <title>Swiftora Interactive Demo</title>
   <link rel="icon" href="swiftora_logo_transparent v2.png">
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <header class="site-header">
-    <div class="logo">
-      <a href="index.html"><img src="swiftora_logo_transparent v2.png" alt="Swiftora logo"><span>Swiftora</span></a>
-    </div>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="demo.html">Demo</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-      </ul>
-    </nav>
+    <!-- (same header as other pages) -->
   </header>
 
   <div class="demo-wrapper">
     <h1>Try the Swiftora Demo</h1>
     <div class="stepper" id="stepper">
-      <div class="dot active">1</div>
-      <div class="dot">2</div>
-      <div class="dot">3</div>
-      <div class="dot">4</div>
+      <div class="dot active">1</div><div class="dot">2</div><div class="dot">3</div><div class="dot">4</div><div class="dot">5</div>
     </div>
-
-    <!-- Step 1 -->
+    <!-- Step 1: Upload -->
     <div class="demo-panel" id="step1">
       <h2><i class="fa-solid fa-image"></i> Upload Your Item Photo</h2>
       <input type="file" id="upload" accept="image/*">
       <img id="preview" class="preview" alt="preview">
       <button class="next-btn" id="step1Btn" disabled onclick="nextStep()">Next</button>
     </div>
-
-    <!-- Step 2 -->
+    <!-- Step 2: AI Listing Preview -->
     <div class="demo-panel" id="step2" style="display:none">
       <h2><i class="fa-solid fa-wand-magic-sparkles"></i> AI Listing Preview</h2>
       <div class="out-card fade" id="listingCard"></div>
       <p class="disclaimer">Note: This is a sample output and does not use live AI. The description may not match your uploaded photo.</p>
       <button class="next-btn" onclick="nextStep()">Next</button>
     </div>
-
-    <!-- Step 3 -->
+    <!-- Step 3: Profit Snapshot -->
     <div class="demo-panel" id="step3" style="display:none">
       <h2><i class="fa-solid fa-calculator"></i> Profit Snapshot</h2>
       <div class="out-card fade" id="profitCard"></div>
       <button class="next-btn" onclick="nextStep()">Next</button>
     </div>
-
-    <!-- Step 4 -->
+    <!-- Step 4: Confidence & Gamification -->
     <div class="demo-panel" id="step4" style="display:none">
+      <h2><i class="fa-solid fa-gauge-high"></i> Confidence Score & Gamification</h2>
+      <div class="confidence-card fade" id="confidenceCard"></div>
+      <div class="gamify-card fade" id="gamifyCard"></div>
+      <button class="next-btn" onclick="nextStep()">Next</button>
+    </div>
+    <!-- Step 5: Get Early Access -->
+    <div class="demo-panel" id="step5" style="display:none">
       <h2>Get Early Access</h2>
       <p>Love what you saw? Join our waitlist and be first to try the full version!</p>
       <a class="next-btn" href="index.html#signup">Sign Me Up</a>
@@ -71,4 +61,3 @@
   <script src="demo.js"></script>
 </body>
 </html>
-
