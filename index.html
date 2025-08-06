@@ -114,39 +114,59 @@
 <header
   style="
     position: relative;
-    height: 60px;                                  /* fixed banner height */
-    display: flex;
-    align-items: center;                           /* vertical centering */
-    justify-content: space-between;
+    height: 60px;                                            /* fixed banner height */
     background: linear-gradient(to right, #ff5e3a, #8e44ad);
-    padding: 0 24px;                               /* no top/bottom padding */
-    overflow: visible;                             /* allow overflow */
+    padding: 0 24px;                                         /* horizontal padding only */
+    overflow: visible;                                       /* show overflowing logo */
   "
 >
-  <!-- Logo wrapper with white background -->
-  <a
-    href="/"
+  <!-- Absolutely positioned logo container -->
+  <div
     style="
-      display: flex;
-      align-items: center;
-      background: white;
+      position: absolute;
+      left: 24px;                                             /* same as header padding */
+      top: 50%;                                               /* halfway down banner */
+      transform: translateY(-50%);                           /* center vertically */
+      background: white;                                      /* make tag pop */
       padding: 4px 8px;
       border-radius: 4px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
     "
   >
-    <img
-      src="swiftora_logo_transparent.png"
-      alt="Swiftora Logo"
-      style="
-        height: 80px;           /* tune this up/down as needed */
-        width: auto;            /* keep aspect ratio */
-      "
-    />
-  </a>
+    <a href="/" style="display: block;">
+      <img
+        src="swiftora_logo_transparent.png"
+        alt="Swiftora Logo"
+        style="
+          height: 80px;                                       /* tune this up/down */
+          width: auto;                                        /* keep aspect ratio */
+          display: block;
+        "
+      />
+    </a>
+  </div>
+
+  <!-- Nav: full-height flex container for vertical centering -->
+  <nav
+    style="
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 32px;
+    "
+  >
+    <a href="index.html" style="color: white; text-decoration: none; font-weight: bold;">
+      Home
+    </a>
+    <a href="about.html" style="color: white; text-decoration: none; font-weight: bold;">
+      About
+    </a>
+    <a href="demo.html" style="color: white; text-decoration: none; font-weight: bold;">
+      Demo
+    </a>
+  </nav>
+</header>
 
   <!-- Navigation aligned to the right & bold -->
   <nav style="display: flex; align-items: center; gap: 32px;">
@@ -242,6 +262,7 @@
 
 </body>
 </html>
+
 
 
 
