@@ -14,9 +14,11 @@ const fees = [
 let current = 1;
 
 function nextStep() {
+  // Hide current panel and deactivate current step dot
   document.getElementById(`step${current}`).style.display = 'none';
   document.querySelectorAll('#stepper .dot')[current - 1].classList.remove('active');
   current++;
+  // Show next panel and activate corresponding dot
   document.getElementById(`step${current}`).style.display = 'block';
   document.querySelectorAll('#stepper .dot')[current - 1].classList.add('active');
 }
