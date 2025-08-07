@@ -101,7 +101,8 @@ a {
 
 /* Hero logo displayed in the hero section */
 .hero-logo {
-  width: 120px;
+  /* Increase size for better visibility */
+  width: 160px;
   height: auto;
   display: block;
   margin: 0 auto 1.5rem;
@@ -200,10 +201,10 @@ a {
 
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
-  /* Increase max width to accommodate additional feature cards */
-  max-width: 1200px;
+  /* Ensure a consistent three-column layout on larger screens */
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1100px;
   margin: auto;
 }
 
@@ -441,6 +442,8 @@ a {
   }
   .feature-grid {
     gap: 1rem;
+    /* On small screens, stack cards vertically */
+    grid-template-columns: 1fr;
   }
   .features h2 {
     font-size: 1.6rem;
@@ -449,5 +452,12 @@ a {
   .hero-logo {
     width: 80px;
     margin-bottom: 1rem;
+  }
+}
+
+/* Medium screen adjustments: two columns for features */
+@media (min-width: 601px) and (max-width: 999px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
