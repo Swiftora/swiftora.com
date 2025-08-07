@@ -1,4 +1,3 @@
-// Updated examples with richer Etsy-style descriptions & SEO tags
 const examples = [
   {
     title: 'Vintage Mid‑Century Amber Glass Vase',
