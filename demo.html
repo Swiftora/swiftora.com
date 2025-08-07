@@ -8,11 +8,22 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .demo-wrapper h1,
+    .demo-wrapper h2 {
+      text-align: center;
+    }
+    .demo-note {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="logo">
-      <!-- Brand name only in header -->
       <a href="index.html"><span>Swiftora</span></a>
     </div>
     <nav class="main-nav">
@@ -27,6 +38,8 @@
 
   <div class="demo-wrapper">
     <h1>Try the Swiftora Demo</h1>
+    <div class="demo-note">Upload any item photo to see a simulated listing example. This demo does not use live AI yet.</div>
+
     <div class="stepper" id="stepper">
       <div class="dot active">1</div>
       <div class="dot">2</div>
@@ -57,6 +70,7 @@
     <div class="demo-panel" id="step3" style="display:none">
       <h2><i class="fa-solid fa-calculator"></i> Profit Breakdown</h2>
       <div class="out-card fade" id="profitCard"></div>
+      <p class="demo-note">“Item Cost” is the amount you originally paid for the item. This tracker helps resellers calculate net profit after fees and shipping.</p>
       <button class="next-btn" onclick="nextStep()">Next</button>
     </div>
 
