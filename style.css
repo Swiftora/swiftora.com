@@ -49,7 +49,6 @@ a {
 }
 
 .site-header .logo img {
-  /* Set explicit width equal to height to avoid cropping issues and ensure logo looks balanced */
   height: 36px;
   width: 36px;
   margin-right: 8px;
@@ -101,8 +100,7 @@ a {
 
 /* Hero logo displayed in the hero section */
 .hero-logo {
-  /* Increase size for better visibility */
-  width: 160px;
+  width: 200px;
   height: auto;
   display: block;
   margin: 0 auto 1.5rem;
@@ -202,7 +200,6 @@ a {
 .feature-grid {
   display: grid;
   gap: 2rem;
-  /* Ensure a consistent three-column layout on larger screens */
   grid-template-columns: repeat(3, 1fr);
   max-width: 1100px;
   margin: auto;
@@ -358,6 +355,7 @@ a {
 }
 
 .next-btn {
+  display: inline-block;
   background: var(--primary);
   color: #fff;
   border: none;
@@ -374,7 +372,7 @@ a {
   background: var(--primary-dark);
 }
 
-/* Confidence & Gamification cards */
+/* Confidence & Progress cards */
 .confidence-card {
   background: #f0fff3;
   border: 1px dashed #b3e6c5;
@@ -390,7 +388,6 @@ a {
   color: #2c8a51;
 }
 
-/* Progress card (renamed from gamify-card for subtlety) */
 .progress-card {
   background: #fff8e1;
   border: 1px dashed #ffe0b2;
@@ -442,20 +439,18 @@ a {
   }
   .feature-grid {
     gap: 1rem;
-    /* On small screens, stack cards vertically */
     grid-template-columns: 1fr;
   }
   .features h2 {
     font-size: 1.6rem;
   }
-
   .hero-logo {
-    width: 80px;
+    width: 100px;
     margin-bottom: 1rem;
   }
 }
 
-/* Medium screen adjustments: two columns for features */
+/* Medium screens: two columns for features */
 @media (min-width: 601px) and (max-width: 999px) {
   .feature-grid {
     grid-template-columns: repeat(2, 1fr);
