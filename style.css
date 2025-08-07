@@ -49,7 +49,7 @@ a {
 }
 
 .site-header .logo img {
-  /* Explicit width & height with contain to avoid cropping */
+  /* Set explicit width equal to height to avoid cropping issues and ensure logo looks balanced */
   height: 36px;
   width: 36px;
   margin-right: 8px;
@@ -97,6 +97,14 @@ a {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+}
+
+/* Hero logo displayed in the hero section */
+.hero-logo {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 1.5rem;
 }
 
 .btn {
@@ -194,7 +202,8 @@ a {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
-  max-width: 900px;
+  /* Increase max width to accommodate additional feature cards */
+  max-width: 1200px;
   margin: auto;
 }
 
@@ -356,7 +365,7 @@ a {
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  margin-top: 1.2rem;
+  margin-top: 1.5rem;
   transition: background .25s;
 }
 
@@ -364,7 +373,7 @@ a {
   background: var(--primary-dark);
 }
 
-/* Confidence & Progress cards */
+/* Confidence & Gamification cards */
 .confidence-card {
   background: #f0fff3;
   border: 1px dashed #b3e6c5;
@@ -380,6 +389,7 @@ a {
   color: #2c8a51;
 }
 
+/* Progress card (renamed from gamify-card for subtlety) */
 .progress-card {
   background: #fff8e1;
   border: 1px dashed #ffe0b2;
@@ -434,5 +444,10 @@ a {
   }
   .features h2 {
     font-size: 1.6rem;
+  }
+
+  .hero-logo {
+    width: 80px;
+    margin-bottom: 1rem;
   }
 }
