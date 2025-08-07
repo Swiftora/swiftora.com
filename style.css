@@ -49,9 +49,11 @@ a {
 }
 
 .site-header .logo img {
-  height: 40px;
-  width: auto;
+  /* Explicit width & height with contain to avoid cropping */
+  height: 36px;
+  width: 36px;
   margin-right: 8px;
+  object-fit: contain;
 }
 
 .site-header .main-nav ul {
@@ -362,7 +364,7 @@ a {
   background: var(--primary-dark);
 }
 
-/* Confidence & Gamification cards */
+/* Confidence & Progress cards */
 .confidence-card {
   background: #f0fff3;
   border: 1px dashed #b3e6c5;
@@ -378,7 +380,7 @@ a {
   color: #2c8a51;
 }
 
-.gamify-card {
+.progress-card {
   background: #fff8e1;
   border: 1px dashed #ffe0b2;
   padding: 1.2rem;
@@ -389,7 +391,7 @@ a {
   font-size: 0.95rem;
 }
 
-.gamify-card strong {
+.progress-card strong {
   color: #d35400;
 }
 
@@ -415,7 +417,8 @@ a {
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .site-header .logo img {
-    height: 32px;
+    height: 28px;
+    width: 28px;
   }
   .site-header .main-nav ul {
     gap: 16px;
