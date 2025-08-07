@@ -12,7 +12,7 @@
 <body>
   <header class="site-header">
     <div class="logo">
-      <!-- Only the brand name in the header -->
+      <!-- Brand name only in header -->
       <a href="index.html"><span>Swiftora</span></a>
     </div>
     <nav class="main-nav">
@@ -35,7 +35,7 @@
       <div class="dot">5</div>
     </div>
 
-    <!-- Step 1: Upload -->
+    <!-- Step 1 -->
     <div class="demo-panel" id="step1">
       <h2><i class="fa-solid fa-image"></i> Upload Your Item Photo</h2>
       <input type="file" id="upload" accept="image/*">
@@ -43,11 +43,12 @@
       <button class="next-btn" id="step1Btn" disabled onclick="nextStep()">Next</button>
     </div>
 
-    <!-- Step 2: Listing & Pricing Preview -->
+    <!-- Step 2: Listing, Pricing & Confidence Preview -->
     <div class="demo-panel" id="step2" style="display:none">
       <h2><i class="fa-solid fa-receipt"></i> Listing &amp; Pricing Preview</h2>
       <div class="out-card fade" id="listingCard"></div>
       <div class="out-card fade" id="compsCard"></div>
+      <div class="confidence-card fade" id="confidenceCard"></div>
       <p class="disclaimer">Note: This is a sample output and does not use live AI. Descriptions and comparables may not match your uploaded photo.</p>
       <button class="next-btn" onclick="nextStep()">Next</button>
     </div>
@@ -59,15 +60,14 @@
       <button class="next-btn" onclick="nextStep()">Next</button>
     </div>
 
-    <!-- Step 4: Confidence & Progress -->
+    <!-- Step 4: Your Progress -->
     <div class="demo-panel" id="step4" style="display:none">
-      <h2><i class="fa-solid fa-gauge-high"></i> Confidence &amp; Progress</h2>
-      <div class="confidence-card fade" id="confidenceCard"></div>
+      <h2><i class="fa-solid fa-gauge-high"></i> Your Progress</h2>
       <div class="progress-card fade" id="progressCard"></div>
       <button class="next-btn" onclick="nextStep()">Next</button>
     </div>
 
-    <!-- Step 5: Get Early Access -->
+    <!-- Step 5: Call to Action -->
     <div class="demo-panel" id="step5" style="display:none">
       <h2>Get Early Access</h2>
       <p>Love what you saw? Join our waitlist and be first to try the full version!</p>
@@ -82,4 +82,3 @@
   <script src="demo.js"></script>
 </body>
 </html>
-
