@@ -11,42 +11,61 @@
 </head>
 <body>
   <header class="site-header">
-    <!-- (same header as other pages) -->
+    <div class="logo">
+      <a href="index.html"><img src="swiftora_logo_transparent v2.png" alt="Swiftora logo"><span>Swiftora</span></a>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="demo.html">Demo</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+      </ul>
+    </nav>
   </header>
 
   <div class="demo-wrapper">
     <h1>Try the Swiftora Demo</h1>
     <div class="stepper" id="stepper">
-      <div class="dot active">1</div><div class="dot">2</div><div class="dot">3</div><div class="dot">4</div><div class="dot">5</div>
+      <div class="dot active">1</div>
+      <div class="dot">2</div>
+      <div class="dot">3</div>
+      <div class="dot">4</div>
+      <div class="dot">5</div>
     </div>
-    <!-- Step 1: Upload -->
+
+    <!-- Step 1 -->
     <div class="demo-panel" id="step1">
       <h2><i class="fa-solid fa-image"></i> Upload Your Item Photo</h2>
       <input type="file" id="upload" accept="image/*">
       <img id="preview" class="preview" alt="preview">
       <button class="next-btn" id="step1Btn" disabled onclick="nextStep()">Next</button>
     </div>
-    <!-- Step 2: AI Listing Preview -->
+
+    <!-- Step 2 -->
     <div class="demo-panel" id="step2" style="display:none">
       <h2><i class="fa-solid fa-wand-magic-sparkles"></i> AI Listing Preview</h2>
       <div class="out-card fade" id="listingCard"></div>
       <p class="disclaimer">Note: This is a sample output and does not use live AI. The description may not match your uploaded photo.</p>
       <button class="next-btn" onclick="nextStep()">Next</button>
     </div>
-    <!-- Step 3: Profit Snapshot -->
+
+    <!-- Step 3 -->
     <div class="demo-panel" id="step3" style="display:none">
       <h2><i class="fa-solid fa-calculator"></i> Profit Snapshot</h2>
       <div class="out-card fade" id="profitCard"></div>
       <button class="next-btn" onclick="nextStep()">Next</button>
     </div>
-    <!-- Step 4: Confidence & Gamification -->
+
+    <!-- Step 4 -->
     <div class="demo-panel" id="step4" style="display:none">
-      <h2><i class="fa-solid fa-gauge-high"></i> Confidence Score & Gamification</h2>
+      <h2><i class="fa-solid fa-gauge-high"></i> Confidence & Progress</h2>
       <div class="confidence-card fade" id="confidenceCard"></div>
-      <div class="gamify-card fade" id="gamifyCard"></div>
+      <div class="progress-card fade" id="progressCard"></div>
       <button class="next-btn" onclick="nextStep()">Next</button>
     </div>
-    <!-- Step 5: Get Early Access -->
+
+    <!-- Step 5 -->
     <div class="demo-panel" id="step5" style="display:none">
       <h2>Get Early Access</h2>
       <p>Love what you saw? Join our waitlist and be first to try the full version!</p>
