@@ -5,36 +5,40 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Swiftora is an AI-powered tool for antique and oddity resellers to automate listings, price smarter, and track ROI." />
-  <meta name="theme-color" content="#6c63ff" />
 
   <title>Swiftora | Smarter Selling Starts Here</title>
 
   <!-- PWA -->
-  <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="icon" href="/swiftora_logo_transparent_v2.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#ff6600" />
+
+  <!-- Icons -->
+  <link rel="icon" href="swiftora_logo_transparent v2.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="swiftora_icon_192x192.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="swiftora_icon_512x512.png" />
 
   <!-- Styles & fonts -->
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <!-- OG -->
+  <!-- Open Graph (optional) -->
   <meta property="og:title" content="Swiftora — Smarter Selling Starts Here" />
   <meta property="og:description" content="AI tools for vintage & secondhand resellers: list faster, price smarter, track ROI." />
-  <meta property="og:image" content="/swiftora_logo_transparent_v2.png" />
+  <meta property="og:image" content="swiftora_logo_transparent v2.png" />
   <meta property="og:type" content="website" />
 </head>
 <body>
   <header class="site-header">
     <div class="logo">
-      <a href="/index.html" aria-label="Swiftora home"><span>Swiftora</span></a>
+      <a href="index.html" aria-label="Swiftora home"><span>Swiftora</span></a>
     </div>
     <nav class="main-nav" aria-label="Main">
       <ul>
-        <li><a href="/index.html">Home</a></li>
-        <li><a href="/about.html">About</a></li>
-        <li><a href="/demo.html">Demo</a></li>
-        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="demo.html">Demo</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
       </ul>
     </nav>
   </header>
@@ -42,13 +46,15 @@
   <main class="container">
     <!-- Hero -->
     <section class="hero">
-      <img class="hero-logo" src="/swiftora_logo_transparent_v2.png" alt="Swiftora logo" />
+      <img class="hero-logo" src="swiftora_logo_transparent v2.png" alt="Swiftora logo" />
       <h1>AI that lists smarter, not harder.</h1>
-      <p>Swiftora helps resellers of antiques & oddities automate listings, improve pricing, and track ROI — without the manual hassle.</p>
+      <p>
+        Swiftora helps resellers of antiques & oddities automate listings, improve pricing, and track ROI —
+        without the manual hassle.
+      </p>
       <div class="cta-buttons">
         <a class="btn primary-btn" href="#signup">Get Early Access</a>
-        <a class="btn secondary-btn" href="/demo.html">Try the Interactive Demo</a>
-        <button id="install-app" class="btn secondary-btn" style="display:none;">Install Swiftora</button>
+        <a class="btn secondary-btn" href="demo.html">Try the Interactive Demo</a>
       </div>
     </section>
 
@@ -104,23 +110,21 @@
   <!-- Sticky bottom CTA (mobile) -->
   <div class="sticky-cta">
     <div class="row">
-      <a class="btn btn-primary" href="/demo.html">Try the Demo</a>
-      <a class="btn btn-secondary" href="/thank-you.html">Join Waitlist</a>
+      <a class="btn btn-primary" href="demo.html">Try the Demo</a>
+      <a class="btn btn-secondary" href="thank-you.html">Join Waitlist</a>
     </div>
   </div>
 
   <footer class="site-footer">
-    <p>&copy; 2025 Swiftora. All rights reserved. | <a href="/privacy.html">Privacy Policy</a></p>
+    <p>&copy; 2025 Swiftora. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
   </footer>
-
-  <!-- Optional PWA install helper -->
-  <script src="/app-install.js"></script>
 
   <!-- Service worker registration -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js').catch(console.error);
+        navigator.serviceWorker.register('/service-worker.js')
+          .catch(console.error);
       });
     }
   </script>
@@ -136,8 +140,11 @@
           body: formData,
           headers: { 'Accept': 'application/json' }
         });
-        if (response.ok) window.location.href = '/thank-you.html';
-        else alert('There was an error submitting the form. Please try again later.');
+        if (response.ok) {
+          window.location.href = 'thank-you.html';
+        } else {
+          alert('There was an error submitting the form. Please try again later.');
+        }
       } catch {
         alert('There was an error submitting the form. Please try again later.');
       }
