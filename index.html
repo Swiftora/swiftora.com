@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <!-- Open Graph (optional but nice) -->
+  <!-- OG -->
   <meta property="og:title" content="Swiftora — Smarter Selling Starts Here" />
   <meta property="og:description" content="AI tools for vintage & secondhand resellers: list faster, price smarter, track ROI." />
   <meta property="og:image" content="/swiftora_logo_transparent_v2.png" />
@@ -27,9 +27,7 @@
 <body>
   <header class="site-header">
     <div class="logo">
-      <a href="/index.html" aria-label="Swiftora home">
-        <span>Swiftora</span>
-      </a>
+      <a href="/index.html" aria-label="Swiftora home"><span>Swiftora</span></a>
     </div>
     <nav class="main-nav" aria-label="Main">
       <ul>
@@ -46,14 +44,10 @@
     <section class="hero">
       <img class="hero-logo" src="/swiftora_logo_transparent_v2.png" alt="Swiftora logo" />
       <h1>AI that lists smarter, not harder.</h1>
-      <p>
-        Swiftora helps resellers of antiques & oddities automate listings, improve pricing, and track ROI —
-        without the manual hassle.
-      </p>
+      <p>Swiftora helps resellers of antiques & oddities automate listings, improve pricing, and track ROI — without the manual hassle.</p>
       <div class="cta-buttons">
         <a class="btn primary-btn" href="#signup">Get Early Access</a>
         <a class="btn secondary-btn" href="/demo.html">Try the Interactive Demo</a>
-        <!-- Optional PWA install button (shown when installable) -->
         <button id="install-app" class="btn secondary-btn" style="display:none;">Install Swiftora</button>
       </div>
     </section>
@@ -78,31 +72,26 @@
           <h3>AI Listing Generator</h3>
           <p>Snap or upload photos and let Swiftora craft titles & descriptions optimized for marketplaces.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon"><i class="fa-solid fa-tags" aria-hidden="true"></i></div>
           <h3>Real-Time Pricing Guidance</h3>
           <p>Get data-driven price suggestions based on live comps from multiple platforms.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
           <h3>ROI Tracker</h3>
           <p>Easily calculate fees, shipping, and profit margins so you can focus on your most lucrative flips.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></div>
           <h3>Confidence & Progress</h3>
           <p>View our confidence in the suggested price and track your progress as you refine listings.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></div>
           <h3>Marketplace Cross-Posting</h3>
           <p>List once and automatically post to multiple resale platforms with one click.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon"><i class="fa-solid fa-user-gear" aria-hidden="true"></i></div>
           <h3>Seller Dashboard</h3>
@@ -116,6 +105,43 @@
   <div class="sticky-cta">
     <div class="row">
       <a class="btn btn-primary" href="/demo.html">Try the Demo</a>
-      <a class="btn btn-secondary" hr
+      <a class="btn btn-secondary" href="/thank-you.html">Join Waitlist</a>
+    </div>
+  </div>
 
+  <footer class="site-footer">
+    <p>&copy; 2025 Swiftora. All rights reserved. | <a href="/privacy.html">Privacy Policy</a></p>
+  </footer>
 
+  <!-- Optional PWA install helper -->
+  <script src="/app-install.js"></script>
+
+  <!-- Service worker registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').catch(console.error);
+      });
+    }
+  </script>
+
+  <!-- Formspree submission -->
+  <script>
+    document.getElementById('signup-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      try {
+        const response = await fetch('https://formspree.io/f/mdkdwvqp', {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) window.location.href = '/thank-you.html';
+        else alert('There was an error submitting the form. Please try again later.');
+      } catch {
+        alert('There was an error submitting the form. Please try again later.');
+      }
+    });
+  </script>
+</body>
+</html>
