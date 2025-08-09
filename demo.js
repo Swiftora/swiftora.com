@@ -35,19 +35,51 @@ const EXAMPLES = [
   }
 ];
 
-/* ---------- Stepper ---------- */
-let current = 1;
-function nextStep() {
-  const cur = document.getElementById(`step${current}`);
-  const dots = document.querySelectorAll('#stepper .dot');
-  if (cur) cur.style.display = 'none';
-  if (dots[current - 1]) dots[current - 1].classList.remove('active');
-  current++;
-  const nxt = document.getElementById(`step${current}`);
-  if (nxt) nxt.style.display = 'block';
-  if (dots[current - 1]) dots[current - 1].classList.add('active');
+/* ---------- Gamification ---------- */
+const xpState = { xp: 0, level: 1 };
+function addXP(amount) {
+  xpState.xp += amount;
+  if (xpState.xp >= 100) { xpState.level++; xpState.xp = xpState.xp - 100; }
+  $('#xpValue').textContent = xpState.xp;
+  $('#levelBadge').textContent = `Lv ${xpState.level}`;
+  $('#levelMeter').style.width = `${xpState.xp}%`;
 }
-window.nextStep = nextStep;
+function updateProgress(stepIndex) {
+  const pct = [20,40,60,80,100][stepIndex-1] || 20;
+  $('#progressBar').style.width = `${pct}%`;
+  const dots = $all('#stepper .dot');
+  dots.forEach((d,i)=>d.classList.toggle('active', i < stepIndex));
+}
+
+/* ---------- Utilities ---------- */
+const $ = (s) => document.querySelector(s);
+const $all = (s) => Array.from(document.querySelectorAll(s));
+const delay = (ms) => new Promise(r=>setTimeout(r,ms));
+const toNum = (str) => { const n = parseFloat(String(str).replace(/[^0-9.]/g,'')); return isNaN(n)?0:n; };
+function row(k, v) { return `<tr><td>${k}</td><td>${v}</td></tr>`; }
+function renderComps(list) {
+  return '<ul style="margin-left:1rem; padding-left:0.5rem;">' +
+    list.map(i => `<li>${i.title} — <em>${i.price}</em></li>`).join('') + '</ul>';
+}
+function buildTitle({ category, color, brand, baseTitle }) {
+  const parts = [];
+  if (brand) parts.push(brand);
+  if (color) parts.push(color);
+  parts.push(baseTitle || category || 'Vintage Item');
+  return parts.join(' ').replace(/\s+/g,' ').trim();
+}
+
+/* ---------- Step flow ---------- */
+let current = 1;
+function goTo(step) {
+  current = step;
+  $all('.screen').forEach((el,i)=> {
+    el.classList.toggle('active', (i+1)===step);
+  });
+  updateProgress(step);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextStep() { goTo(current+1); }
 
 /* ---------- DOM refs ---------- */
 let uploadEl, previewEl, nextBtn1;
@@ -55,154 +87,84 @@ let listingCard, compsCard, confidenceCard, attrsCard, profitCard, statusList;
 let fieldCategory, fieldCondition, fieldCost, fieldColor, fieldBrand;
 let adjShip, adjFee;
 
-/* ---------- Helpers ---------- */
-const $ = (s) => document.querySelector(s);
-const toNum = (str) => {
-  const n = parseFloat(String(str).replace(/[^0-9.]/g, ''));
-  return isNaN(n) ? 0 : n;
-};
-function renderComps(list) {
-  return '<ul style="margin-left:1rem; padding-left:0.5rem;">' +
-    list.map(i => `<li>${i.title} — <em>${i.price}</em></li>`).join('') +
-    '</ul>';
-}
-function pushStatus(msg) {
-  const li = document.createElement('li');
-  li.textContent = msg;
-  statusList.appendChild(li);
-}
-function buildTitle({ category, color, brand, baseTitle }) {
-  const parts = [];
-  if (brand) parts.push(brand);
-  if (color) parts.push(color);
-  parts.push(baseTitle || category || 'Vintage Item');
-  return parts.join(' ').replace(/\s+/g, ' ').trim();
-}
-
-/* ---------- Main ---------- */
 document.addEventListener('DOMContentLoaded', () => {
-  // Grab elements
-  uploadEl = $('#upload');
-  previewEl = $('#preview');
-  nextBtn1  = $('#step1Btn');
+  // refs
+  uploadEl = $('#upload'); previewEl = $('#preview'); nextBtn1 = $('#step1Btn');
+  listingCard = $('#listingCard'); compsCard = $('#compsCard');
+  confidenceCard = $('#confidenceCard'); attrsCard = $('#attrsCard');
+  profitCard = $('#profitCard'); statusList = $('#statusList');
+  fieldCategory = $('#field-category'); fieldCondition = $('#field-condition');
+  fieldCost = $('#field-cost'); fieldColor = $('#field-color'); fieldBrand = $('#field-brand');
+  adjShip = $('#adj-ship'); adjFee = $('#adj-fee');
 
-  listingCard    = $('#listingCard');
-  compsCard      = $('#compsCard');
-  confidenceCard = $('#confidenceCard');
-  attrsCard      = $('#attrsCard');
-  profitCard     = $('#profitCard');
-  statusList     = $('#statusList');
+  // Validation for Step 1
+  const checkValid = () => {
+    const photoOK = uploadEl && uploadEl.files && uploadEl.files.length > 0;
+    const catOK = fieldCategory.value !== '';
+    const condOK = fieldCondition.value !== '';
+    const costOK = fieldCost.value !== '' && !isNaN(Number(fieldCost.value));
+    const ok = photoOK && catOK && condOK && costOK;
+    nextBtn1.disabled = !ok;
+  };
 
-  fieldCategory  = $('#field-category');
-  fieldCondition = $('#field-condition');
-  fieldCost      = $('#field-cost');
-  fieldColor     = $('#field-color');
-  fieldBrand     = $('#field-brand');
-
-  adjShip = $('#adj-ship');
-  adjFee  = $('#adj-fee');
-
-  // Make Next reliable on all browsers
-  const enable = () => { if (nextBtn1) nextBtn1.disabled = false; };
-  if (uploadEl) {
-    uploadEl.addEventListener('change', enable);
-    uploadEl.addEventListener('input', enable);
-    uploadEl.addEventListener('change', () => {
-      if (!uploadEl.files?.length) return;
-      const file = uploadEl.files[0];
-      previewEl.src = URL.createObjectURL(file);
-      previewEl.style.display = 'block';
+  ['change','input'].forEach(evt => {
+    uploadEl.addEventListener(evt, () => {
+      if (uploadEl.files?.length) {
+        const file = uploadEl.files[0];
+        previewEl.src = URL.createObjectURL(file);
+        previewEl.style.display = 'block';
+        addXP(10); // small reward for uploading
+      }
+      checkValid();
     });
-  }
-
-  // When Step 2 becomes visible, run the simulated pipeline
-  const observer = new MutationObserver(() => {
-    const st2 = $('#step2');
-    if (st2 && st2.style.display !== 'none') {
-      observer.disconnect();
-      runSimulatedPipeline();
-    }
+    fieldCategory.addEventListener(evt, checkValid);
+    fieldCondition.addEventListener(evt, checkValid);
+    fieldCost.addEventListener(evt, checkValid);
   });
-  observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+
+  nextBtn1.addEventListener('click', async () => {
+    if (nextBtn1.disabled) return;
+    addXP(15);
+    goTo(2);
+    await runSimulatedPipeline();
+  });
+
+  $('#step2Btn').addEventListener('click', () => { addXP(10); goTo(3); });
+  $('#step3Btn').addEventListener('click', () => { addXP(10); goTo(4); $('#earnedXP').textContent = (xpState.xp + (xpState.level-1)*100); });
+  $('#step4Btn').addEventListener('click', () => { addXP(5); goTo(5); });
+
+  // Init
+  goTo(1);
 });
 
+/* ---------- Pipeline ---------- */
 async function runSimulatedPipeline() {
-  // Reset
-  statusList.innerHTML = '';
-  listingCard.innerHTML = '';
-  compsCard.innerHTML = '';
-  confidenceCard.innerHTML = '';
-  attrsCard.innerHTML = '';
-  profitCard.innerHTML = '';
-
-  const category  = fieldCategory.value;
-  const condition = fieldCondition.value;
-  const cost      = toNum(fieldCost.value);
-  const color     = (fieldColor.value || '').trim();
-  const brand     = (fieldBrand.value || '').trim();
+  // reset UI
+  statusList.innerHTML = ''; listingCard.innerHTML = ''; compsCard.innerHTML = '';
+  confidenceCard.innerHTML = ''; attrsCard.innerHTML = ''; profitCard.innerHTML = '';
 
   const ex = EXAMPLES[Math.floor(Math.random() * EXAMPLES.length)];
-  const basePrice = toNum(ex.price);
-  const suggested = Math.max(basePrice - 1, 10);
+  const category  = $('#field-category').value;
+  const condition = $('#field-condition').value;
+  const cost      = toNum($('#field-cost').value);
+  const color     = ($('#field-color').value || '').trim();
+  const brand     = ($('#field-brand').value || '').trim();
 
-  // Stream statuses
-  pushStatus('Analyzing image…');                 await delay(600);
-  pushStatus('Detecting edges/background…');      await delay(500);
-  pushStatus('Reading markings/labels…');         await delay(600);
-  pushStatus('Finding visually similar items…');  await delay(600);
-  pushStatus('Pulling sold prices (last 90 days)…'); await delay(700);
+  // streamed statuses
+  pushStatus('Analyzing image…'); await delay(450);
+  pushStatus('Detecting edges/background…'); await delay(450);
+  pushStatus('Reading markings/labels…'); await delay(450);
+  pushStatus('Finding visually similar items…'); await delay(500);
+  pushStatus('Pulling sold prices (last 90 days)…'); await delay(600);
 
-  // Comps
+  // comps
   compsCard.innerHTML = renderComps(ex.comps);
 
-  // Listing
+  // listing
+  const basePrice = toNum(ex.price);
+  const suggested = Math.max(basePrice - 1, 10);
   const title = buildTitle({ category, color, brand, baseTitle: ex.title });
   const desc  = `${ex.desc} ${brand ? `Marked/Brand: ${brand}. ` : ''}${color ? `Color: ${color}. ` : ''}Category: ${category || 'N/A'}. Condition: ${condition || 'N/A'}.`;
 
   listingCard.innerHTML =
-    `<p><strong>Title:</strong> ${title}</p>` +
-    `<p><strong>Description:</strong> ${desc}</p>` +
-    `<p><strong>Suggested Price:</strong> $${suggested.toFixed(2)} <span style="color:#777">(sample)</span></p>`;
-
-  // Attributes
-  attrsCard.innerHTML =
-    row('Category', category || '—') +
-    row('Condition', condition || '—') +
-    row('Color', color || '—') +
-    row('Brand/Markings', brand || '—') +
-    row('Photo Quality', 'Good lighting, neutral background (tips applied)');
-
-  // Confidence
-  pushStatus('Scoring confidence…'); await delay(500);
-  const conf = Math.floor(Math.random() * 26) + 70; // 70–95%
-  confidenceCard.innerHTML = `<p><strong>Confidence Score:</strong> ${conf}%</p>
-  <p class="fine">Higher means the estimate aligns with recent sales based on image similarity and keywords.</p>`;
-
-  // Profit snapshot
-  const ship = ex.fees.ship, fee = ex.fees.fee;
-  const net  = suggested - ship - fee - (isNaN(cost) ? 0 : cost);
-  profitCard.innerHTML = profitHTML({ ship, fee, cost: isNaN(cost) ? 0 : cost, net });
-
-  // Adjustable fees
-  const recompute = () => {
-    const s = toNum(adjShip.value || ship);
-    const f = toNum(adjFee.value || fee);
-    const netNow = suggested - s - f - (isNaN(cost) ? 0 : cost);
-    profitCard.innerHTML = profitHTML({ ship: s, fee: f, cost: isNaN(cost) ? 0 : cost, net: netNow });
-  };
-  adjShip.value = ship.toFixed(2);
-  adjFee.value  = fee.toFixed(2);
-  adjShip.addEventListener('input', recompute);
-  adjFee.addEventListener('input', recompute);
-
-  pushStatus('Done');
-}
-
-function row(k, v) { return `<tr><td>${k}</td><td>${v}</td></tr>`; }
-function profitHTML({ ship, fee, cost, net }) {
-  return `<p><strong>Shipping:</strong> $${Number(ship).toFixed(2)}</p>
-          <p><strong>Platform Fees:</strong> $${Number(fee).toFixed(2)}</p>
-          <p><strong>Item Cost:</strong> $${Number(cost).toFixed(2)}</p>
-          <p><strong>Net Profit:</strong> $${net.toFixed(2)}</p>`;
-}
-function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+    `<p><strong>Title:<
