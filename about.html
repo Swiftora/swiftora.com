@@ -1,46 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Swiftora</title>
-  <link rel="icon" href="swiftora_logo_transparent v2.png">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="description" content="Learn why Swiftora exists and how it helps secondhand sellers list faster, price smarter, and track ROI." />
+  <script>window.__ASSET_VERSION__="v2025-08-09-6";</script>
+  <link rel="icon" href="/swiftora_icon_192x192.png" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-6" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
   <header class="site-header">
-    <div class="logo">
-      <!-- Only the brand name in the header (no small logo) -->
-      <a href="index.html"><span>Swiftora</span></a>
+    <div class="logo-wrap">
+      <a class="logo-badge" href="/" aria-label="Swiftora home">
+        <img src="/swiftora_logo_transparent v2.png" alt="Swiftora logo" />
+      </a>
     </div>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="demo.html">Demo</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-      </ul>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a href="/demo.html">Live Demo</a>
+      <a class="active" href="/about.html">About</a>
+      <a class="cta" href="/index.html#signup">Get Updates</a>
     </nav>
   </header>
 
-  <main class="content-section">
-    <h1>About Swiftora</h1>
-    <p>Swiftora is on a mission to supercharge resellers of antiques and oddities with intelligent tools. Our platform simplifies every step of the resale process:</p>
+  <main class="content-section" style="padding-top:32px">
+    <h1>Built for secondhand sellers</h1>
+    <p>Swiftora is an AI-powered toolkit for vintage and resale sellers. It turns a few details and photos into a platform-ready listing, suggests price ranges based on comparables, and shows your net profit after fees and shipping.</p>
+
+    <h2 style="margin-top:24px">What Swiftora helps you do</h2>
     <ul>
-      <li><strong>Automated Listing Creation</strong> – Generate optimized titles and descriptions in seconds.</li>
-      <li><strong>Pricing Intelligence</strong> – Real‑time comps from major marketplaces to price competitively.</li>
-      <li><strong>ROI Tracking</strong> – End‑to‑end profit calculations, including fees, shipping, and cost of goods.</li>
-      <li><strong>Confidence & Progress</strong> – Understand our confidence in suggested prices and track your progress as you refine listings.</li>
-      <li><strong>Marketplace Cross‑Posting</strong> – List once and automatically post to multiple resale platforms.</li>
-      <li><strong>Seller Dashboard</strong> – Track your inventory, sales, expenses and progress in one place.</li>
+      <li><strong>List faster:</strong> draft titles and descriptions from a quick prompt.</li>
+      <li><strong>Price smarter:</strong> guidance tuned for vintage, collectibles, and oddities.</li>
+      <li><strong>Track ROI:</strong> see cost, fees, shipping, and net profit at a glance.</li>
     </ul>
-    <p>We’re building this by listening to early adopters. Join our waitlist on the <a href="index.html#signup">home page</a> — you’ll help shape the roadmap and receive exclusive first access.</p>
+
+    <h2 style="margin-top:24px">Why we’re building this</h2>
+    <p>Most listing tools are made for brand-new retail products. Swiftora is purpose-built for secondhand items—where condition, era, and quirks matter. Our goal is to remove busywork so you can spend more time sourcing and selling.</p>
+
+    <h2 style="margin-top:24px">Roadmap (high level)</h2>
+    <ul>
+      <li>Image understanding to auto-extract attributes</li>
+      <li>Comps and pricing confidence from sold data</li>
+      <li>Multi-platform listing exports</li>
+      <li>Lightweight analytics and ROI tracking</li>
+    </ul>
+
+    <p style="margin-top:24px"><a class="btn primary" href="/demo.html">Try the demo</a></p>
   </main>
 
   <footer class="site-footer">
-    <p>&copy; 2025 Swiftora. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
+    <p>&copy; <span id="y"></span> Swiftora LLC. All rights reserved. · <a href="/privacy.html">Privacy</a></p>
   </footer>
+  <script>document.getElementById("y").textContent=new Date().getFullYear();</script>
 </body>
 </html>
