@@ -6,19 +6,17 @@
   <title>Swiftora Demo</title>
   <meta name="theme-color" content="#ffffff" />
   <meta name="description" content="Upload a photo or just try it with defaults. Add details if you want—Swiftora fills the gaps." />
-  <script>window.__ASSET_VERSION__="v2025-08-09-11";</script>
-  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-11" />
+  <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+  <script>window.__ASSET_VERSION__="v2025-08-09-12";</script>
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-12" />
   <link rel="icon" href="/swiftora_icon_192x192.png" />
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-11" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-12" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="brand">
-      <img class="brand-logo" src="/swiftora_logo_transparent v2.png" srcset="/swiftora_logo_transparent v2.png 1x, /swiftora_icon_512x512.png 2x" alt="Swiftora tag logo" />
-      <span class="brand-name">Swiftora</span>
-    </div>
+    <div class="brand"><span class="brand-name">Swiftora</span></div>
     <nav class="site-nav">
       <a href="/index.html">Home</a>
       <a class="active" href="/demo.html">Live Demo</a>
@@ -50,7 +48,7 @@
             <label class="block-label">Describe your item (optional)
               <textarea id="field-desc" rows="3" placeholder="e.g., amber glass vase, ribbed, 9 inches tall, likely 1960s. Marked Fenton on base."></textarea>
             </label>
-            <p class="mini-hint">Write naturally. If you leave it empty, Swiftora will make reasonable assumptions.</p>
+            <p class="mini-hint">Leave blank and Swiftora will make reasonable assumptions.</p>
 
             <div class="block-label">Condition (optional)
               <div class="chip-row" id="condChips" role="group" aria-label="Condition">
@@ -148,9 +146,19 @@
   </footer>
 
   <script>
-    document.getElementById("y").textContent=new Date().getFullYear();
     const V=(window.__ASSET_VERSION__||"").toString();
-    document.querySelectorAll('a[href^="/"]').forEach(a=>{const u=new URL(a.getAttribute("href"),location.origin);if(!u.searchParams.get("v")){u.searchParams.set("v",V);a.href=u.pathname+"?"+u.searchParams.toString()+(u.hash||"");}});
+    document.getElementById("y").textContent=new Date().getFullYear();
+    (function(){
+      const KEY="__swiftora_build__";
+      const prev=localStorage.getItem(KEY);
+      if(prev && prev!==V){
+        if('caches' in window){caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k))))}
+        if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.update()))}
+        localStorage.setItem(KEY,V); location.reload(); return;
+      }
+      localStorage.setItem(KEY,V);
+      document.querySelectorAll('a[href^="/"]').forEach(a=>{try{const u=new URL(a.getAttribute("href"),location.origin);if(u.origin===location.origin&&!u.searchParams.get("v")){u.searchParams.set("v",V);a.href=u.pathname+"?"+u.searchParams.toString()+(u.hash||"")}}catch{}});
+    })();
     if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v="+V));}
   </script>
   <script src="/demo.js?v=v2025-08-09-11" defer></script>
