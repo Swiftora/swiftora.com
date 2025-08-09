@@ -1,37 +1,40 @@
-// Network-first for HTML, cache-first for assets
-const CACHE_VERSION = "swiftora-v2025-08-09-7";
+// Swiftora SW — network-first HTML, cache-first assets, auto-claim
+const CACHE_VERSION = "swiftora-v2025-08-09-10";
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(self.skipWaiting());
+self.addEventListener("install", (e) => {
+  self.skipWaiting();
 });
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.map(k => k !== CACHE_VERSION ? caches.delete(k) : null)))
-  );
-  self.clients.claim();
+
+self.addEventListener("activate", (e) => {
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.map(k => k !== CACHE_VERSION ? caches.delete(k) : null));
+    await self.clients.claim();
+    // nudge open tabs so they pick up fresh assets
+    const clients = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
+    clients.forEach(c => c.postMessage({ type: "SW_ACTIVATED", cache: CACHE_VERSION }));
+  })());
 });
 
 self.addEventListener("fetch", (event) => {
   const req = event.request;
-  const isHTML = req.mode === "navigate" || req.headers.get("accept")?.includes("text/html");
+  const acceptsHTML = req.mode === "navigate" || req.headers.get("accept")?.includes("text/html");
 
-  if (isHTML) {
+  if (acceptsHTML) {
     event.respondWith(
-      fetch(req)
-        .then((resp) => {
-          const copy = resp.clone();
-          caches.open(CACHE_VERSION).then((c) => c.put(req, copy));
-          return resp;
-        })
-        .catch(() => caches.match(req) || caches.match("/index.html"))
+      fetch(req).then(resp => {
+        const copy = resp.clone();
+        caches.open(CACHE_VERSION).then(c => c.put(req, copy));
+        return resp;
+      }).catch(() => caches.match(req) || caches.match("/index.html"))
     );
     return;
   }
 
   event.respondWith(
-    caches.match(req).then((hit) => hit || fetch(req).then((resp) => {
+    caches.match(req).then(hit => hit || fetch(req).then(resp => {
       const copy = resp.clone();
-      caches.open(CACHE_VERSION).then((c) => c.put(req, copy));
+      caches.open(CACHE_VERSION).then(c => c.put(req, copy));
       return resp;
     }))
   );
