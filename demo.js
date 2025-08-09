@@ -1,4 +1,4 @@
-// Swiftora Demo – photos optional, multi-image, back buttons, P&L profit step (v15)
+// Swiftora Demo – photos optional, multi-image, back buttons, P&L profit step (v2025-08-09-16)
 (() => {
   const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
 
@@ -17,8 +17,7 @@
   const levelMeter=$("#levelMeter"), earnedXP=$("#earnedXP");
 
   // Profit step elements
-  const adjShip=$("#adj-ship"), adjFee=$("#adj-fee"); // created in P&L section (ids are reused)
-  const adjPrice=$("#adj-price"), adjCost=$("#adj-cost");
+  const adjPrice=$("#adj-price"), adjShip=$("#adj-ship"), adjCost=$("#adj-cost"), adjFee=$("#adj-fee"); // (adj-fee is virtual)
   const kpiPrice=$("#kpi-price"), kpiProfit=$("#kpi-profit"), kpiMargin=$("#kpi-margin"), kpiROI=$("#kpi-roi");
   const feeMeta=$("#fee-meta"), feeAmt=$("#fee-amt"), netAmt=$("#net-amt"), profitAmt=$("#profit-amt");
   const marginPct=$("#margin-pct"), roiPct=$("#roi-pct"), marginBar=$("#margin-bar"), roiBar=$("#roi-bar");
@@ -128,19 +127,18 @@
 
   // Step 3: Profit & Loss
   function renderProfit(init=false){
-    // Defaults & inputs
     if(init){
       if(!adjPrice.value) adjPrice.value = (state.suggested||0).toFixed(2);
       if(!adjShip.value)  adjShip.value  = "12.00";
-      if(!adjFee.value)   adjFee.value   = (state.feeRate*100).toFixed(1);
       if(!adjCost.value && Number.isFinite(state.cost)) adjCost.value = (+state.cost).toFixed(2);
     }
 
+    // Fee % editable via hidden control? keep constant 13% for demo:
+    const feeRate = 0.13;
+
     const gross = numOr(adjPrice.value, state.suggested);
     const ship  = numOr(adjShip.value, 12);
-    const feeRate = numOr(adjFee.value, state.feeRate*100)/100;
     const itemCost = numOr(adjCost.value, Number.isFinite(state.cost)?state.cost:0);
-
     const fees = +(gross*feeRate + state.feeFixed).toFixed(2);
     const netBeforeCost = +(gross - fees - ship).toFixed(2);
     const profit = +(netBeforeCost - itemCost).toFixed(2);
@@ -168,8 +166,7 @@
     roiBar.style.width = clamp(roi>999?100:roi) + "%";
   }
 
-  // live recompute on input
-  [adjPrice, adjShip, adjFee, adjCost].forEach(el=>el?.addEventListener("input",()=>renderProfit(false)));
+  [adjPrice, adjShip, adjCost].forEach(el=>el?.addEventListener("input",()=>renderProfit(false)));
 
   // XP
   function awardXP(){
