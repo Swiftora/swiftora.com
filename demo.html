@@ -5,43 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Swiftora Demo</title>
   <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="Upload multiple photos and let Swiftora draft the listing. Add optional details if you want." />
+  <meta name="description" content="Upload multiple photos (front/back/base/close-up) and let Swiftora draft the listing. Add optional details if you want." />
   <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
-  <script>window.__ASSET_VERSION__="v2025-08-09-16";</script>
-
-  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-16" />
+  <script>window.__ASSET_VERSION__="v2025-08-09-18";</script>
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-18" />
   <link rel="icon" href="/swiftora_icon_192x192.png" />
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-16" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-18" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <!-- P&L step helpers -->
-  <style>
-    .pnl .kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
-    .pnl .kpi{background:#fff;border:1px solid #e8ebf3;border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
-    .pnl .kpi-label{font-size:.85rem;color:#6b7280;margin-bottom:6px}
-    .pnl .kpi-value{font-weight:800;font-size:1.4rem}
-    .pnl .kpi-sub{margin-top:4px;font-size:.85rem;color:#6b7280}
-    .pnl-table{border:1px solid #e8ebf3;border-radius:12px;overflow:hidden;background:#fff}
-    .pnl-table .row{display:grid;grid-template-columns:1fr 180px;gap:12px;padding:12px 14px;border-top:1px solid #f2f4f7}
-    .pnl-table .row.header{background:#fafafa;font-weight:700;border-top:none}
-    .pnl-table .num{text-align:right}
-    .pnl-table input{width:140px;text-align:right}
-    .pnl-table .sub{background:#fcfcfe}
-    .pnl-table .neg{color:#b42318}
-    .pnl-table .total{background:#f9fafb;font-weight:700}
-    .pnl-table .total.strong{background:#fff7ed;border-top:2px solid #fde68a}
-    .bars{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-    .bar{font-size:.9rem;color:#374151}
-    .bar .bar-outer{height:10px;border-radius:999px;background:#eef2ff;margin-top:6px;overflow:hidden}
-    .bar .bar-inner{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#16a34a,#22c55e)}
-    @media (max-width:700px){
-      .pnl .kpis{grid-template-columns:1fr}
-      .bars{grid-template-columns:1fr}
-      .pnl-table .row{grid-template-columns:1fr 140px}
-      .pnl-table input{width:120px}
-    }
-  </style>
 </head>
 <body>
   <header class="site-header">
@@ -65,7 +36,7 @@
       <h1>Upload & Tell Us a Bit</h1>
       <div class="grid-two">
         <div class="card">
-          <label class="block-label">Item photos (optional — multiple allowed)
+          <label class="block-label">Item photos (required — multiple allowed)
             <input type="file" id="upload" accept="image/*" multiple />
           </label>
           <div id="thumbs" class="preview-grid" aria-live="polite"></div>
@@ -75,7 +46,7 @@
             <div class="coverage-bar"><div id="coverageFill"></div></div>
             <small id="coverageLabel">0/3</small>
           </div>
-          <p class="mini-hint">Recommended angles: <strong>Front</strong>, <strong>Back</strong> or <strong>Base/Mark</strong>, and a <strong>Close-up</strong>. No photos? We’ll still generate a draft.</p>
+          <p class="mini-hint">Recommended angles: <strong>Front</strong>, <strong>Back</strong> or <strong>Base/Mark</strong>, and a <strong>Close-up</strong>.</p>
         </div>
 
         <div class="card">
@@ -113,22 +84,18 @@
         </ul>
       </details>
 
-      <p id="step1Errors" class="errors" aria-live="polite">
-        Tip: you can leave everything blank and hit Next—Swiftora will fill in sensible defaults.
-      </p>
+      <p id="step1Errors" class="errors" aria-live="polite" style="display:none"></p>
       <div class="actions">
-        <button class="btn btn-next" id="step1Btn">Next</button>
+        <button class="btn btn-next" id="step1Btn" disabled>Next</button>
       </div>
+      <p class="badge" style="margin-top:8px">Build <span id="demoBuild"></span></p>
     </section>
 
     <!-- STEP 2 -->
     <section class="screen" id="step2">
       <h1>Listing & Live Results</h1>
 
-      <div class="card">
-        <h3>Status</h3>
-        <ul id="statusList" class="status"></ul>
-      </div>
+      <div class="card"><h3>Status</h3><ul id="statusList" class="status"></ul></div>
 
       <div class="grid-two">
         <div class="card"><h3>Draft Listing</h3><div id="listingCard" aria-live="polite"></div></div>
@@ -147,71 +114,41 @@
       </div>
     </section>
 
-    <!-- STEP 3 — P&L -->
+    <!-- STEP 3 -->
     <section class="screen" id="step3">
-      <h1>Profit &amp; Loss</h1>
-      <div class="card pnl">
+      <h1>Profit Breakdown</h1>
+      <div class="card">
         <div class="kpis">
-          <div class="kpi">
-            <div class="kpi-label">Price</div>
-            <div class="kpi-value" id="kpi-price">$0.00</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-label">Profit</div>
-            <div class="kpi-value" id="kpi-profit">$0.00</div>
-            <div class="kpi-sub" id="kpi-margin">Margin 0%</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-label">ROI</div>
-            <div class="kpi-value" id="kpi-roi">—</div>
-          </div>
+          <div class="kpi"><div class="kpi-title">Price</div><div class="kpi-value" id="kpi-price">$—</div></div>
+          <div class="kpi"><div class="kpi-title">Profit</div><div class="kpi-value" id="kpi-profit">$—</div></div>
+          <div class="kpi"><div class="kpi-title" id="kpi-margin">Margin —</div></div>
+          <div class="kpi"><div class="kpi-title">ROI</div><div class="kpi-value" id="kpi-roi">—</div></div>
         </div>
 
-        <div class="pnl-table">
-          <div class="row header"><div>Item</div><div class="num">Amount</div></div>
-
-          <div class="row">
-            <div>Listing price</div>
-            <div class="num"><input id="adj-price" type="number" inputmode="decimal" step="0.01" placeholder="0.00" /></div>
-          </div>
-
-          <div class="row sub">
-            <div>Platform fees <span id="fee-meta"></span></div>
-            <div class="num neg">-<span id="fee-amt">$0.00</span></div>
-          </div>
-
-          <div class="row sub">
-            <div>Shipping</div>
-            <div class="num neg"><input id="adj-ship" type="number" inputmode="decimal" step="0.01" placeholder="0.00" /></div>
-          </div>
-
-          <div class="row sub">
-            <div>Item cost</div>
-            <div class="num neg"><input id="adj-cost" type="number" inputmode="decimal" step="0.01" placeholder="0.00" /></div>
-          </div>
-
-          <div class="row total">
-            <div>Net</div>
-            <div class="num" id="net-amt">$0.00</div>
-          </div>
-
-          <div class="row total strong">
-            <div>Profit</div>
-            <div class="num" id="profit-amt">$0.00</div>
-          </div>
+        <div class="grid-mini" style="margin-top:10px">
+          <label class="block-label">Adjust price <input id="adj-price" type="number" inputmode="decimal" step="0.01" /></label>
+          <label class="block-label">Adjust shipping <input id="adj-ship" type="number" inputmode="decimal" step="0.01" /></label>
+          <label class="block-label">Item cost <input id="adj-cost" type="number" inputmode="decimal" step="0.01" /></label>
         </div>
 
-        <div class="bars">
-          <div class="bar">Margin <span id="margin-pct"></span>
-            <div class="bar-outer"><div id="margin-bar" class="bar-inner"></div></div>
+        <div class="grid-two" style="margin-top:14px">
+          <div class="card" style="box-shadow:none;border-style:dashed">
+            <h4>Fees <small id="fee-meta"></small></h4>
+            <div id="fee-amt">$—</div>
+            <h4 style="margin-top:10px">Net (before cost)</h4>
+            <div id="net-amt">$—</div>
           </div>
-          <div class="bar">ROI <span id="roi-pct"></span>
-            <div class="bar-outer"><div id="roi-bar" class="bar-inner"></div></div>
+          <div class="card" style="box-shadow:none;border-style:dashed">
+            <h4>Profit</h4><div id="profit-amt">$—</div>
+            <h4 style="margin-top:10px">Margin <span id="margin-pct">—</span></h4>
+            <div class="bar-outer"><div id="margin-bar" class="bar-inner" style="background:linear-gradient(90deg,#f97316,#fb923c);width:0%"></div></div>
+            <h4 style="margin-top:10px">ROI <span id="roi-pct">—</span></h4>
+            <div class="bar-outer"><div id="roi-bar" class="bar-inner" style="background:linear-gradient(90deg,#0891b2,#06b6d4);width:0%"></div></div>
           </div>
         </div>
       </div>
 
-      <p class="hint">Tweak price/fees/shipping/cost to see how net profit and ROI change.</p>
+      <p class="hint">Tweak fees/shipping to see how net profit changes.</p>
       <div class="actions">
         <button class="btn btn-back" id="back3">Back</button>
         <button class="btn btn-next" id="step3Btn">Next</button>
@@ -248,37 +185,13 @@
   </footer>
 
   <script>
-  (() => {
     const V=(window.__ASSET_VERSION__||"").toString();
-    const KEY="__swiftora_build__";
-    const qp=new URLSearchParams(location.search);
-
-    if(qp.get("flush")==="1"){
-      (async()=>{
-        if('caches' in window){const ks=await caches.keys(); await Promise.all(ks.map(k=>caches.delete(k)));}
-        if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister()));}
-        qp.delete("flush"); qp.set("v",V);
-        location.replace(location.pathname+"?"+qp.toString());
-      })(); return;
-    }
-
     document.getElementById("y").textContent=new Date().getFullYear();
-    const prev=localStorage.getItem(KEY);
-    if(prev && prev!==V){
-      if('caches' in window){caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k))))}
-      if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.update()))}
-      localStorage.setItem(KEY,V); location.reload(); return;
-    }
-    localStorage.setItem(KEY,V);
-
+    const dB=document.getElementById("demoBuild"); if(dB) dB.textContent=V;
     if("serviceWorker" in navigator){
       window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v="+V));
-      navigator.serviceWorker.addEventListener("message",(e)=>{ if(e.data?.type==="SW_ACTIVATED") location.reload(); });
     }
-  })();
   </script>
-
-  <script src="/demo.js?v=v2025-08-09-16" defer></script>
+  <script src="/demo.js?v=v2025-08-09-18" defer></script>
 </body>
 </html>
-
