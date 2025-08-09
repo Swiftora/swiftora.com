@@ -1,7 +1,6 @@
-// Swiftora Demo – step-by-step flow, light UI (v7)
+// Swiftora Demo – step-by-step flow (v10)
 (() => {
-  const $ = (s, p=document) => p.querySelector(s);
-  const $$ = (s, p=document) => [...p.querySelectorAll(s)];
+  const $ = (s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
 
   const upload=$("#upload"), preview=$("#preview"), desc=$("#field-desc"),
         condChips=$("#condChips"), condHidden=$("#field-condition"),
@@ -17,14 +16,14 @@
 
   const levelMeter=$("#levelMeter"), earnedXP=$("#earnedXP");
 
-  const state={ file:null, desc:"", condition:"", cost:0, suggested:48, ship:12, feeRate:0.13, feeFixed:0.30, xp:0, level:1 };
+  const state={file:null,desc:"",condition:"",cost:0,suggested:48,ship:12,feeRate:0.13,feeFixed:0.30,xp:0,level:1};
 
   const setProgress=pct=>progressBar.style.width=pct+"%";
   const goto=i=>{
     screens.forEach((el,idx)=>el.classList.toggle("active",idx===i));
     dots.forEach((d,idx)=>d.classList.toggle("active",idx<=i));
     setProgress([20,40,60,80,100][i]||20);
-    window.scrollTo({top:0, behavior:"smooth"});
+    window.scrollTo({top:0,behavior:"smooth"});
   };
 
   const validate=()=>{
@@ -49,36 +48,25 @@
     else{ preview.removeAttribute("src"); preview.style.display="none"; }
     validate();
   });
-  condChips.addEventListener("click",e=>{ const b=e.target.closest(".chip"); if(b) selectCond(b.dataset.value) });
+  condChips.addEventListener("click",e=>{const b=e.target.closest(".chip"); if(b) selectCond(b.dataset.value)});
   ["input","blur","keyup"].forEach(ev=>{
     desc.addEventListener(ev,()=>{state.desc=desc.value; validate()});
     cost.addEventListener(ev,()=>validate());
   });
 
-  $("#step1Btn").addEventListener("click",()=>{ state.cost=parseFloat(cost.value)||0; buildStep2(); goto(1) });
-  $("#step2Btn").addEventListener("click",()=>{ renderProfit(); goto(2) });
-  $("#step3Btn").addEventListener("click",()=>{ awardXP(); goto(3) });
-  $("#step4Btn").addEventListener("click",()=> goto(4) );
+  $("#step1Btn").addEventListener("click",()=>{state.cost=parseFloat(cost.value)||0; buildStep2(); goto(1)});
+  $("#step2Btn").addEventListener("click",()=>{renderProfit(); goto(2)});
+  $("#step3Btn").addEventListener("click",()=>{awardXP(); goto(3)});
+  $("#step4Btn").addEventListener("click",()=>goto(4));
 
   function buildStep2(){
     statusList.innerHTML=""; log("Analyzing image (simulated)..."); log("Extracting attributes from your description..."); log("Drafting listing text...");
 
     const title=draftTitle(state.desc,state.condition), body=draftBody(state.desc,state.condition), tags=draftTags(state.desc);
-    listingCard.innerHTML=`
-      <div class="listing">
-        <div class="listing-title">${esc(title)}</div>
-        <div class="listing-body">${esc(body)}</div>
-        <div class="listing-tags">${tags.map(t=>`<span class="tag">#${esc(t)}</span>`).join("")}</div>
-      </div>`;
+    listingCard.innerHTML=`<div class="listing"><div class="listing-title">${esc(title)}</div><div class="listing-body">${esc(body)}</div><div class="listing-tags">${tags.map(t=>`<span class="tag">#${esc(t)}</span>`).join("")}</div></div>`;
 
-    const comps=sampleComps(state.desc);
-    state.suggested=Math.round(avg(comps.map(c=>c.price)));
-    compsCard.innerHTML=`
-      <ul class="comps">
-        ${comps.map(c=>`<li><div class="comp-line"><span class="comp-title">${esc(c.title)}</span><span class="comp-price">$${c.price}</span></div><div class="comp-meta">Sold • ${c.date}</div></li>`).join("")}
-      </ul>
-      <div class="comp-summary">Suggested price (demo): <strong>$${state.suggested}</strong></div>
-      <small>(Example comps only — live data coming in MVP.)</small>`;
+    const comps=sampleComps(state.desc); state.suggested=Math.round(avg(comps.map(c=>c.price)));
+    compsCard.innerHTML=`<ul class="comps">${comps.map(c=>`<li><div class="comp-line"><span class="comp-title">${esc(c.title)}</span><span class="comp-price">$${c.price}</span></div><div class="comp-meta">Sold • ${c.date}</div></li>`).join("")}</ul><div class="comp-summary">Suggested price (demo): <strong>$${state.suggested}</strong></div><small>(Example comps only — live data coming in MVP.)</small>`;
 
     const attrs=extractAttrs(state.desc,state.condition);
     attrsCard.innerHTML=`<tbody>${Object.entries(attrs).map(([k,v])=>`<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join("")}</tbody>`;
@@ -88,7 +76,7 @@
 
     log("Done. Review your draft below.");
   }
-  function log(t){ const li=document.createElement("li"); li.textContent=t; statusList.appendChild(li); }
+  function log(t){const li=document.createElement("li"); li.textContent=t; statusList.appendChild(li);}
 
   function renderProfit(){
     const ship=Number.isFinite(parseFloat(adjShip.value))?parseFloat(adjShip.value):state.ship;
@@ -116,13 +104,12 @@
     const pct=Math.min(100, Math.round((state.xp%150)/150*100)); levelMeter.style.width=pct+"%";
   }
 
-  /* Toy drafting/extraction helpers */
+  // helpers
   const draftTitle=(t,c)=>`${(t||"Vintage item").replace(/\s+/g," ").trim().replace(/^./,m=>m.toUpperCase())} • ${c||"Good condition"}`;
   const draftBody=(t,c)=>`${t.trim().replace(/\s+/g," ")} ${c?`Condition: ${c}.`:""} Ships fast and packed with care.`;
-  const draftTags=t=>[...new Set([...(t.toLowerCase().match(/[a-z0-9-]+/g)||[]).slice(0,12), "vintage","collectible","resale","decor","gift"])].slice(0,10);
+  const draftTags=t=>[...new Set([...(t.toLowerCase().match(/[a-z0-9-]+/g)||[]).slice(0,12),"vintage","collectible","resale","decor","gift"])].slice(0,10);
   function sampleComps(t){const s=t.toLowerCase();const hint=s.includes("amber")?"Amber":s.includes("silver")?"Silver":s.includes("ceramic")?"Ceramic":"Vintage";const now=new Date();const d=o=>new Date(now.getTime()-o*86400000).toLocaleDateString();return[{title:`${hint} piece, similar style`,price:42,date:d(8)},{title:`${hint} item, comparable size`,price:51,date:d(15)},{title:`${hint} item, good condition`,price:49,date:d(23)}]}
   function extractAttrs(t,c){const s=t.toLowerCase();const material=/glass|ceramic|porcelain|wood|metal|brass|bronze|silver|gold|plastic|resin/.exec(s)?.[0]||"Unknown";const color=/amber|blue|green|red|pink|white|black|brown|clear|smoke|yellow|violet|orange/.exec(s)?.[0]||"Neutral";const size=/(\d+(\.\d+)?)\s?(in|inch|inches|cm|mm)/.exec(s)?.[0]||"Approx.";const era=/(1920s|1930s|1940s|1950s|1960s|1970s|1980s|1990s|mid-?century|art deco|victorian|edwardian)/.exec(s)?.[0]||"Likely vintage";const cap=x=>x?x.charAt(0).toUpperCase()+x.slice(1):x;const title=x=>x.split(/\s+/).map(cap).join(" ");return{Material:cap(material),Color:cap(color),Size:size.replace(/inch(es)?/,"in"),Era:title(era),Condition:c||"Good"}}
-
   const avg=a=>Math.round(a.reduce((x,y)=>x+y,0)/(a.length||1));
   const esc=s=>(s+"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   const colorClass=p=>p>=80?"ok":p>=60?"warn":"low";
