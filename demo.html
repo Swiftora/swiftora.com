@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Swiftora Interactive Demo</title>
-  <meta name="theme-color" content="#6c63ff" />
-  <meta name="description" content="Upload a photo and see a simulated Swiftora listing, pricing band, and ROI flow." />
+  <meta name="theme-color" content="#ff6600" />
+  <meta name="description" content="Upload a photo and see a simulated Swiftora listing, pricing band, ROI, and guidance." />
+
+  <!-- PWA -->
   <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="icon" href="/swiftora_logo_transparent_v2.png" />
+  <link rel="icon" href="/swiftora_logo_transparent v2.png" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/demo.css" />
+
+  <!-- Fonts/Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="logo"><a href="/index.html"><span>Swiftora</span></a></div>
+    <div class="logo">
+      <a href="/index.html" aria-label="Swiftora home"><span>Swiftora</span></a>
+    </div>
     <nav class="main-nav" aria-label="Main">
       <ul>
         <li><a href="/index.html">Home</a></li>
@@ -27,57 +37,170 @@
 
   <main class="container demo-wrapper">
     <h1>Try the Swiftora Demo</h1>
-    <p class="demo-note">Upload any item photo to see a simulated listing example. This demo does not use live AI yet.</p>
+    <p class="demo-note">Upload an item photo and add a few details. This demo simulates our real-time flow (no live AI yet).</p>
 
+    <!-- Stepper -->
     <div class="stepper" id="stepper" aria-label="Demo steps">
-      <div class="dot active">1</div><div class="dot">2</div><div class="dot">3</div><div class="dot">4</div><div class="dot">5</div>
+      <div class="dot active">1</div>
+      <div class="dot">2</div>
+      <div class="dot">3</div>
+      <div class="dot">4</div>
+      <div class="dot">5</div>
     </div>
 
-    <!-- Step 1 -->
+    <!-- Step 1: Upload + Details + Coaching -->
     <section class="demo-panel" id="step1">
-      <h2><i class="fa-solid fa-image" aria-hidden="true"></i> Upload Your Item Photo</h2>
-      <input type="file" id="upload" accept="image/*" aria-label="Upload item photo" />
-      <img id="preview" class="preview" alt="Uploaded preview" />
-      <button class="next-btn" id="step1Btn" disabled onclick="nextStep()">Next</button>
+      <h2><i class="fa-solid fa-image" aria-hidden="true"></i> Upload & Tell Us a Bit</h2>
+
+      <div class="grid-two">
+        <div class="card">
+          <label class="block-label">Item photo
+            <input type="file" id="upload" accept="image/*"
+                   aria-label="Upload item photo"
+                   onchange="document.getElementById('step1Btn').disabled=false" />
+          </label>
+          <img id="preview" class="preview" alt="Uploaded preview" />
+        </div>
+
+        <div class="card">
+          <div class="grid gap">
+            <label class="block-label">Category <span class="req">*</span>
+              <select id="field-category" required>
+                <option value="">Select…</option>
+                <option>Glassware</option>
+                <option>Clocks</option>
+                <option>Decor</option>
+                <option>Jewelry</option>
+                <option>Toys</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label class="block-label">Condition <span class="req">*</span>
+              <select id="field-condition" required>
+                <option value="">Select…</option>
+                <option>New</option>
+                <option>Like New</option>
+                <option>Good</option>
+                <option>Fair</option>
+                <option>As-is</option>
+              </select>
+            </label>
+
+            <label class="block-label">Estimated item cost (your cost) <span class="req">*</span>
+              <input id="field-cost" type="number" step="0.01" placeholder="e.g., 5.00" required />
+            </label>
+
+            <label class="block-label">Color (optional)
+              <input id="field-color" type="text" placeholder="e.g., amber, brass" />
+            </label>
+
+            <label class="block-label">Brand / markings (optional)
+              <input id="field-brand" type="text" placeholder="e.g., Westclox, Fenton mark" />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <details class="card tips">
+        <summary><strong>Photo tips for better matches</strong></summary>
+        <ul>
+          <li>Use <strong>good lighting</strong> (near a window or daylight bulb).</li>
+          <li>Shoot on a <strong>neutral background</strong> (plain table, sheet, or wall).</li>
+          <li>Include <strong>multiple angles</strong>: front, back, base/mark, and a close-up of texture.</li>
+          <li>Add a <strong>size reference</strong> (ruler, coin) for scale.</li>
+          <li>Avoid heavy filters; keep colors accurate.</li>
+          <li>Remove clutter so the item stands out.</li>
+        </ul>
+      </details>
+
+      <div class="actions">
+        <button class="next-btn" id="step1Btn" disabled onclick="nextStep()">Next</button>
+      </div>
     </section>
 
-    <!-- Step 2 -->
+    <!-- Step 2: Listing & Live Results -->
     <section class="demo-panel" id="step2" style="display:none">
-      <h2><i class="fa-solid fa-receipt" aria-hidden="true"></i> Listing &amp; Pricing Preview</h2>
-      <div class="out-card fade" id="listingCard" aria-live="polite"></div>
-      <div class="out-card fade" id="compsCard"></div>
-      <div class="confidence-card fade" id="confidenceCard"></div>
-      <p class="disclaimer">Note: This is a sample output and does not use live AI. Descriptions and comparables may not match your uploaded photo.</p>
-      <button class="next-btn" onclick="nextStep()">Next</button>
+      <h2><i class="fa-solid fa-receipt" aria-hidden="true"></i> Listing & Live Results</h2>
+
+      <div class="card">
+        <h3>Status</h3>
+        <ul id="statusList" class="status"></ul>
+      </div>
+
+      <div class="grid-two">
+        <div class="card">
+          <h3>Draft Listing</h3>
+          <div id="listingCard" aria-live="polite"></div>
+        </div>
+
+        <div class="card">
+          <h3>Sold Comparables (sample)</h3>
+          <div id="compsCard"></div>
+        </div>
+      </div>
+
+      <div class="grid-two">
+        <div class="card">
+          <h3>Attributes</h3>
+          <table class="attr-table" id="attrsCard"></table>
+        </div>
+        <div class="card">
+          <h3>Confidence</h3>
+          <div id="confidenceCard"></div>
+        </div>
+      </div>
+
+      <p class="disclaimer">This is a <em>simulated</em> preview (no live AI yet). Real-time lookup & pricing will arrive in the MVP.</p>
+      <div class="actions">
+        <button class="next-btn" onclick="nextStep()">Next</button>
+      </div>
     </section>
 
-    <!-- Step 3 -->
+    <!-- Step 3: Profit Breakdown -->
     <section class="demo-panel" id="step3" style="display:none">
       <h2><i class="fa-solid fa-calculator" aria-hidden="true"></i> Profit Breakdown</h2>
-      <div class="out-card fade" id="profitCard"></div>
-      <p class="demo-note">“Item Cost” is what you originally paid. This snapshot estimates profit after typical fees & shipping.</p>
-      <button class="next-btn" onclick="nextStep()">Next</button>
+      <div class="card">
+        <div id="profitCard"></div>
+        <div class="grid-two">
+          <label class="block-label">Adjust shipping
+            <input id="adj-ship" type="number" step="0.01" />
+          </label>
+          <label class="block-label">Adjust platform fees
+            <input id="adj-fee" type="number" step="0.01" />
+          </label>
+        </div>
+      </div>
+      <p class="demo-note">“Item Cost” is what you originally paid. Use the adjusters above to see how net profit changes.</p>
+      <div class="actions">
+        <button class="next-btn" onclick="nextStep()">Next</button>
+      </div>
     </section>
 
-    <!-- Step 4 -->
+    <!-- Step 4: Your Progress -->
     <section class="demo-panel" id="step4" style="display:none">
       <h2><i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Your Progress</h2>
-      <div class="progress-card fade" id="progressCard"></div>
-      <button class="next-btn" onclick="nextStep()">Next</button>
+      <div class="card">
+        <div id="progressCard"></div>
+      </div>
+      <div class="actions">
+        <button class="next-btn" onclick="nextStep()">Next</button>
+      </div>
     </section>
 
-    <!-- Step 5 -->
+    <!-- Step 5: Call to Action -->
     <section class="demo-panel" id="step5" style="display:none">
       <h2>Get Early Access</h2>
-      <p>Like what you saw? Join our waitlist and be first to try the full version.</p>
+      <p>Like what you saw? Join our waitlist and be first to try the live version.</p>
       <a class="next-btn" href="/index.html#signup">Sign Me Up</a>
     </section>
   </main>
 
+  <!-- Sticky bottom CTA (mobile) -->
   <div class="sticky-cta">
     <div class="row">
       <a class="btn btn-primary" href="/demo.html" aria-current="page">Try the Demo</a>
-      <a class="btn btn-secondary" href="/thank-you.html">Join Waitlist</a>
+      <a class="btn btn-secondary" href="/index.html#signup">Join Waitlist</a>
     </div>
   </div>
 
@@ -85,6 +208,7 @@
     <p>&copy; 2025 Swiftora. All rights reserved. | <a href="/privacy.html">Privacy Policy</a></p>
   </footer>
 
+  <!-- SW register -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -93,7 +217,7 @@
     }
   </script>
 
+  <!-- Demo logic -->
   <script src="/demo.js" defer></script>
 </body>
 </html>
-
