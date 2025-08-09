@@ -1,7 +1,6 @@
-// Swiftora SW — network-first HTML, cache-first assets, auto-claim
-const CACHE_VERSION = "swiftora-v2025-08-09-12";
+const CACHE_VERSION = "swiftora-v2025-08-09-13";
 
-self.addEventListener("install", (e) => self.skipWaiting());
+self.addEventListener("install", () => self.skipWaiting());
 
 self.addEventListener("activate", (e) => {
   e.waitUntil((async () => {
