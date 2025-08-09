@@ -29,19 +29,52 @@
     .hero-cta{display:flex;gap:10px;margin:16px 0 8px}
     .hero .bullets{margin:10px 0 0 18px}
     .phone-wrap{display:flex;justify-content:center}
-    .phone{width:100%;max-width:390px;border-radius:28px;background:linear-gradient(#f7f8ff,#eef1ff);box-shadow:0 6px 30px rgba(17,24,39,.12);padding:16px 14px 18px}
-    .phone-notch{width:62%;height:6px;border-radius:6px;background:#11182714;margin:6px auto}
+
+    /* UPGRADED: phone now looks like a real device (no class renames) */
+    .phone{
+      width:min(340px,85vw);
+      aspect-ratio:9/19.5;
+      border-radius:36px;
+      background:#111;
+      box-shadow:0 20px 60px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.08);
+      padding:14px;
+      margin:0 auto;
+      position:relative;
+    }
+    .phone-notch{
+      position:absolute;top:8px;left:50%;transform:translateX(-50%);
+      width:32%;height:18px;background:#000;border-radius:0 0 16px 16px;
+      box-shadow:0 2px 6px rgba(0,0,0,.4);
+    }
+    /* NEW: inner screen wrapper to host your existing card */
+    .phone-screen{
+      width:100%;height:100%;
+      border-radius:28px;
+      background:linear-gradient(180deg,#fafafa,#f4f4f4);
+      overflow:hidden;
+      padding:16px;
+      display:flex;flex-direction:column;gap:10px;
+    }
+
     .card{background:#fff;border:1px solid #e8ebf3;border-radius:16px;padding:14px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
     .row{display:flex;gap:10px;align-items:center;justify-content:space-between}
     .thumbs{display:flex;gap:6px}
     .thumb{width:26px;height:26px;border-radius:6px;background:#f3f4f6;border:1px solid #e5e7eb}
     .title-skel{height:8px;border-radius:6px;background:#eef2ff;width:78%;margin-top:8px}
     .title-skel.short{width:58%}
-    .image-box{height:124px;border-radius:12px;background:
-      radial-gradient(#f5f6ff 1px,transparent 1px) 0 0/8px 8px,
-      linear-gradient(#fff,#fbfbff);
-      border:1px solid #e8ebf3;display:flex;align-items:center;justify-content:center;margin:10px 0}
-    .image-box img{max-height:140px !important;max-width:85% !important;opacity:.98}
+
+    /* TUNED: image area fits logo/device better on phones */
+    .image-box{
+      height:124px;border-radius:12px;
+      background:
+        radial-gradient(#f5f6ff 1px,transparent 1px) 0 0/8px 8px,
+        linear-gradient(#fff,#fbfbff);
+      border:1px solid #e8ebf3;display:flex;align-items:center;justify-content:center;margin:10px 0
+    }
+    .image-box img{
+      display:block;max-height:120px;max-width:85%;height:auto;width:auto;opacity:.98
+    }
+
     .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 12px}
     .chip{padding:6px 10px;border-radius:999px;background:#f3f0ff;color:#6d28d9;font-weight:700;font-size:.75rem}
     .badge{display:inline-flex;align-items:center;gap:6px;background:#e7f7ee;color:#166534;border-radius:999px;padding:6px 10px;font-weight:700;font-size:.76rem}
@@ -49,11 +82,17 @@
     .bar{font-size:.85rem;color:#374151}
     .bar-outer{height:8px;border-radius:999px;background:#eef2ff;overflow:hidden}
     .bar-fill{height:8px;border-radius:999px;width:0}
+
     .features-3{display:grid;gap:14px;grid-template-columns:repeat(3,1fr);padding:18px 20px 6px}
     .feat{border:1px solid #eee;border-radius:16px;padding:16px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.04)}
     .feat h4{margin:8px 0 6px}
     .icon-bubble{width:34px;height:34px;border-radius:999px;background:#fff3e8;display:flex;align-items:center;justify-content:center;font-weight:800;color:#ff6b00}
-    @media(max-width:980px){.hero{grid-template-columns:1fr;gap:20px}.phone{max-width:360px;margin:0 auto}.features-3{grid-template-columns:1fr}}
+
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr;gap:20px}
+      .phone{width:min(360px,90vw)} /* slightly larger on tablet-ish widths */
+      .features-3{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
@@ -89,34 +128,40 @@
     <div class="phone-wrap">
       <div class="phone">
         <div class="phone-notch"></div>
-        <div class="card">
-          <div class="row">
-            <strong>Listing Draft</strong>
-            <div class="thumbs"><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div></div>
-          </div>
-          <div class="image-box">
-            <img src="/swiftora_logo_transparent%20v2.png" alt="" style="max-height:140px;max-width:85%;opacity:.98">
-          </div>
-          <div class="title-skel"></div>
-          <div class="title-skel short"></div>
-          <div class="chips">
-            <span class="chip">Vintage</span>
-            <span class="chip">Mid-Century</span>
-            <span class="chip">Glass</span>
-          </div>
-          <span class="badge">$47 • suggested</span>
-          <div class="bars">
-            <div class="bar">Category
-              <div class="bar-outer"><div class="bar-fill" style="width:82%;background:#8b5cf6"></div></div>
+
+        <!-- NEW wrapper: phone-screen (content unchanged inside) -->
+        <div class="phone-screen">
+          <div class="card">
+            <div class="row">
+              <strong>Listing Draft</strong>
+              <div class="thumbs"><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div></div>
             </div>
-            <div class="bar">Era
-              <div class="bar-outer"><div class="bar-fill" style="width:66%;background:#22c55e"></div></div>
+            <div class="image-box">
+              <img src="/swiftora_logo_transparent%20v2.png" alt="">
             </div>
-            <div class="bar">Condition
-              <div class="bar-outer"><div class="bar-fill" style="width:74%;background:#10b981"></div></div>
+            <div class="title-skel"></div>
+            <div class="title-skel short"></div>
+            <div class="chips">
+              <span class="chip">Vintage</span>
+              <span class="chip">Mid-Century</span>
+              <span class="chip">Glass</span>
+            </div>
+            <span class="badge">$47 • suggested</span>
+            <div class="bars">
+              <div class="bar">Category
+                <div class="bar-outer"><div class="bar-fill" style="width:82%;background:#8b5cf6"></div></div>
+              </div>
+              <div class="bar">Era
+                <div class="bar-outer"><div class="bar-fill" style="width:66%;background:#22c55e"></div></div>
+              </div>
+              <div class="bar">Condition
+                <div class="bar-outer"><div class="bar-fill" style="width:74%;background:#10b981"></div></div>
+              </div>
             </div>
           </div>
         </div>
+        <!-- /phone-screen -->
+
       </div>
     </div>
   </main>
@@ -209,6 +254,3 @@
   </script>
 </body>
 </html>
-
-
-
