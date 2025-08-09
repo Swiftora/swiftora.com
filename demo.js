@@ -1,4 +1,4 @@
-/* ---------- Demo data (examples) ---------- */
+/* ---------- Demo data ---------- */
 const EXAMPLES = [
   {
     title: 'Vintage Mid-Century Amber Glass Vase',
@@ -56,7 +56,7 @@ let fieldCategory, fieldCondition, fieldCost, fieldColor, fieldBrand;
 let adjShip, adjFee;
 
 /* ---------- Helpers ---------- */
-const $$ = (sel) => document.querySelector(sel);
+const $ = (s) => document.querySelector(s);
 const toNum = (str) => {
   const n = parseFloat(String(str).replace(/[^0-9.]/g, ''));
   return isNaN(n) ? 0 : n;
@@ -93,29 +93,29 @@ document.addEventListener('DOMContentLoaded', () => {
   profitCard     = $('#profitCard');
   statusList     = $('#statusList');
 
-  fieldCategory = $('#field-category');
+  fieldCategory  = $('#field-category');
   fieldCondition = $('#field-condition');
-  fieldCost = $('#field-cost');
-  fieldColor = $('#field-color');
-  fieldBrand = $('#field-brand');
+  fieldCost      = $('#field-cost');
+  fieldColor     = $('#field-color');
+  fieldBrand     = $('#field-brand');
 
   adjShip = $('#adj-ship');
-  adjFee = $('#adj-fee');
+  adjFee  = $('#adj-fee');
 
-  // Safety: enable Next when any image is chosen
-  const enable = () => { nextBtn1.disabled = false; };
-  uploadEl.addEventListener('change', enable);
-  uploadEl.addEventListener('input', enable);
+  // Make Next reliable on all browsers
+  const enable = () => { if (nextBtn1) nextBtn1.disabled = false; };
+  if (uploadEl) {
+    uploadEl.addEventListener('change', enable);
+    uploadEl.addEventListener('input', enable);
+    uploadEl.addEventListener('change', () => {
+      if (!uploadEl.files?.length) return;
+      const file = uploadEl.files[0];
+      previewEl.src = URL.createObjectURL(file);
+      previewEl.style.display = 'block';
+    });
+  }
 
-  // Preview selected image
-  uploadEl.addEventListener('change', () => {
-    if (!uploadEl.files?.length) return;
-    const file = uploadEl.files[0];
-    previewEl.src = URL.createObjectURL(file);
-    previewEl.style.display = 'block';
-  });
-
-  // When Step 2 shows, simulate streaming and use the fields
+  // When Step 2 becomes visible, run the simulated pipeline
   const observer = new MutationObserver(() => {
     const st2 = $('#step2');
     if (st2 && st2.style.display !== 'none') {
@@ -123,11 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
       runSimulatedPipeline();
     }
   });
-  observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+  observer.observe(document.body, { childList: true, subtree: true, attributes: true });
 });
 
 async function runSimulatedPipeline() {
-  // Clear previous
+  // Reset
   statusList.innerHTML = '';
   listingCard.innerHTML = '';
   compsCard.innerHTML = '';
@@ -135,43 +135,36 @@ async function runSimulatedPipeline() {
   attrsCard.innerHTML = '';
   profitCard.innerHTML = '';
 
-  // Validate required fields
-  const category = fieldCategory.value;
+  const category  = fieldCategory.value;
   const condition = fieldCondition.value;
-  const cost = toNum(fieldCost.value);
-  const color = fieldColor.value.trim();
-  const brand = fieldBrand.value.trim();
+  const cost      = toNum(fieldCost.value);
+  const color     = (fieldColor.value || '').trim();
+  const brand     = (fieldBrand.value || '').trim();
 
-  // Pick a sample to drive comps + base price
   const ex = EXAMPLES[Math.floor(Math.random() * EXAMPLES.length)];
   const basePrice = toNum(ex.price);
-  const suggested = Math.max(basePrice - 1, 10); // tiny jitter
+  const suggested = Math.max(basePrice - 1, 10);
 
-  // Streamed steps
-  pushStatus('Analyzing image…');             await delay(600);
-  pushStatus('Detecting edges/background…');  await delay(500);
-  pushStatus('Reading markings/labels…');     await delay(600);
-  pushStatus('Finding visually similar items…'); await delay(600);
+  // Stream statuses
+  pushStatus('Analyzing image…');                 await delay(600);
+  pushStatus('Detecting edges/background…');      await delay(500);
+  pushStatus('Reading markings/labels…');         await delay(600);
+  pushStatus('Finding visually similar items…');  await delay(600);
   pushStatus('Pulling sold prices (last 90 days)…'); await delay(700);
 
   // Comps
   compsCard.innerHTML = renderComps(ex.comps);
 
-  // Listing based on user hints
-  const title = buildTitle({
-    category,
-    color,
-    brand,
-    baseTitle: ex.title
-  });
-  const desc = `${ex.desc} ${brand ? `Marked/Brand: ${brand}. ` : ''}${color ? `Color: ${color}. ` : ''}Category: ${category || 'N/A'}. Condition: ${condition || 'N/A'}.`;
+  // Listing
+  const title = buildTitle({ category, color, brand, baseTitle: ex.title });
+  const desc  = `${ex.desc} ${brand ? `Marked/Brand: ${brand}. ` : ''}${color ? `Color: ${color}. ` : ''}Category: ${category || 'N/A'}. Condition: ${condition || 'N/A'}.`;
 
   listingCard.innerHTML =
     `<p><strong>Title:</strong> ${title}</p>` +
     `<p><strong>Description:</strong> ${desc}</p>` +
     `<p><strong>Suggested Price:</strong> $${suggested.toFixed(2)} <span style="color:#777">(sample)</span></p>`;
 
-  // Attributes table
+  // Attributes
   attrsCard.innerHTML =
     row('Category', category || '—') +
     row('Condition', condition || '—') +
@@ -183,14 +176,14 @@ async function runSimulatedPipeline() {
   pushStatus('Scoring confidence…'); await delay(500);
   const conf = Math.floor(Math.random() * 26) + 70; // 70–95%
   confidenceCard.innerHTML = `<p><strong>Confidence Score:</strong> ${conf}%</p>
-  <p class="fine">Higher means the estimate aligns well with recent sales based on image similarity and keywords.</p>`;
+  <p class="fine">Higher means the estimate aligns with recent sales based on image similarity and keywords.</p>`;
 
-  // Profit snapshot (uses your cost)
+  // Profit snapshot
   const ship = ex.fees.ship, fee = ex.fees.fee;
-  const net = suggested - ship - fee - (isNaN(cost) ? 0 : cost);
+  const net  = suggested - ship - fee - (isNaN(cost) ? 0 : cost);
   profitCard.innerHTML = profitHTML({ ship, fee, cost: isNaN(cost) ? 0 : cost, net });
 
-  // Allow user to tweak fees/shipping and recompute net
+  // Adjustable fees
   const recompute = () => {
     const s = toNum(adjShip.value || ship);
     const f = toNum(adjFee.value || fee);
@@ -198,11 +191,18 @@ async function runSimulatedPipeline() {
     profitCard.innerHTML = profitHTML({ ship: s, fee: f, cost: isNaN(cost) ? 0 : cost, net: netNow });
   };
   adjShip.value = ship.toFixed(2);
-  adjFee.value = fee.toFixed(2);
+  adjFee.value  = fee.toFixed(2);
   adjShip.addEventListener('input', recompute);
   adjFee.addEventListener('input', recompute);
 
   pushStatus('Done');
 }
 
-function row(k, v) {
+function row(k, v) { return `<tr><td>${k}</td><td>${v}</td></tr>`; }
+function profitHTML({ ship, fee, cost, net }) {
+  return `<p><strong>Shipping:</strong> $${Number(ship).toFixed(2)}</p>
+          <p><strong>Platform Fees:</strong> $${Number(fee).toFixed(2)}</p>
+          <p><strong>Item Cost:</strong> $${Number(cost).toFixed(2)}</p>
+          <p><strong>Net Profit:</strong> $${net.toFixed(2)}</p>`;
+}
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
