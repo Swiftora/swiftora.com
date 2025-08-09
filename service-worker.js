@@ -1,4 +1,4 @@
-const CACHE_VERSION = "swiftora-v2025-08-09-13";
+const CACHE_VERSION = "swiftora-v2025-08-09-14";
 
 self.addEventListener("install", () => self.skipWaiting());
 
@@ -19,8 +19,7 @@ self.addEventListener("fetch", (event) => {
   if (wantsHTML) {
     event.respondWith(
       fetch(req).then(r => {
-        const copy = r.clone();
-        caches.open(CACHE_VERSION).then(c => c.put(req, copy));
+        caches.open(CACHE_VERSION).then(c => c.put(req, r.clone()));
         return r;
       }).catch(() => caches.match(req) || caches.match("/index.html"))
     );
@@ -29,8 +28,7 @@ self.addEventListener("fetch", (event) => {
 
   event.respondWith(
     caches.match(req).then(hit => hit || fetch(req).then(r => {
-      const copy = r.clone();
-      caches.open(CACHE_VERSION).then(c => c.put(req, copy));
+      caches.open(CACHE_VERSION).then(c => c.put(req, r.clone()));
       return r;
     }))
   );
