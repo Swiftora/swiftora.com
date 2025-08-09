@@ -1,4 +1,4 @@
-// Swiftora Demo – photos optional, multi-image, back buttons (v14)
+// Swiftora Demo – photos optional, multi-image, back buttons, P&L profit step (v15)
 (() => {
   const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
 
@@ -12,10 +12,16 @@
   // Step 2/3/4
   const statusList=$("#statusList"), listingCard=$("#listingCard"),
         compsCard=$("#compsCard"), attrsCard=$("#attrsCard"), confidenceCard=$("#confidenceCard");
-  const profitCard=$("#profitCard"), adjShip=$("#adj-ship"), adjFee=$("#adj-fee");
   const progressBar=$("#progressBar"), dots=$$("#stepper .dot"),
         screens=[$("#step1"),$("#step2"),$("#step3"),$("#step4"),$("#step5")];
   const levelMeter=$("#levelMeter"), earnedXP=$("#earnedXP");
+
+  // Profit step elements
+  const adjShip=$("#adj-ship"), adjFee=$("#adj-fee"); // created in P&L section (ids are reused)
+  const adjPrice=$("#adj-price"), adjCost=$("#adj-cost");
+  const kpiPrice=$("#kpi-price"), kpiProfit=$("#kpi-profit"), kpiMargin=$("#kpi-margin"), kpiROI=$("#kpi-roi");
+  const feeMeta=$("#fee-meta"), feeAmt=$("#fee-amt"), netAmt=$("#net-amt"), profitAmt=$("#profit-amt");
+  const marginPct=$("#margin-pct"), roiPct=$("#roi-pct"), marginBar=$("#margin-bar"), roiBar=$("#roi-bar");
 
   const state={
     images:[], desc:"", condition:"", cost:NaN,
@@ -24,13 +30,13 @@
 
   const angles=["Front","Back","Base/Mark","Close-up","Other"];
 
-  // Nav
+  // Nav helpers
   const setProgress=p=>progressBar.style.width=p+"%";
   const goto=i=>{ screens.forEach((el,idx)=>el.classList.toggle("active",idx===i));
     dots.forEach((d,idx)=>d.classList.toggle("active",idx<=i));
     setProgress([20,40,60,80,100][i]||20); window.scrollTo({top:0,behavior:"smooth"}); };
 
-  // Thumbs
+  // Thumbs / coverage
   function addPreview(url){
     const wrap=document.createElement("div");
     wrap.className="preview-item";
@@ -43,7 +49,6 @@
     state.images.push(item);
     select.addEventListener("change",()=>{item.angle=select.value; refreshCoverage();});
   }
-
   function refreshCoverage(){
     if(state.images.length===0){ coverageWrap.style.display="none"; return; }
     coverageWrap.style.display="";
@@ -53,8 +58,7 @@
     const pct=[0,34,67,100][score]||0;
     coverageFill.style.width=pct+"%"; coverageLabel.textContent=score+"/3";
   }
-
-  upload.addEventListener("change",()=>{
+  upload?.addEventListener("change",()=>{
     thumbs.innerHTML=""; state.images.length=0;
     const files=[...upload.files||[]];
     files.slice(0,12).forEach(f=>{
@@ -65,27 +69,28 @@
     setTimeout(refreshCoverage,0);
   });
 
-  condChips.addEventListener("click",e=>{
+  // Chips
+  condChips?.addEventListener("click",e=>{
     const b=e.target.closest(".chip"); if(!b) return;
     state.condition=b.dataset.value; condHidden.value=state.condition;
     $$("#condChips .chip").forEach(x=>x.classList.toggle("active",x===b));
   });
 
-  $("#step1Btn").addEventListener("click",()=>{
+  // Buttons
+  $("#step1Btn")?.addEventListener("click",()=>{
     state.desc=(desc.value||"").trim();
     state.cost=parseFloat(cost.value);
     buildStep2();
     goto(1);
   });
+  $("#back2")?.addEventListener("click",()=>goto(0));
+  $("#step2Btn")?.addEventListener("click",()=>{renderProfit(true); goto(2);});
+  $("#back3")?.addEventListener("click",()=>goto(1));
+  $("#step3Btn")?.addEventListener("click",()=>{awardXP(); goto(3);});
+  $("#back4")?.addEventListener("click",()=>goto(2));
+  $("#step4Btn")?.addEventListener("click",()=>goto(4));
 
-  $("#back2").addEventListener("click",()=>goto(0));
-  $("#back3").addEventListener("click",()=>goto(1));
-  $("#back4").addEventListener("click",()=>goto(2));
-  $("#step2Btn").addEventListener("click",()=>{renderProfit(); goto(2);});
-  $("#step3Btn").addEventListener("click",()=>{awardXP(); goto(3);});
-  $("#step4Btn").addEventListener("click",()=>goto(4));
-
-  // Step 2
+  // Step 2: build simulated results
   function buildStep2(){
     statusList.innerHTML="";
     log(state.images.length? "Analyzing images…" : "No images supplied — using generic assumptions.");
@@ -121,31 +126,52 @@
   }
   function log(t){const li=document.createElement("li"); li.textContent=t; statusList.appendChild(li);}
 
-  // Step 3
-  function renderProfit(){
-    const ship=isNum(adjShip.value)?parseFloat(adjShip.value):12;
-    const feeRate=isNum(adjFee.value)?(parseFloat(adjFee.value)/100):state.feeRate;
-    const gross=state.suggested;
-    const fees=+(gross*feeRate+state.feeFixed).toFixed(2);
-    const net=+(gross-fees-ship).toFixed(2);
-    const costVal=isNum(state.cost)?state.cost:0;
-    const profit=+(net-costVal).toFixed(2);
-    const roi=costVal>0?Math.round((profit/costVal)*100):(profit>0?999:0);
-    profitCard.innerHTML=`
-      <div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;text-align:center">
-        <div><strong>Price</strong><div>$${gross}</div></div>
-        <div><strong>Fees</strong><div>$${fees}</div></div>
-        <div><strong>Shipping</strong><div>$${ship}</div></div>
-        <div><strong>Cost</strong><div>$${isNum(state.cost)?costVal.toFixed(2):"—"}</div></div>
-        <div><strong>Net</strong><div>$${net}</div></div>
-        <div><strong>Profit</strong><div>${profit>=0?"":"-"}$${Math.abs(profit).toFixed(2)}</div></div>
-        <div><strong>ROI</strong><div>${isNum(state.cost)?roi+"%":"—"}</div></div>
-      </div>
-      <small>Fee rate: ${(feeRate*100).toFixed(1)}% + $${state.feeFixed.toFixed(2)} (simulated)</small>`;
-    if(!adjShip.value) adjShip.value="12.00";
-    if(!adjFee.value) adjFee.value=(state.feeRate*100).toFixed(1);
+  // Step 3: Profit & Loss
+  function renderProfit(init=false){
+    // Defaults & inputs
+    if(init){
+      if(!adjPrice.value) adjPrice.value = (state.suggested||0).toFixed(2);
+      if(!adjShip.value)  adjShip.value  = "12.00";
+      if(!adjFee.value)   adjFee.value   = (state.feeRate*100).toFixed(1);
+      if(!adjCost.value && Number.isFinite(state.cost)) adjCost.value = (+state.cost).toFixed(2);
+    }
+
+    const gross = numOr(adjPrice.value, state.suggested);
+    const ship  = numOr(adjShip.value, 12);
+    const feeRate = numOr(adjFee.value, state.feeRate*100)/100;
+    const itemCost = numOr(adjCost.value, Number.isFinite(state.cost)?state.cost:0);
+
+    const fees = +(gross*feeRate + state.feeFixed).toFixed(2);
+    const netBeforeCost = +(gross - fees - ship).toFixed(2);
+    const profit = +(netBeforeCost - itemCost).toFixed(2);
+
+    const margin = gross>0 ? Math.round((profit/gross)*100) : 0;
+    const roi = itemCost>0 ? Math.round((profit/itemCost)*100) : (profit>0?999:0);
+
+    // KPIs
+    kpiPrice.textContent  = `$${gross.toFixed(2)}`;
+    kpiProfit.textContent = `${profit>=0?"":"-"}$${Math.abs(profit).toFixed(2)}`;
+    kpiMargin.textContent = `Margin ${isFinite(margin)?margin:0}%`;
+    kpiROI.textContent    = itemCost>0 ? `${roi}%` : "—";
+
+    // Table cells
+    feeMeta.textContent = `(${(feeRate*100).toFixed(1)}% + $${state.feeFixed.toFixed(2)})`;
+    feeAmt.textContent  = `$${fees.toFixed(2)}`;
+    netAmt.textContent  = `$${netBeforeCost.toFixed(2)}`;
+    profitAmt.textContent= `${profit>=0?"":"-"}$${Math.abs(profit).toFixed(2)}`;
+
+    // Bars
+    const clamp = (x)=>Math.max(0,Math.min(100,x));
+    marginPct.textContent = `${isFinite(margin)?margin:0}%`;
+    roiPct.textContent = itemCost>0?`${roi}%`:"—";
+    marginBar.style.width = clamp(isFinite(margin)?margin:0) + "%";
+    roiBar.style.width = clamp(roi>999?100:roi) + "%";
   }
 
+  // live recompute on input
+  [adjPrice, adjShip, adjFee, adjCost].forEach(el=>el?.addEventListener("input",()=>renderProfit(false)));
+
+  // XP
   function awardXP(){
     let xp=40;
     const have=new Set(state.images.map(i=>i.angle));
@@ -155,13 +181,13 @@
     if(state.images.length>=4) xp+=10;
     if((state.desc||"").length>40) xp+=10;
     if(state.condition) xp+=10;
-    if(isNum(state.cost)) xp+=10;
+    if(Number.isFinite(parseFloat(state.cost))) xp+=10;
     state.xp+=xp; earnedXP.textContent=xp;
     const pct=Math.min(100, Math.round((state.xp%150)/150*100)); levelMeter.style.width=pct+"%";
   }
 
   // helpers
-  const isNum=v=>Number.isFinite(parseFloat(v));
+  const numOr=(v,f)=>Number.isFinite(parseFloat(v))?parseFloat(v):f;
   const draftTitle=(t,c)=>`${(t||"Vintage item").replace(/\s+/g," ").trim().replace(/^./,m=>m.toUpperCase())}${c?" • "+c:""}`;
   const draftBody=(t,c)=>`${(t||"Classic vintage piece with nice character.").trim()} ${c?`Condition: ${c}.`:""} Ships fast and packed with care.`;
   const draftTags=t=>[...new Set([...(t.toLowerCase().match(/[a-z0-9-]+/g)||[]).slice(0,12),"vintage","collectible","resale","decor","gift"])].slice(0,10);
