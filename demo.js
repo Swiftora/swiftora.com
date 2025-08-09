@@ -1,5 +1,5 @@
 // Swiftora Demo Logic (client-only, simulated)
-// Keeps your existing UX but tightens validation and state handling.
+// Visual tweaks: confidence bar colors; same behavior as before.
 
 (() => {
   const $ = (s, p = document) => p.querySelector(s);
@@ -42,8 +42,8 @@
     cost: 0,
     suggested: 48,
     ship: 12,
-    feeRate: 0.13,   // 13% platform fee (simulated)
-    feeFixed: 0.30,  // fixed processing fee
+    feeRate: 0.13,
+    feeFixed: 0.30,
     xp: 0,
     level: 1
   };
@@ -105,7 +105,6 @@
   // --- Step 1 -> Step 2
   step1Btn.addEventListener("click", () => {
     state.cost = parseFloat(cost.value) || 0;
-    // Populate step 2 simulated content
     simulateListingAndComps();
     goto(1);
   });
@@ -132,7 +131,6 @@
     appendStatus("Extracting attributes from your description...");
     appendStatus("Drafting listing text...");
 
-    // Draft title + description
     const title = draftTitle(state.desc, state.condition);
     const body = draftBody(state.desc, state.condition);
     const tags = draftTags(state.desc);
@@ -141,11 +139,10 @@
       <div class="listing">
         <div class="listing-title">${escapeHtml(title)}</div>
         <div class="listing-body">${escapeHtml(body)}</div>
-        <div class="listing-tags">${tags.map(t => `<span class="tag">#${escapeHtml(t)}</span>`).join(" ")}</div>
+        <div class="listing-tags">${tags.map(t => `<span class="tag">#${escapeHtml(t)}</span>`).join("")}</div>
       </div>
     `;
 
-    // Comps (sample)
     const comps = sampleComps(state.desc);
     state.suggested = Math.round(avg(comps.map(c => c.price)));
     compsCard.innerHTML = `
@@ -164,7 +161,6 @@
       <small>(Example comps only — live data coming in MVP.)</small>
     `;
 
-    // Attributes table
     const attrs = extractAttributes(state.desc, state.condition);
     attrsCard.innerHTML = `
       <tbody>
@@ -174,7 +170,6 @@
       </tbody>
     `;
 
-    // Confidence (toy values)
     const conf = [
       {label:"Category", pct: 82},
       {label:"Era", pct: 66},
@@ -184,7 +179,7 @@
     confidenceCard.innerHTML = conf.map(c => `
       <div class="bar">
         <span>${c.label}</span>
-        <div class="bar-outer"><div class="bar-inner" style="width:${c.pct}%"></div></div>
+        <div class="bar-outer"><div class="bar-inner ${colorClass(c.pct)}" style="width:${c.pct}%"></div></div>
         <span class="pct">${c.pct}%</span>
       </div>
     `).join("");
@@ -198,7 +193,7 @@
     statusList.appendChild(li);
   }
 
-  // --- Step 3: Profit
+  // --- Profit
   function renderProfit(){
     const ship = Number.isFinite(parseFloat(adjShip.value)) ? parseFloat(adjShip.value) : state.ship;
     const feeRate = Number.isFinite(parseFloat(adjFee.value)) ? (parseFloat(adjFee.value)/100) : state.feeRate;
@@ -210,7 +205,7 @@
     const roi = state.cost > 0 ? Math.round((profit / state.cost) * 100) : (profit > 0 ? 999 : 0);
 
     profitCard.innerHTML = `
-      <div class="profit-grid">
+      <div class="profit-grid" style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;text-align:center">
         <div><strong>Price</strong><div>$${gross}</div></div>
         <div><strong>Fees</strong><div>$${fees}</div></div>
         <div><strong>Shipping</strong><div>$${ship}</div></div>
@@ -222,24 +217,22 @@
       <small>Fee rate: ${(feeRate*100).toFixed(1)}% + $${state.feeFixed.toFixed(2)} (simulated)</small>
     `;
 
-    // Defaults into adjusters
     if (!adjShip.value) adjShip.value = state.ship.toFixed(2);
     if (!adjFee.value) adjFee.value = (state.feeRate*100).toFixed(1);
   }
 
   [adjShip, adjFee].forEach(el => el.addEventListener("input", renderProfit));
 
-  // --- Step 4: XP
+  // --- XP
   function simulateXP(){
-    // Award based on completeness of inputs
-    let xp = 30; // base
+    let xp = 30;
     if (state.file) xp += 25;
     if (state.desc.length > 40) xp += 20;
     if (state.condition) xp += 10;
     if (state.cost > 0) xp += 15;
 
     state.xp += xp;
-    const newLevel = 1 + Math.floor(state.xp / 150); // 150xp per level
+    const newLevel = 1 + Math.floor(state.xp / 150);
     state.level = Math.max(state.level, newLevel);
 
     earnedXP.textContent = xp;
@@ -250,61 +243,47 @@
     levelMeter.style.width = pct + "%";
   }
 
-  // --- Drafting helpers (toy rules)
+  // --- Draft helpers
   function draftTitle(text, condition){
     const base = (text || "Vintage item").replace(/\s+/g, " ").trim();
     const first = base.charAt(0).toUpperCase() + base.slice(1);
     return `${first} • ${condition || "Good condition"}`;
   }
-
   function draftBody(text, condition){
     const clean = text.trim().replace(/\s+/g," ");
     return `${clean} ${condition ? `Condition: ${condition}.` : ""} Ships fast and packed with care.`;
   }
-
   function draftTags(text){
     const words = (text.toLowerCase().match(/[a-z0-9-]+/g) || []).slice(0, 12);
     const base = ["vintage","collectible","resale","decor","gift"];
     return [...new Set([...words, ...base])].slice(0, 10);
   }
-
   function sampleComps(text){
     const hint = text.toLowerCase().includes("amber") ? "Amber" :
                  text.toLowerCase().includes("silver") ? "Silver" :
                  text.toLowerCase().includes("ceramic") ? "Ceramic" : "Vintage";
-    const now = new Date();
-    const d = (off) => new Date(now.getTime() - off*86400000).toLocaleDateString();
+    const now = new Date(); const d = (off) => new Date(now.getTime() - off*86400000).toLocaleDateString();
     return [
       {title:`${hint} piece, similar style`, price: 42, date: d(8)},
       {title:`${hint} item, comparable size`, price: 51, date: d(15)},
       {title:`${hint} item, good condition`, price: 49, date: d(23)}
     ];
   }
-
   function extractAttributes(text, condition){
     const t = text.toLowerCase();
-    const material =
-      /glass|ceramic|porcelain|wood|metal|brass|bronze|silver|gold|plastic|resin/.exec(t)?.[0] || "Unknown";
-    const color =
-      /amber|blue|green|red|pink|white|black|brown|clear|smoke|yellow|violet|orange/.exec(t)?.[0] || "Neutral";
-    const size =
-      /(\d+(\.\d+)?)\s?(in|inch|inches|cm|mm)/.exec(t)?.[0] || "Approx.";
-    const era =
-      /(1920s|1930s|1940s|1950s|1960s|1970s|1980s|1990s|mid-?century|art deco|victorian|edwardian)/.exec(t)?.[0] || "Likely vintage";
-    return {
-      Material: capitalize(material),
-      Color: capitalize(color),
-      Size: size.replace(/inch(es)?/,"in"),
-      Era: titleCase(era),
-      Condition: condition || "Good"
-    };
+    const material = /glass|ceramic|porcelain|wood|metal|brass|bronze|silver|gold|plastic|resin/.exec(t)?.[0] || "Unknown";
+    const color = /amber|blue|green|red|pink|white|black|brown|clear|smoke|yellow|violet|orange/.exec(t)?.[0] || "Neutral";
+    const size = /(\d+(\.\d+)?)\s?(in|inch|inches|cm|mm)/.exec(t)?.[0] || "Approx.";
+    const era = /(1920s|1930s|1940s|1950s|1960s|1970s|1980s|1990s|mid-?century|art deco|victorian|edwardian)/.exec(t)?.[0] || "Likely vintage";
+    return { Material: cap(material), Color: cap(color), Size: size.replace(/inch(es)?/,"in"), Era: title(era), Condition: condition || "Good" };
   }
 
   // --- Utils
   const avg = (arr) => Math.round(arr.reduce((a,b)=>a+b,0) / (arr.length || 1));
   const escapeHtml = (s) => (s+"").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-  const capitalize = (s) => s ? s.charAt(0).toUpperCase()+s.slice(1) : s;
-  const titleCase = (s) => s.split(/\s+/).map(capitalize).join(" ");
+  const cap = (s) => s ? s.charAt(0).toUpperCase()+s.slice(1) : s;
+  const title = (s) => s.split(/\s+/).map(cap).join(" ");
+  const colorClass = (pct) => pct >= 80 ? "ok" : pct >= 60 ? "warn" : "low";
 
   // Init
   validateStep1();
