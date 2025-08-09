@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Swiftora Demo</title>
   <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="Upload a photo, describe your item, and preview a simulated listing, pricing, and ROI." />
-  <script>window.__ASSET_VERSION__="v2025-08-09-10";</script>
-  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-10" />
+  <meta name="description" content="Upload a photo or just try it with defaults. Add details if you want—Swiftora fills the gaps." />
+  <script>window.__ASSET_VERSION__="v2025-08-09-11";</script>
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-11" />
   <link rel="icon" href="/swiftora_icon_192x192.png" />
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-10" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-11" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="brand">
-      <img class="brand-logo" src="/swiftora_logo_transparent v2.png" alt="" aria-hidden="true" />
+      <img class="brand-logo" src="/swiftora_logo_transparent v2.png" srcset="/swiftora_logo_transparent v2.png 1x, /swiftora_icon_512x512.png 2x" alt="Swiftora tag logo" />
       <span class="brand-name">Swiftora</span>
     </div>
     <nav class="site-nav">
@@ -38,21 +38,21 @@
       <h1>Upload & Tell Us a Bit</h1>
       <div class="grid-two">
         <div class="card">
-          <label class="block-label required">Item photo (required)
+          <label class="block-label">Item photo (optional)
             <input type="file" id="upload" accept="image/*" />
           </label>
           <img id="preview" class="preview" alt="Uploaded preview" />
-          <p class="hint">Tip: multiple angles help—front, back, base/mark, and a close-up.</p>
+          <p class="hint">Photos help with attributes. No photo? We’ll still generate a draft.</p>
         </div>
 
         <div class="card">
           <div class="grid">
-            <label class="block-label required">Describe your item (required)
+            <label class="block-label">Describe your item (optional)
               <textarea id="field-desc" rows="3" placeholder="e.g., amber glass vase, ribbed, 9 inches tall, likely 1960s. Marked Fenton on base."></textarea>
             </label>
-            <p class="mini-hint">Write naturally—Swiftora extracts category, color, brand/markings, age, size.</p>
+            <p class="mini-hint">Write naturally. If you leave it empty, Swiftora will make reasonable assumptions.</p>
 
-            <div class="block-label required">Condition (required)
+            <div class="block-label">Condition (optional)
               <div class="chip-row" id="condChips" role="group" aria-label="Condition">
                 <button type="button" data-value="New" class="chip">New</button>
                 <button type="button" data-value="Like New" class="chip">Like New</button>
@@ -63,7 +63,7 @@
               <input id="field-condition" type="hidden" />
             </div>
 
-            <label class="block-label required">Estimated cost — what you paid (required)
+            <label class="block-label">Estimated cost — what you paid (optional)
               <input id="field-cost" type="number" inputmode="decimal" step="0.01" placeholder="e.g., 5.00" />
             </label>
           </div>
@@ -80,8 +80,8 @@
         </ul>
       </details>
 
-      <p id="step1Errors" class="errors" aria-live="polite"></p>
-      <div class="actions"><button class="btn btn-next" id="step1Btn" disabled>Next</button></div>
+      <p id="step1Errors" class="errors" aria-live="polite">Tip: you can leave everything blank and hit Next—Swiftora will fill in sensible defaults.</p>
+      <div class="actions"><button class="btn btn-next" id="step1Btn">Next</button></div>
     </section>
 
     <!-- STEP 2 -->
@@ -150,13 +150,9 @@
   <script>
     document.getElementById("y").textContent=new Date().getFullYear();
     const V=(window.__ASSET_VERSION__||"").toString();
-    // Version internal links
-    document.querySelectorAll('a[href^="/"]').forEach(a=>{
-      const u=new URL(a.getAttribute("href"), location.origin);
-      if(!u.searchParams.get("v")){u.searchParams.set("v",V); a.href=u.pathname+"?"+u.searchParams.toString()+(u.hash||"");}
-    });
+    document.querySelectorAll('a[href^="/"]').forEach(a=>{const u=new URL(a.getAttribute("href"),location.origin);if(!u.searchParams.get("v")){u.searchParams.set("v",V);a.href=u.pathname+"?"+u.searchParams.toString()+(u.hash||"");}});
     if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v="+V));}
   </script>
-  <script src="/demo.js?v=v2025-08-09-10" defer></script>
+  <script src="/demo.js?v=v2025-08-09-11" defer></script>
 </body>
 </html>
