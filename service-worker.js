@@ -1,5 +1,5 @@
 // Network-first for HTML, cache-first for assets
-const CACHE_VERSION = "swiftora-v2025-08-09-6";
+const CACHE_VERSION = "swiftora-v2025-08-09-7";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(self.skipWaiting());
