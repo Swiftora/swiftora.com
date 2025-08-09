@@ -5,27 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Swiftora Interactive Demo</title>
   <meta name="theme-color" content="#ff6600" />
-  <meta name="description" content="Upload a photo, add a few details, and see a simulated listing, pricing, and ROI in an app-like flow." />
+  <meta name="description" content="Upload a photo, describe the item in your own words, then see a simulated listing, pricing, and ROI." />
 
-  <!-- PWA + icons -->
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/swiftora_logo_transparent v2.png" />
 
-  <!-- Styles -->
   <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/demo.css" />
 
-  <!-- Fonts/Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
 
-  <!-- App Top Bar -->
   <header class="appbar">
-    <div class="appbar-left">
-      <a class="brand" href="/index.html">Swiftora</a>
-    </div>
+    <div class="appbar-left"><a class="brand" href="/index.html">Swiftora</a></div>
     <div class="appbar-right">
       <span class="level" id="levelBadge">Lv 1</span>
       <span class="xp" id="xpBadge"><i class="fa-solid fa-coins" aria-hidden="true"></i> <span id="xpValue">0</span></span>
@@ -33,63 +27,45 @@
   </header>
 
   <main class="app-container">
-    <!-- Progress -->
-    <div class="progress">
-      <div class="progress-bar" id="progressBar" style="width: 20%;"></div>
-    </div>
+    <div class="progress"><div class="progress-bar" id="progressBar" style="width:20%"></div></div>
 
-    <!-- Stepper -->
     <div class="stepper" id="stepper" aria-label="Demo steps">
       <div class="dot active">1</div><div class="dot">2</div><div class="dot">3</div><div class="dot">4</div><div class="dot">5</div>
     </div>
 
-    <!-- Step 1: Upload + details + tips -->
+    <!-- STEP 1: Upload + describe + required inputs -->
     <section class="screen active" id="step1">
       <h1><i class="fa-solid fa-image"></i> Upload & Tell Us a Bit</h1>
 
       <div class="grid-two">
         <div class="card">
-          <label class="block-label">Item photo
+          <label class="block-label required">Item photo (required)
             <input type="file" id="upload" accept="image/*" />
           </label>
           <img id="preview" class="preview" alt="Uploaded preview" />
+          <p class="hint">Tip: multiple angles help a lot—front, back, base/mark, and a close-up.</p>
         </div>
 
         <div class="card">
           <div class="grid gap">
-            <label class="block-label">Category <span class="req">*</span>
-              <select id="field-category" required>
-                <option value="">Select…</option>
-                <option>Glassware</option>
-                <option>Clocks</option>
-                <option>Decor</option>
-                <option>Jewelry</option>
-                <option>Toys</option>
-                <option>Other</option>
-              </select>
+            <label class="block-label required">Describe your item (required)
+              <textarea id="field-desc" rows="3" placeholder="e.g., amber glass vase, ribbed, 9 inches tall, likely 1960s. Marked Fenton on base."></textarea>
             </label>
+            <p class="mini-hint">Write naturally—Swiftora will parse for category, color, brand/markings, age, size, etc.</p>
 
-            <label class="block-label">Condition <span class="req">*</span>
-              <select id="field-condition" required>
-                <option value="">Select…</option>
-                <option>New</option>
-                <option>Like New</option>
-                <option>Good</option>
-                <option>Fair</option>
-                <option>As-is</option>
-              </select>
-            </label>
+            <div class="block-label required">Condition (required)
+              <div class="chip-row" id="condChips" role="group" aria-label="Condition">
+                <button type="button" data-value="New" class="chip">New</button>
+                <button type="button" data-value="Like New" class="chip">Like New</button>
+                <button type="button" data-value="Good" class="chip">Good</button>
+                <button type="button" data-value="Fair" class="chip">Fair</button>
+                <button type="button" data-value="As-is" class="chip">As-is</button>
+              </div>
+              <input id="field-condition" type="hidden" />
+            </div>
 
-            <label class="block-label">Estimated item cost (your cost) <span class="req">*</span>
-              <input id="field-cost" type="number" inputmode="decimal" step="0.01" placeholder="e.g., 5.00" required />
-            </label>
-
-            <label class="block-label">Color (optional)
-              <input id="field-color" type="text" placeholder="e.g., amber, brass" />
-            </label>
-
-            <label class="block-label">Brand / markings (optional)
-              <input id="field-brand" type="text" placeholder="e.g., Westclox, Fenton mark" />
+            <label class="block-label required">Estimated item cost — your cost (required)
+              <input id="field-cost" type="number" inputmode="decimal" step="0.01" placeholder="e.g., 5.00" />
             </label>
           </div>
         </div>
@@ -107,12 +83,13 @@
         </ul>
       </details>
 
+      <p id="step1Errors" class="errors" aria-live="polite"></p>
       <div class="actions">
         <button class="btn-next" id="step1Btn" disabled>Next</button>
       </div>
     </section>
 
-    <!-- Step 2: Listing & Live Results -->
+    <!-- STEP 2: Listing & Live Results -->
     <section class="screen" id="step2">
       <h1><i class="fa-solid fa-receipt"></i> Listing & Live Results</h1>
 
@@ -144,13 +121,10 @@
       </div>
 
       <p class="disclaimer">This is a simulated preview (no live AI yet). Real-time lookup arrives in the MVP.</p>
-
-      <div class="actions">
-        <button class="btn-next" id="step2Btn">Next</button>
-      </div>
+      <div class="actions"><button class="btn-next" id="step2Btn">Next</button></div>
     </section>
 
-    <!-- Step 3: Profit -->
+    <!-- STEP 3: Profit -->
     <section class="screen" id="step3">
       <h1><i class="fa-solid fa-calculator"></i> Profit Breakdown</h1>
       <div class="card">
@@ -165,28 +139,22 @@
         </div>
       </div>
       <p class="hint">Tweak fees/shipping to see how net profit changes.</p>
-      <div class="actions">
-        <button class="btn-next" id="step3Btn">Next</button>
-      </div>
+      <div class="actions"><button class="btn-next" id="step3Btn">Next</button></div>
     </section>
 
-    <!-- Step 4: Progress / Gamification -->
+    <!-- STEP 4: Progress -->
     <section class="screen" id="step4">
       <h1><i class="fa-solid fa-gauge-high"></i> Your Progress</h1>
       <div class="card center">
-        <p class="big">⭐ Great work!</p>
+        <p class="big">⭐ Nice!</p>
         <p>You’ve earned <strong><span id="earnedXP">0</span> XP</strong> in this run.</p>
-        <div class="meter">
-          <div id="levelMeter"></div>
-        </div>
+        <div class="meter"><div id="levelMeter"></div></div>
         <p class="hint">Keep listing to level up and unlock advanced price tools.</p>
       </div>
-      <div class="actions">
-        <button class="btn-next" id="step4Btn">Next</button>
-      </div>
+      <div class="actions"><button class="btn-next" id="step4Btn">Next</button></div>
     </section>
 
-    <!-- Step 5: CTA -->
+    <!-- STEP 5: CTA -->
     <section class="screen" id="step5">
       <h1>Get Early Access</h1>
       <div class="card center">
@@ -196,7 +164,6 @@
     </section>
   </main>
 
-  <!-- Sticky bottom CTA (mobile) -->
   <div class="sticky-cta">
     <div class="row">
       <a class="btn btn-primary" href="/demo.html" aria-current="page">Try the Demo</a>
@@ -208,7 +175,6 @@
     <p>&copy; 2025 Swiftora. All rights reserved. | <a href="/privacy.html">Privacy Policy</a></p>
   </footer>
 
-  <!-- SW -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -217,7 +183,6 @@
     }
   </script>
 
-  <!-- Demo logic -->
   <script src="/demo.js" defer></script>
 </body>
 </html>
