@@ -8,11 +8,11 @@
   <meta name="description" content="Create listings faster, price with comps, and track ROI—without busywork." />
   <meta name="theme-color" content="#7c4dff" />
   <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
-  <script>window.__ASSET_VERSION__="v2025-08-09-12";</script>
+  <script>window.__ASSET_VERSION__="v2025-08-09-13";</script>
   <link rel="canonical" href="https://swiftora.com/" />
   <link rel="icon" href="/swiftora_icon_192x192.png" />
-  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-12" />
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-12" />
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-13" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-13" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
@@ -20,9 +20,7 @@
   <a class="sr-only" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <div class="brand">
-      <span class="brand-name">Swiftora</span>
-    </div>
+    <div class="brand"><span class="brand-name">Swiftora</span></div>
     <nav class="site-nav" aria-label="Primary">
       <a class="active" href="/index.html">Home</a>
       <a href="/demo.html">Live Demo</a>
@@ -33,11 +31,7 @@
 
   <main id="main" class="hero">
     <div class="hero-copy">
-      <div class="hero-appicon">
-        <img src="/swiftora_logo_transparent v2.png" alt="Swiftora tag icon" />
-        <span>Swiftora AI</span>
-      </div>
-
+      <div class="hero-ai">Swiftora AI</div>
       <h1>Smarter selling for vintage & resale</h1>
       <p>Draft listings in minutes, price with real-world comps, and track ROI—all in one place.</p>
 
@@ -48,12 +42,12 @@
 
       <ul class="bullets">
         <li>AI-drafted titles & descriptions</li>
-        <li>Pricing guidance with comps</li>
+        <li>Pricing guidance with sold comps</li>
         <li>ROI tracking & simple analytics</li>
       </ul>
     </div>
 
-    <!-- Phone mock with image + details -->
+    <!-- Phone mock: photo + thumbs + price + bars + platform chips -->
     <div class="hero-art" aria-hidden="true">
       <div class="phone-frame">
         <div class="phone-top"></div>
@@ -62,13 +56,18 @@
             <div class="screen-title">Listing Draft</div>
 
             <div class="screen-photo">
-              <!-- Using your existing app icon as a placeholder image (you can swap to a real sample later) -->
-              <img src="/swiftora_icon_512x512.png" alt="Sample photo" />
+              <img src="/swiftora_icon_512x512.png" alt="">
+            </div>
+            <div class="thumb-row">
+              <img src="/swiftora_icon_512x512.png" alt="">
+              <img src="/swiftora_icon_512x512.png" alt="">
+              <img src="/swiftora_icon_512x512.png" alt="">
             </div>
 
             <div class="screen-lines"><span></span><span></span><span></span></div>
             <div class="screen-actions">
               <div class="chip">Vintage</div><div class="chip">Mid-Century</div><div class="chip">Glass</div>
+              <div class="chip platform-chip">Etsy</div><div class="chip platform-chip">eBay</div>
             </div>
 
             <span class="price-chip">$47 • suggested</span>
@@ -86,8 +85,19 @@
 
   <section class="features" aria-label="Highlights">
     <article class="feature"><h3><i class="fa-solid fa-bolt icon"></i>Faster listings</h3><p>Turn a photo + a few details into a polished, platform-ready listing.</p></article>
-    <article class="feature"><h3><i class="fa-solid fa-tags icon"></i>Price with confidence</h3><p>Comps and guidance tuned for secondhand goods and niche categories.</p></article>
-    <article class="feature"><h3><i class="fa-solid fa-chart-line icon"></i>Know your ROI</h3><p>Track cost, fees, shipping, and net profit—automatically.</p></article>
+    <article class="feature"><h3><i class="fa-solid fa-tags icon"></i>Price with confidence</h3><p>Guidance from sold comps— not just asking prices—tuned for secondhand.</p></article>
+    <article class="feature"><h3><i class="fa-solid fa-chart-line icon"></i>Know your ROI</h3><p>Cost, fees, shipping, and net profit at a glance.</p></article>
+  </section>
+
+  <section class="diff" aria-label="Why it’s different">
+    <h2>Why Swiftora is different</h2>
+    <ul>
+      <li><strong>Built for secondhand.</strong> Condition, era, and quirks matter—our models are tuned for vintage & resale, not brand-new retail.</li>
+      <li><strong>Multi-angle photo guidance.</strong> Front, back, base/mark, close-up—get better matches and fewer mislabels.</li>
+      <li><strong>Sold-data pricing.</strong> Confidence bars and suggested ranges come from outcomes, not wishful list prices.</li>
+      <li><strong>Profit-first workflow.</strong> ROI is baked in—no spreadsheets required.</li>
+      <li><strong>Made to export.</strong> Draft once, send to Etsy/eBay/FB (exports in MVP).</li>
+    </ul>
   </section>
 
   <div class="sticky-cta" role="complementary" aria-label="Quick actions">
@@ -141,26 +151,15 @@
     document.getElementById("y").textContent=new Date().getFullYear();
     const bEl=document.getElementById("buildId"); if(bEl) bEl.textContent=V;
 
-    // Auto-refresh on version change (fixes Incognito + stubborn caches)
-    (function(){
-      const KEY="__swiftora_build__";
-      const prev=localStorage.getItem(KEY);
+    (function(){ // version watcher
+      const KEY="__swiftora_build__"; const prev=localStorage.getItem(KEY);
       if(prev && prev!==V){
         if('caches' in window){caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k))))}
         if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.update()))}
-        localStorage.setItem(KEY,V);
-        location.reload();
-        return;
+        localStorage.setItem(KEY,V); location.reload(); return;
       }
       localStorage.setItem(KEY,V);
-      // version-append internal links so next navigations are fresh
-      document.querySelectorAll('a[href^="/"]').forEach(a=>{
-        try{const u=new URL(a.getAttribute("href"),location.origin);
-          if(u.origin===location.origin && !u.searchParams.get("v")){
-            u.searchParams.set("v",V); a.href=u.pathname+"?"+u.searchParams.toString()+(u.hash||"");
-          }
-        }catch{}
-      });
+      document.querySelectorAll('a[href^="/"]').forEach(a=>{try{const u=new URL(a.getAttribute("href"),location.origin);if(u.origin===location.origin&&!u.searchParams.get("v")){u.searchParams.set("v",V);a.href=u.pathname+"?"+u.searchParams.toString()+(u.hash||"")}}catch{}});
     })();
 
     if("serviceWorker" in navigator){
