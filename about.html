@@ -7,11 +7,10 @@
   <meta name="description" content="Why Swiftora exists, who we serve, and what's coming next." />
   <meta name="theme-color" content="#7c4dff" />
   <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
-  <script>window.__ASSET_VERSION__="v2025-08-09-14";</script>
-
+  <script>window.__ASSET_VERSION__="v2025-08-09-16";</script>
   <link rel="icon" href="/swiftora_icon_192x192.png" />
-  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-14" />
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-14" />
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-16" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-16" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
@@ -57,23 +56,23 @@
   </footer>
 
   <script>
+  (() => {
     const V=(window.__ASSET_VERSION__||"").toString();
-    document.getElementById("y").textContent=new Date().getFullYear();
+    const KEY="__swiftora_build__";
+    const qp=new URLSearchParams(location.search);
 
-    // Version watcher ONLY (no link rewriting)
-    (function(){
-      const KEY="__swiftora_build__"; const prev=localStorage.getItem(KEY);
-      if(prev && prev!==V){
-        if('caches' in window){caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k))))}
-        if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.update()))}
-        localStorage.setItem(KEY,V); location.reload(); return;
-      }
-      localStorage.setItem(KEY,V);
-    })();
-
-    if("serviceWorker" in navigator){
-      window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v="+V));
+    if(qp.get("flush")==="1"){
+      (async()=>{
+        if('caches' in window){const ks=await caches.keys(); await Promise.all(ks.map(k=>caches.delete(k)));}
+        if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister()));}
+        qp.delete("flush"); qp.set("v",V);
+        location.replace(location.pathname+"?"+qp.toString());
+      })(); return;
     }
-  </script>
-</body>
-</html>
+
+    document.getElementById("y").textContent=new Date().getFullYear();
+    const prev=localStorage.getItem(KEY);
+    if(prev && prev!==V){
+      if('caches' in window){caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k))))}
+      if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.update()))}
+      local
