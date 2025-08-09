@@ -1,4 +1,4 @@
-// Swiftora Demo – photos optional, multi-image, back buttons, P&L profit step (v2025-08-09-16)
+// Swiftora Demo – v2025-08-09-17
 (() => {
   const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
 
@@ -16,32 +16,24 @@
         screens=[$("#step1"),$("#step2"),$("#step3"),$("#step4"),$("#step5")];
   const levelMeter=$("#levelMeter"), earnedXP=$("#earnedXP");
 
-  // Profit step elements
-  const adjPrice=$("#adj-price"), adjShip=$("#adj-ship"), adjCost=$("#adj-cost"), adjFee=$("#adj-fee"); // (adj-fee is virtual)
+  // Profit step
+  const adjPrice=$("#adj-price"), adjShip=$("#adj-ship"), adjCost=$("#adj-cost");
   const kpiPrice=$("#kpi-price"), kpiProfit=$("#kpi-profit"), kpiMargin=$("#kpi-margin"), kpiROI=$("#kpi-roi");
   const feeMeta=$("#fee-meta"), feeAmt=$("#fee-amt"), netAmt=$("#net-amt"), profitAmt=$("#profit-amt");
   const marginPct=$("#margin-pct"), roiPct=$("#roi-pct"), marginBar=$("#margin-bar"), roiBar=$("#roi-bar");
 
-  const state={
-    images:[], desc:"", condition:"", cost:NaN,
-    suggested:48, ship:12, feeRate:0.13, feeFixed:0.30, xp:0, level:1
-  };
-
+  const state={ images:[], desc:"", condition:"", cost:NaN, suggested:48, ship:12, feeRate:0.13, feeFixed:0.30, xp:0, level:1 };
   const angles=["Front","Back","Base/Mark","Close-up","Other"];
 
-  // Nav helpers
   const setProgress=p=>progressBar.style.width=p+"%";
   const goto=i=>{ screens.forEach((el,idx)=>el.classList.toggle("active",idx===i));
     dots.forEach((d,idx)=>d.classList.toggle("active",idx<=i));
     setProgress([20,40,60,80,100][i]||20); window.scrollTo({top:0,behavior:"smooth"}); };
 
-  // Thumbs / coverage
   function addPreview(url){
     const wrap=document.createElement("div");
     wrap.className="preview-item";
-    wrap.innerHTML=`
-      <img src="${url}" alt="">
-      <select class="angle">${angles.map(a=>`<option value="${a}">${a}</option>`).join("")}</select>`;
+    wrap.innerHTML=`<img src="${url}" alt=""><select class="angle">${angles.map(a=>`<option value="${a}">${a}</option>`).join("")}</select>`;
     thumbs.appendChild(wrap);
     const select=wrap.querySelector(".angle");
     const item={url, angle:select.value};
@@ -68,28 +60,32 @@
     setTimeout(refreshCoverage,0);
   });
 
-  // Chips
   condChips?.addEventListener("click",e=>{
     const b=e.target.closest(".chip"); if(!b) return;
     state.condition=b.dataset.value; condHidden.value=state.condition;
     $$("#condChips .chip").forEach(x=>x.classList.toggle("active",x===b));
   });
 
-  // Buttons
   $("#step1Btn")?.addEventListener("click",()=>{
     state.desc=(desc.value||"").trim();
     state.cost=parseFloat(cost.value);
     buildStep2();
     goto(1);
   });
+
   $("#back2")?.addEventListener("click",()=>goto(0));
-  $("#step2Btn")?.addEventListener("click",()=>{renderProfit(true); goto(2);});
+
+  // **DEFENSIVE**: always navigate; log any error so we can see it in DevTools if it happens.
+  $("#step2Btn")?.addEventListener("click",()=>{
+    try { renderProfit(true); } catch (e) { console.error("[demo] renderProfit error", e); }
+    goto(2);
+  });
+
   $("#back3")?.addEventListener("click",()=>goto(1));
   $("#step3Btn")?.addEventListener("click",()=>{awardXP(); goto(3);});
   $("#back4")?.addEventListener("click",()=>goto(2));
   $("#step4Btn")?.addEventListener("click",()=>goto(4));
 
-  // Step 2: build simulated results
   function buildStep2(){
     statusList.innerHTML="";
     log(state.images.length? "Analyzing images…" : "No images supplied — using generic assumptions.");
@@ -119,21 +115,18 @@
     attrsCard.innerHTML=`<tbody>${Object.entries(attrs).map(([k,v])=>`<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join("")}</tbody>`;
 
     const conf=[{label:"Category",pct:82},{label:"Era",pct:66},{label:"Material",pct:74},{label:"Condition",pct: state.condition?95:76}];
-    confidenceCard.innerHTML=conf.map(c=>`<div class="bar"><span>${c.label}</span><div class="bar-outer"><div class="bar-inner ${colorClass(c.pct)}" style="width:${c.pct}%"></div></div><span class="pct">${c.pct}%</span></div>`).join("");
+    confidenceCard.innerHTML=conf.map(c=>`<div class="bar"><span>${c.label}</span><div class="bar-outer"><div class="bar-inner" style="width:${c.pct}%"></div></div><span class="pct">${c.pct}%</span></div>`).join("");
 
     log("Done. Review your draft below.");
   }
   function log(t){const li=document.createElement("li"); li.textContent=t; statusList.appendChild(li);}
 
-  // Step 3: Profit & Loss
   function renderProfit(init=false){
     if(init){
       if(!adjPrice.value) adjPrice.value = (state.suggested||0).toFixed(2);
       if(!adjShip.value)  adjShip.value  = "12.00";
       if(!adjCost.value && Number.isFinite(state.cost)) adjCost.value = (+state.cost).toFixed(2);
     }
-
-    // Fee % editable via hidden control? keep constant 13% for demo:
     const feeRate = 0.13;
 
     const gross = numOr(adjPrice.value, state.suggested);
@@ -146,19 +139,16 @@
     const margin = gross>0 ? Math.round((profit/gross)*100) : 0;
     const roi = itemCost>0 ? Math.round((profit/itemCost)*100) : (profit>0?999:0);
 
-    // KPIs
     kpiPrice.textContent  = `$${gross.toFixed(2)}`;
     kpiProfit.textContent = `${profit>=0?"":"-"}$${Math.abs(profit).toFixed(2)}`;
     kpiMargin.textContent = `Margin ${isFinite(margin)?margin:0}%`;
     kpiROI.textContent    = itemCost>0 ? `${roi}%` : "—";
 
-    // Table cells
     feeMeta.textContent = `(${(feeRate*100).toFixed(1)}% + $${state.feeFixed.toFixed(2)})`;
     feeAmt.textContent  = `$${fees.toFixed(2)}`;
     netAmt.textContent  = `$${netBeforeCost.toFixed(2)}`;
     profitAmt.textContent= `${profit>=0?"":"-"}$${Math.abs(profit).toFixed(2)}`;
 
-    // Bars
     const clamp = (x)=>Math.max(0,Math.min(100,x));
     marginPct.textContent = `${isFinite(margin)?margin:0}%`;
     roiPct.textContent = itemCost>0?`${roi}%`:"—";
@@ -168,7 +158,6 @@
 
   [adjPrice, adjShip, adjCost].forEach(el=>el?.addEventListener("input",()=>renderProfit(false)));
 
-  // XP
   function awardXP(){
     let xp=40;
     const have=new Set(state.images.map(i=>i.angle));
@@ -192,5 +181,4 @@
   function extractAttrs(t,c,imgs){const s=t.toLowerCase();const material=/glass|ceramic|porcelain|wood|metal|brass|bronze|silver|gold|plastic|resin/.exec(s)?.[0]||"Unknown";const color=/amber|blue|green|red|pink|white|black|brown|clear|smoke|yellow|violet|orange/.exec(s)?.[0]||"Neutral";const size=/(\d+(\.\d+)?)\s?(in|inch|inches|cm|mm)/.exec(s)?.[0]||"Approx.";const era=/(1920s|1930s|1940s|1950s|1960s|1970s|1980s|1990s|mid-?century|art deco|victorian|edwardian)/.exec(s)?.[0]||"Likely vintage";const have=new Set(imgs.map(i=>i.angle));const photoCov=`${have.has("Front")?"Front ✓":"Front —"}, ${have.has("Back")||have.has("Base/Mark")?"Back/Base ✓":"Back/Base —"}, ${have.has("Close-up")?"Close-up ✓":"Close-up —"}`;const cap=x=>x?x.charAt(0).toUpperCase()+x.slice(1):x;const title=x=>x.split(/\s+/).map(cap).join(" ");return{Material:cap(material),Color:cap(color),Size:size.replace(/inch(es)?/,"in"),Era:title(era),Photos:photoCov,Condition:c||"Good"}}
   const avg=a=>Math.round(a.reduce((x,y)=>x+y,0)/(a.length||1));
   const esc=s=>(s+"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-  const colorClass=p=>p>=80?"ok":p>=60?"warn":"low";
 })();
