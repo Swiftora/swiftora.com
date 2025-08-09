@@ -4,17 +4,14 @@
   <meta charset="UTF-8" />
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <title>Swiftora | AI Tools for Vintage & Resale Sellers</title>
   <meta name="description" content="Create listings faster, price with comps, and track ROI—without busywork." />
   <meta name="theme-color" content="#7c4dff" />
-
-  <script>window.__ASSET_VERSION__="v2025-08-09-10";</script>
+  <script>window.__ASSET_VERSION__="v2025-08-09-11";</script>
   <link rel="canonical" href="https://swiftora.com/" />
-
   <link rel="icon" href="/swiftora_icon_192x192.png" />
-  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-10" />
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-10" />
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-11" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-11" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
@@ -23,7 +20,10 @@
 
   <header class="site-header">
     <div class="brand">
-      <img class="brand-logo" src="/swiftora_logo_transparent v2.png" alt="" aria-hidden="true" />
+      <img class="brand-logo"
+        src="/swiftora_logo_transparent v2.png"
+        srcset="/swiftora_logo_transparent v2.png 1x, /swiftora_icon_512x512.png 2x"
+        alt="Swiftora tag logo" />
       <span class="brand-name">Swiftora</span>
     </div>
     <nav class="site-nav" aria-label="Primary">
@@ -49,15 +49,23 @@
       </ul>
     </div>
 
+    <!-- Richer phone mock -->
     <div class="hero-art" aria-hidden="true">
       <div class="phone-frame">
         <div class="phone-top"></div>
         <div class="phone-screen">
           <div class="screen-card">
             <div class="screen-title">Listing Draft</div>
-            <div class="screen-lines"><span></span><span></span><span></span><span></span></div>
+            <div class="screen-photo"></div>
+            <div class="screen-lines"><span></span><span></span><span></span></div>
             <div class="screen-actions">
               <div class="chip">Vintage</div><div class="chip">Mid-Century</div><div class="chip">Glass</div>
+            </div>
+            <span class="price-chip">$47 • suggested</span>
+            <div class="conf-mini">
+              <div class="bar"><small>Category</small><div class="bar-outer"><div class="bar-inner" style="width:82%"></div></div></div>
+              <div class="bar"><small>Era</small><div class="bar-outer"><div class="bar-inner" style="width:66%"></div></div></div>
+              <div class="bar"><small>Condition</small><div class="bar-outer"><div class="bar-inner" style="width:94%"></div></div></div>
             </div>
           </div>
         </div>
@@ -119,35 +127,18 @@
   </footer>
 
   <script>
-    // Version + SW + link versioning
     const V=(window.__ASSET_VERSION__||"").toString();
     document.getElementById("y").textContent=new Date().getFullYear();
     const bEl=document.getElementById("buildId"); if(bEl) bEl.textContent=V;
 
     // Add ?v= to internal links so new pages always fetch fresh
     (function(){
-      const addV = (url) => {
-        try{
-          const u = new URL(url, location.origin);
-        if (u.origin !== location.origin) return url;
-          if (!u.searchParams.get("v")) u.searchParams.set("v", V);
-          return u.pathname + "?" + u.searchParams.toString() + (u.hash||"");
-        }catch{ return url; }
-      };
-      document.querySelectorAll('a[href^="/"]').forEach(a => {
-        a.href = addV(a.getAttribute("href"));
-      });
+      const addV=(url)=>{try{const u=new URL(url,location.origin);if(u.origin!==location.origin)return url;if(!u.searchParams.get("v"))u.searchParams.set("v",V);return u.pathname+"?"+u.searchParams.toString()+(u.hash||"");}catch{return url;}};
+      document.querySelectorAll('a[href^="/"]').forEach(a=>{a.href=addV(a.getAttribute("href"))});
     })();
 
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/service-worker.js?v="+V).catch(console.error);
-      });
-      navigator.serviceWorker.addEventListener("message", (e) => {
-        if (e.data?.type === "SW_ACTIVATED") {
-          // could show a toast or quietly refresh assets on next nav
-        }
-      });
+    if("serviceWorker" in navigator){
+      window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v="+V).catch(console.error));
     }
   </script>
 </body>
