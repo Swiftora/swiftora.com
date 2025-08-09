@@ -1,47 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Privacy Policy – Swiftora</title>
-  <link rel="icon" href="swiftora_logo_transparent v2.png">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy · Swiftora</title>
+  <meta name="description" content="Swiftora privacy policy: what we collect, how we use it, and your rights." />
+  <meta name="theme-color" content="#7c4dff" />
+  <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+
+  <!-- Version (kept in sync with the other pages) -->
+  <script>window.__ASSET_VERSION__="v2025-08-09-14";</script>
+
+  <!-- Icons / styles / fonts -->
+  <link rel="icon" href="/swiftora_icon_192x192.png" />
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-14" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-14" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <!-- Header / Nav (consistent with Home/Demo/About) -->
   <header class="site-header">
-    <div class="logo">
-      <!-- Only the brand name in the header -->
-      <a href="index.html"><span>Swiftora</span></a>
-    </div>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="demo.html">Demo</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-      </ul>
+    <div class="brand"><span class="brand-name">Swiftora</span></div>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/index.html">Home</a>
+      <a href="/demo.html">Live Demo</a>
+      <a href="/about.html">About</a>
+      <a class="active" href="/privacy.html">Privacy</a>
+      <a class="cta" href="/index.html#signup">Get Updates</a>
     </nav>
   </header>
 
-  <main class="content-section">
+  <!-- Content -->
+  <main class="content" id="main">
     <h1>Privacy Policy</h1>
-    <p><em>Last updated: August 5, 2025</em></p>
-    <p>At Swiftora, we take your privacy seriously. This policy explains what information we collect, how we use it, and your rights.</p>
+    <p><em>Last updated: August 9, 2025</em></p>
+
+    <p>
+      At Swiftora, we take your privacy seriously. This policy explains what information we collect,
+      how we use it, and your rights.
+    </p>
+
     <h2>Information We Collect</h2>
     <ul>
-      <li><strong>Email address:</strong> used to send early access notifications and product updates.</li>
-      <li><strong>Form submissions:</strong> your name and any other information you provide when signing up.</li>
+      <li><strong>Email address:</strong> used to send early-access notifications and product updates.</li>
+      <li><strong>Form submissions:</strong> your name and any other info you provide when signing up.</li>
     </ul>
+
     <h2>How We Use Your Data</h2>
-    <p>We use your email only to send early‑access invitations and occasional product updates. We never sell or share your data with third parties.</p>
+    <p>
+      We use your email only to send early-access invitations and occasional product updates.
+      We never sell or share your data with third parties.
+    </p>
+
     <h2>Your Rights</h2>
-    <p>You can request to have your data deleted at any time by emailing <a href="mailto:info@swiftora.com">info@swiftora.com</a>.</p>
-    <p><a href="index.html">← Back to Home</a></p>
+    <p>
+      You can request deletion of your data at any time by emailing
+      <a href="mailto:info@swiftora.com">info@swiftora.com</a>.
+    </p>
+
+    <p style="margin-top:18px">
+      <a class="btn ghost" href="/index.html">← Back to Home</a>
+    </p>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
-    <p>&copy; 2025 Swiftora. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
+    <p>&copy; <span id="y"></span> Swiftora LLC. All rights reserved. · <a href="/privacy.html">Privacy</a></p>
   </footer>
+
+  <!-- Version watcher (no link rewriting) + SW register -->
+  <script>
+    const V=(window.__ASSET_VERSION__||"").toString();
+    document.getElementById("y").textContent=new Date().getFullYear();
+
+    (function(){
+      const KEY="__swiftora_build__"; const prev=localStorage.getItem(KEY);
+      if(prev && prev!==V){
+        if('caches' in window){caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k))))}
+        if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.update()))}
+        localStorage.setItem(KEY,V); location.reload(); return;
+      }
+      localStorage.setItem(KEY,V);
+    })();
+
+    if("serviceWorker" in navigator){
+      window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v="+V));
+    }
+  </script>
 </body>
 </html>
