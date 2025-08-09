@@ -4,21 +4,46 @@
   <meta charset="UTF-8" />
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Swiftora | AI Tools for Vintage & Resale Sellers</title>
-  <meta name="description" content="Create listings faster, price with comps, and track ROI—without busywork." />
+  <title>Swiftora | Smarter Selling Starts Here</title>
+  <meta name="description" content="Swiftora helps vintage and second-hand resellers create listings, price smarter, and track ROI with AI." />
   <meta name="theme-color" content="#7c4dff" />
-  <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
-  <script>window.__ASSET_VERSION__="v2025-08-09-14";</script>
+
+  <script>window.__ASSET_VERSION__="v2025-08-09-16";</script>
+
   <link rel="canonical" href="https://swiftora.com/" />
   <link rel="icon" href="/swiftora_icon_192x192.png" />
-  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-14" />
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-14" />
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-16" />
+
+  <meta property="og:title" content="Swiftora | Smarter Selling Starts Here" />
+  <meta property="og:description" content="Create listings faster, price with confidence, and track ROI — purpose-built for vintage & resale." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://swiftora.com/" />
+  <meta property="og:image" content="https://swiftora.com/swiftora_logo_transparent%20v2.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Swiftora | Smarter Selling Starts Here" />
+  <meta name="twitter:description" content="Create listings faster, price with confidence, and track ROI." />
+  <meta name="twitter:image" content="https://swiftora.com/swiftora_logo_transparent%20v2.png" />
+
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-16" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* small hero-specific polish */
+    .hero {display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;padding:48px 24px 28px}
+    .hero .ai-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#f3f0ff;color:#6d28d9;font-weight:700;font-size:.85rem;margin-bottom:10px}
+    .hero-cta{display:flex;gap:10px;margin:16px 0 8px}
+    .phone-frame{width:100%;max-width:360px;margin-inline:auto;border-radius:28px;background:linear-gradient(#f7f8ff,#eef1ff);box-shadow:0 6px 30px rgba(17,24,39,.12);padding:14px 14px 18px}
+    .phone-top,.phone-bottom{width:60%;height:6px;border-radius:6px;background:#11182714;margin:6px auto}
+    .screen-card{background:#fff;border:1px solid #e8ebf3;border-radius:14px;padding:14px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+    .screen-title{font-weight:800;margin-bottom:8px}
+    .screen-lines span{display:block;height:8px;border-radius:6px;background:#eef2ff;margin:6px 0}
+    .screen-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+    .chip{padding:6px 10px;border-radius:999px;background:#f3f0ff;color:#6d28d9;font-weight:700;font-size:.75rem}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;gap:24px}}
+  </style>
 </head>
 <body>
-  <a class="sr-only" href="#main">Skip to content</a>
-
   <header class="site-header">
     <div class="brand"><span class="brand-name">Swiftora</span></div>
     <nav class="site-nav" aria-label="Primary">
@@ -29,52 +54,35 @@
     </nav>
   </header>
 
-  <main id="main" class="hero">
+  <main class="hero">
     <div class="hero-copy">
-      <div class="hero-ai">Swiftora AI</div>
-      <h1>Smarter selling for vintage & resale</h1>
-      <p>Draft listings in minutes, price with real-world comps, and track ROI—all in one place.</p>
-
+      <div class="ai-pill">Swiftora AI</div>
+      <h1>Smarter selling for<br/>vintage &amp; resale</h1>
+      <p>Swiftora speeds up listings, guides pricing from real-world comps, and tracks ROI—so you spend less time typing and more time selling.</p>
       <div class="hero-cta">
         <a class="btn primary" href="/demo.html">Try the demo</a>
         <a class="btn ghost" href="#signup">Join the waitlist</a>
       </div>
-
       <ul class="bullets">
         <li>AI-drafted titles & descriptions</li>
-        <li>Pricing guidance from **sold** comps</li>
-        <li>Multi-angle photo guidance (front/back/base/close-up)</li>
-        <li>Export-ready listings for marketplaces (in MVP)</li>
+        <li>Pricing guidance with comps</li>
         <li>ROI tracking & simple analytics</li>
       </ul>
     </div>
 
-    <div class="hero-art" aria-hidden="true">
+    <div class="hero-art">
       <div class="phone-frame">
         <div class="phone-top"></div>
         <div class="phone-screen">
           <div class="screen-card">
             <div class="screen-title">Listing Draft</div>
-
-            <div class="screen-photo">
-              <img src="/swiftora_icon_512x512.png" alt="">
-            </div>
-            <div class="thumb-row">
-              <img src="/swiftora_icon_512x512.png" alt="">
-              <img src="/swiftora_icon_512x512.png" alt="">
-              <img src="/swiftora_icon_512x512.png" alt="">
-            </div>
-
-            <div class="screen-lines"><span></span><span></span><span></span></div>
+            <div class="screen-lines"><span></span><span></span><span style="width:80%"></span></div>
             <div class="screen-actions">
               <div class="chip">Vintage</div><div class="chip">Mid-Century</div><div class="chip">Glass</div>
             </div>
-
-            <span class="price-chip">$47 • suggested</span>
-            <div class="conf-mini">
-              <div class="bar"><small>Category</small><div class="bar-outer"><div class="bar-inner" style="width:82%"></div></div></div>
-              <div class="bar"><small>Era</small><div class="bar-outer"><div class="bar-inner" style="width:66%"></div></div></div>
-              <div class="bar"><small>Condition</small><div class="bar-outer"><div class="bar-inner" style="width:94%"></div></div></div>
+            <div class="screen-lines"><span style="width:65%"></span></div>
+            <div class="screen-actions">
+              <div class="chip" style="background:#e7f7ee;color:#166534"> $47 • suggested</div>
             </div>
           </div>
         </div>
@@ -83,47 +91,25 @@
     </div>
   </main>
 
-  <section class="features" aria-label="Highlights">
-    <article class="feature"><h3><i class="fa-solid fa-bolt icon"></i>Faster listings</h3><p>Turn a photo + a few details into a polished, platform-ready listing.</p></article>
-    <article class="feature"><h3><i class="fa-solid fa-tags icon"></i>Price with confidence</h3><p>Guidance from sold comps—tuned for secondhand, not brand-new retail.</p></article>
-    <article class="feature"><h3><i class="fa-solid fa-chart-line icon"></i>Know your ROI</h3><p>Cost, fees, shipping, and net profit at a glance.</p></article>
-  </section>
-
-  <section class="diff" aria-label="Why it’s different">
-    <h2>Why Swiftora is different</h2>
-    <ul>
-      <li><strong>Secondhand-first models.</strong> Condition, era, materials and quirks actually matter here.</li>
-      <li><strong>Multi-angle photo coaching.</strong> Fewer mislabels, better confidence.</li>
-      <li><strong>Sold-data pricing.</strong> Confidence bars & ranges from outcomes—not wishful list prices.</li>
-      <li><strong>Profit-first workflow.</strong> ROI is baked in—no spreadsheets.</li>
-      <li><strong>Export once.</strong> Draft once, export to marketplaces (in MVP).</li>
-    </ul>
-  </section>
-
-  <div class="sticky-cta" role="complementary" aria-label="Quick actions">
-    <div class="row">
-      <a class="btn primary" href="/demo.html">Try the Demo</a>
-      <a class="btn ghost" href="#signup">Join Waitlist</a>
-    </div>
-  </div>
-
-  <section id="signup" class="signup" aria-labelledby="signup-title">
-    <h2 id="signup-title" style="margin:0 0 12px">Get early access</h2>
-    <p class="notice" style="margin:0 0 16px">Join the waitlist and we’ll notify you when live pricing and comps roll out.</p>
+  <section id="signup" class="signup">
+    <h2 style="margin:0 0 12px">Get early access</h2>
+    <p class="notice" style="margin:0 0 16px">Join the waitlist and we’ll notify you when live pricing + comps roll out.</p>
 
     <form class="card" name="signup" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="signup" />
       <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
 
       <div class="grid">
-        <label class="block-label">Name<input type="text" name="name" autocomplete="name" /></label>
-        <label class="block-label">Email<input type="email" name="email" required autocomplete="email" /></label>
+        <label class="block-label">Name <input type="text" name="name" autocomplete="name" /></label>
+        <label class="block-label">Email <input type="email" name="email" required autocomplete="email" /></label>
       </div>
 
       <label class="block-label" style="margin-top:12px">Primary platform
         <select name="platform">
-          <option value="Etsy">Etsy</option><option value="eBay">eBay</option>
-          <option value="Facebook Marketplace">Facebook Marketplace</option><option value="Multiple">Multiple</option>
+          <option value="Etsy">Etsy</option>
+          <option value="eBay">eBay</option>
+          <option value="Facebook Marketplace">Facebook Marketplace</option>
+          <option value="Multiple">Multiple</option>
         </select>
       </label>
 
@@ -133,38 +119,44 @@
       </div>
       <p class="badge" style="margin-top:10px">Build <span id="buildId"></span></p>
     </form>
-
-    <div class="socials" aria-label="Social links">
-      <a href="https://twitter.com/swiftoraai"><i class="fa-brands fa-x-twitter"></i> @swiftoraai</a>
-      <a href="https://www.instagram.com/swiftoraai"><i class="fa-brands fa-instagram"></i> @swiftoraai</a>
-      <a href="https://www.tiktok.com/@swiftoraai"><i class="fa-brands fa-tiktok"></i> @swiftoraai</a>
-      <a href="https://www.youtube.com/@swiftoraai"><i class="fa-brands fa-youtube"></i> @swiftoraai</a>
-    </div>
   </section>
 
   <footer class="site-footer">
     <p>&copy; <span id="y"></span> Swiftora LLC. All rights reserved. · <a href="/privacy.html">Privacy</a></p>
   </footer>
 
+  <!-- Hard refresh + version watcher -->
   <script>
+  (() => {
     const V=(window.__ASSET_VERSION__||"").toString();
-    document.getElementById("y").textContent=new Date().getFullYear();
-    const b=document.getElementById("buildId"); if(b) b.textContent=V;
+    const KEY="__swiftora_build__";
+    const qp=new URLSearchParams(location.search);
 
-    // Version watcher (no link rewriting)
-    (function(){
-      const KEY="__swiftora_build__"; const prev=localStorage.getItem(KEY);
-      if(prev && prev!==V){
-        if('caches' in window){caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k))))}
-        if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.update()))}
-        localStorage.setItem(KEY,V); location.reload(); return;
-      }
-      localStorage.setItem(KEY,V);
-    })();
+    if(qp.get("flush")==="1"){
+      (async()=>{
+        if('caches' in window){const ks=await caches.keys(); await Promise.all(ks.map(k=>caches.delete(k)));}
+        if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister()));}
+        qp.delete("flush"); qp.set("v",V);
+        location.replace(location.pathname+"?"+qp.toString());
+      })(); return;
+    }
+
+    document.getElementById("y").textContent=new Date().getFullYear();
+    const bid = V; const t=document.getElementById("buildId"); if(t) t.textContent=bid;
+
+    const prev=localStorage.getItem(KEY);
+    if(prev && prev!==V){
+      if('caches' in window){caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k))))}
+      if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.update()))}
+      localStorage.setItem(KEY,V); location.reload(); return;
+    }
+    localStorage.setItem(KEY,V);
 
     if("serviceWorker" in navigator){
-      window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v="+V).catch(console.error));
+      window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v="+V));
+      navigator.serviceWorker.addEventListener("message",(e)=>{ if(e.data?.type==="SW_ACTIVATED") location.reload(); });
     }
+  })();
   </script>
 </body>
 </html>
