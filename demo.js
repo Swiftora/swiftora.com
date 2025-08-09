@@ -1,26 +1,30 @@
-// Swiftora Demo – v2025-08-09-17
+// Swiftora Demo – v2025-08-09-18
 (() => {
   const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
 
-  // Step 1
+  // Step 1 elements
   const upload=$("#upload"), thumbs=$("#thumbs"), coverageFill=$("#coverageFill"),
         coverageLabel=$("#coverageLabel"), coverageWrap=$("#coverageWrap"),
         step1Btn=$("#step1Btn"), desc=$("#field-desc"),
         condChips=$("#condChips"), condHidden=$("#field-condition"),
-        cost=$("#field-cost"), step1Errors=$("#step1Errors");
+        cost=$("#field-cost");
 
-  // Step 2/3/4
-  const statusList=$("#statusList"), listingCard=$("#listingCard"),
-        compsCard=$("#compsCard"), attrsCard=$("#attrsCard"), confidenceCard=$("#confidenceCard");
+  // Stepper + screens
   const progressBar=$("#progressBar"), dots=$$("#stepper .dot"),
         screens=[$("#step1"),$("#step2"),$("#step3"),$("#step4"),$("#step5")];
-  const levelMeter=$("#levelMeter"), earnedXP=$("#earnedXP");
 
-  // Profit step
+  // Step 2 output
+  const statusList=$("#statusList"), listingCard=$("#listingCard"),
+        compsCard=$("#compsCard"), attrsCard=$("#attrsCard"), confidenceCard=$("#confidenceCard");
+
+  // Step 3 outputs
   const adjPrice=$("#adj-price"), adjShip=$("#adj-ship"), adjCost=$("#adj-cost");
   const kpiPrice=$("#kpi-price"), kpiProfit=$("#kpi-profit"), kpiMargin=$("#kpi-margin"), kpiROI=$("#kpi-roi");
   const feeMeta=$("#fee-meta"), feeAmt=$("#fee-amt"), netAmt=$("#net-amt"), profitAmt=$("#profit-amt");
   const marginPct=$("#margin-pct"), roiPct=$("#roi-pct"), marginBar=$("#margin-bar"), roiBar=$("#roi-bar");
+
+  // Step 4
+  const levelMeter=$("#levelMeter"), earnedXP=$("#earnedXP");
 
   const state={ images:[], desc:"", condition:"", cost:NaN, suggested:48, ship:12, feeRate:0.13, feeFixed:0.30, xp:0, level:1 };
   const angles=["Front","Back","Base/Mark","Close-up","Other"];
@@ -30,6 +34,7 @@
     dots.forEach((d,idx)=>d.classList.toggle("active",idx<=i));
     setProgress([20,40,60,80,100][i]||20); window.scrollTo({top:0,behavior:"smooth"}); };
 
+  // --- Step 1: images + coverage
   function addPreview(url){
     const wrap=document.createElement("div");
     wrap.className="preview-item";
@@ -58,14 +63,17 @@
       rd.readAsDataURL(f);
     });
     setTimeout(refreshCoverage,0);
+    step1Btn.disabled = files.length===0; // require at least one photo
   });
 
+  // condition chips
   condChips?.addEventListener("click",e=>{
     const b=e.target.closest(".chip"); if(!b) return;
     state.condition=b.dataset.value; condHidden.value=state.condition;
     $$("#condChips .chip").forEach(x=>x.classList.toggle("active",x===b));
   });
 
+  // proceed Step1 → Step2
   $("#step1Btn")?.addEventListener("click",()=>{
     state.desc=(desc.value||"").trim();
     state.cost=parseFloat(cost.value);
@@ -75,7 +83,7 @@
 
   $("#back2")?.addEventListener("click",()=>goto(0));
 
-  // **DEFENSIVE**: always navigate; log any error so we can see it in DevTools if it happens.
+  // proceed Step2 → Step3 (defensive: always advances)
   $("#step2Btn")?.addEventListener("click",()=>{
     try { renderProfit(true); } catch (e) { console.error("[demo] renderProfit error", e); }
     goto(2);
@@ -86,6 +94,7 @@
   $("#back4")?.addEventListener("click",()=>goto(2));
   $("#step4Btn")?.addEventListener("click",()=>goto(4));
 
+  // --- Step 2 builders
   function buildStep2(){
     statusList.innerHTML="";
     log(state.images.length? "Analyzing images…" : "No images supplied — using generic assumptions.");
@@ -114,20 +123,32 @@
     const attrs=extractAttrs(state.desc,state.condition,state.images);
     attrsCard.innerHTML=`<tbody>${Object.entries(attrs).map(([k,v])=>`<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join("")}</tbody>`;
 
-    const conf=[{label:"Category",pct:82},{label:"Era",pct:66},{label:"Material",pct:74},{label:"Condition",pct: state.condition?95:76}];
-    confidenceCard.innerHTML=conf.map(c=>`<div class="bar"><span>${c.label}</span><div class="bar-outer"><div class="bar-inner" style="width:${c.pct}%"></div></div><span class="pct">${c.pct}%</span></div>`).join("");
+    // color-coded confidence
+    const conf=[
+      {label:"Category",pct:82, cls:"bar-cat"},
+      {label:"Era",pct:66, cls:"bar-era"},
+      {label:"Material",pct:74, cls:"bar-mat"},
+      {label:"Condition",pct: state.condition?95:76, cls:"bar-con"}
+    ];
+    confidenceCard.innerHTML=conf.map(c=>`
+      <div class="bar ${c.cls}">
+        <span>${c.label}</span>
+        <div class="bar-outer"><div class="bar-inner" style="width:${c.pct}%"></div></div>
+        <span class="pct">${c.pct}%</span>
+      </div>`).join("");
 
     log("Done. Review your draft below.");
   }
   function log(t){const li=document.createElement("li"); li.textContent=t; statusList.appendChild(li);}
 
+  // --- Step 3: profit calc
   function renderProfit(init=false){
     if(init){
       if(!adjPrice.value) adjPrice.value = (state.suggested||0).toFixed(2);
       if(!adjShip.value)  adjShip.value  = "12.00";
       if(!adjCost.value && Number.isFinite(state.cost)) adjCost.value = (+state.cost).toFixed(2);
     }
-    const feeRate = 0.13;
+    const feeRate = state.feeRate;
 
     const gross = numOr(adjPrice.value, state.suggested);
     const ship  = numOr(adjShip.value, 12);
@@ -155,7 +176,6 @@
     marginBar.style.width = clamp(isFinite(margin)?margin:0) + "%";
     roiBar.style.width = clamp(roi>999?100:roi) + "%";
   }
-
   [adjPrice, adjShip, adjCost].forEach(el=>el?.addEventListener("input",()=>renderProfit(false)));
 
   function awardXP(){
