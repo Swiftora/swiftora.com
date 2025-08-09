@@ -185,7 +185,12 @@ function renderStep3() {
   $("#adj-fee").oninput = (e)=>{ state.feePct = parseFloat(e.target.value||"0")||0; updatePNL(); };
 
   $("#back3").onclick = ()=>goTo(2);
-  $("#step3Btn").onclick = ()=>goTo(4);
+
+  // **CHANGED**: render XP/meter before moving to Step 4
+  $("#step3Btn").onclick = ()=>{
+    renderStep4();
+    goTo(4);
+  };
 }
 
 function updatePNL() {
@@ -197,6 +202,24 @@ function updatePNL() {
   $("#pNet").textContent    = money(net);
   $("#pProfit").textContent = money(profit);
   $("#pROI").textContent    = (roi!=null) ? (roi.toFixed(0)+"%") : "—";
+}
+
+/* ---------- Step 4 XP + meter (NEW) ---------- */
+function computeXP(){
+  let xp = 0;
+  if (state.files.length) xp += 8;      // photos uploaded
+  if (state.desc)         xp += 4;      // description provided
+  if (state.condition)    xp += 3;      // picked a condition
+  if (state.cost > 0)     xp += 2;      // entered cost
+  return xp;                            // simple demo scoring
+}
+
+function renderStep4(){
+  const xp = computeXP();
+  const xpEl = $("#earnedXP");
+  if (xpEl) xpEl.textContent = xp;
+  const meter = $("#levelMeter");
+  if (meter) meter.style.width = Math.min(100, xp * 5) + "%"; // 5% per XP
 }
 
 /* ---------- Step 4/5 nav ---------- */
