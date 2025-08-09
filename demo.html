@@ -2,61 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Swiftora Interactive Demo</title>
-  <meta name="theme-color" content="#ff6600" />
-  <meta name="description" content="Upload a photo, describe the item in your own words, then see a simulated listing, pricing, and ROI." />
+  <title>Swiftora Demo</title>
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="Upload a photo, describe your item in natural language, and preview a simulated listing, pricing, and ROI." />
+  <script>window.__ASSET_VERSION__="v2025-08-09-6";</script>
 
-  <script>window.__ASSET_VERSION__="v2025-08-09-2";</script>
-
-  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-2" />
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-6" />
   <link rel="icon" href="/swiftora_logo_transparent v2.png" />
-
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-2" />
-  <link rel="stylesheet" href="/demo.css?v=v2025-08-09-2" />
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-6" />
+  <link rel="stylesheet" href="/demo.css?v=v2025-08-09-6" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/demo.js?v=v2025-08-09-6" as="script" />
 </head>
 <body>
-
-  <header class="appbar">
-    <div class="appbar-left">
-      <a class="brand" href="/index.html">Swiftora</a>
+  <header class="site-header">
+    <div class="logo-wrap">
+      <a class="logo-badge" href="/" aria-label="Swiftora home">
+        <img src="/swiftora_logo_transparent v2.png" alt="Swiftora logo" />
+      </a>
     </div>
-    <div class="appbar-right">
-      <span class="level" id="levelBadge">Lv 1</span>
-      <span class="xp" id="xpBadge"><i class="fa-solid fa-coins" aria-hidden="true"></i> <span id="xpValue">0</span></span>
-    </div>
+    <nav class="site-nav">
+      <a href="/index.html">Home</a>
+      <a class="active" href="/demo.html">Live Demo</a>
+      <a href="/about.html">About</a>
+      <a class="cta" href="/index.html#signup">Get Updates</a>
+    </nav>
   </header>
 
   <main class="app-container">
     <div class="progress"><div class="progress-bar" id="progressBar" style="width:20%"></div></div>
-
     <div class="stepper" id="stepper" aria-label="Demo steps">
       <div class="dot active">1</div><div class="dot">2</div><div class="dot">3</div><div class="dot">4</div><div class="dot">5</div>
     </div>
 
-    <!-- STEP 1: Upload + describe + required inputs -->
+    <!-- STEP 1 -->
     <section class="screen active" id="step1">
-      <h1><i class="fa-solid fa-image"></i> Upload & Tell Us a Bit</h1>
-
+      <h1>Upload & Tell Us a Bit</h1>
       <div class="grid-two">
         <div class="card">
           <label class="block-label required">Item photo (required)
             <input type="file" id="upload" accept="image/*" />
           </label>
           <img id="preview" class="preview" alt="Uploaded preview" />
-          <p class="hint">Tip: multiple angles help a lot—front, back, base/mark, and a close-up.</p>
+          <p class="hint">Tip: multiple angles help—front, back, base/mark, and a close-up.</p>
         </div>
 
         <div class="card">
-          <div class="grid gap">
+          <div class="grid">
             <label class="block-label required">Describe your item (required)
               <textarea id="field-desc" rows="3" placeholder="e.g., amber glass vase, ribbed, 9 inches tall, likely 1960s. Marked Fenton on base."></textarea>
             </label>
-            <p class="mini-hint">Write naturally—Swiftora will parse for category, color, brand/markings, age, size, etc.</p>
+            <p class="mini-hint">Write naturally—Swiftora extracts category, color, brand/markings, age, and size.</p>
 
             <div class="block-label required">Condition (required)
               <div class="chip-row" id="condChips" role="group" aria-label="Condition">
@@ -69,7 +66,7 @@
               <input id="field-condition" type="hidden" />
             </div>
 
-            <label class="block-label required">Estimated item cost — your cost (required)
+            <label class="block-label required">Estimated cost — what you paid (required)
               <input id="field-cost" type="number" inputmode="decimal" step="0.01" placeholder="e.g., 5.00" />
             </label>
           </div>
@@ -79,24 +76,21 @@
       <details class="card tips">
         <summary><strong>Photo tips for better matches</strong></summary>
         <ul>
-          <li>Use <strong>good lighting</strong> (window or daylight bulb).</li>
-          <li>Shoot on a <strong>neutral background</strong> (plain table or sheet).</li>
-          <li>Include <strong>multiple angles</strong>: front, back, base/mark, close-up texture.</li>
-          <li>Add a <strong>size reference</strong> (ruler, coin) for scale.</li>
-          <li>No heavy filters; keep colors accurate.</li>
-          <li>Remove clutter so the item stands out.</li>
+          <li>Good lighting (window or daylight bulb)</li>
+          <li>Neutral background (plain table or sheet)</li>
+          <li>Multiple angles: front, back, base/mark, close-up texture</li>
+          <li>Size reference (ruler/coin) for scale</li>
+          <li>No heavy filters; keep colors accurate</li>
         </ul>
       </details>
 
       <p id="step1Errors" class="errors" aria-live="polite"></p>
-      <div class="actions">
-        <button class="btn-next" id="step1Btn" disabled>Next</button>
-      </div>
+      <div class="actions"><button class="btn-next" id="step1Btn" disabled>Next</button></div>
     </section>
 
-    <!-- STEP 2: Listing & Live Results -->
+    <!-- STEP 2 -->
     <section class="screen" id="step2">
-      <h1><i class="fa-solid fa-receipt"></i> Listing & Live Results</h1>
+      <h1>Listing & Live Results</h1>
 
       <div class="card">
         <h3>Status</h3>
@@ -129,29 +123,25 @@
       <div class="actions"><button class="btn-next" id="step2Btn">Next</button></div>
     </section>
 
-    <!-- STEP 3: Profit -->
+    <!-- STEP 3 -->
     <section class="screen" id="step3">
-      <h1><i class="fa-solid fa-calculator"></i> Profit Breakdown</h1>
+      <h1>Profit Breakdown</h1>
       <div class="card">
         <div id="profitCard"></div>
         <div class="grid-two">
-          <label class="block-label">Adjust shipping
-            <input id="adj-ship" type="number" inputmode="decimal" step="0.01" />
-          </label>
-          <label class="block-label">Adjust platform fees
-            <input id="adj-fee" type="number" inputmode="decimal" step="0.01" />
-          </label>
+          <label class="block-label">Adjust shipping<input id="adj-ship" type="number" inputmode="decimal" step="0.01" /></label>
+          <label class="block-label">Adjust platform fees (%)<input id="adj-fee" type="number" inputmode="decimal" step="0.1" /></label>
         </div>
       </div>
       <p class="hint">Tweak fees/shipping to see how net profit changes.</p>
       <div class="actions"><button class="btn-next" id="step3Btn">Next</button></div>
     </section>
 
-    <!-- STEP 4: Progress -->
+    <!-- STEP 4 -->
     <section class="screen" id="step4">
-      <h1><i class="fa-solid fa-gauge-high"></i> Your Progress</h1>
+      <h1>Your Progress</h1>
       <div class="card center">
-        <p class="big">⭐ Nice!</p>
+        <p class="big">Nice!</p>
         <p>You’ve earned <strong><span id="earnedXP">0</span> XP</strong> in this run.</p>
         <div class="meter"><div id="levelMeter"></div></div>
         <p class="hint">Keep listing to level up and unlock advanced price tools.</p>
@@ -159,36 +149,28 @@
       <div class="actions"><button class="btn-next" id="step4Btn">Next</button></div>
     </section>
 
-    <!-- STEP 5: CTA -->
+    <!-- STEP 5 -->
     <section class="screen" id="step5">
       <h1>Get Early Access</h1>
       <div class="card center">
         <p>Like what you saw? Join our waitlist and be first to try the live version.</p>
-        <a class="btn-primary" href="/index.html#signup">Sign Me Up</a>
+        <a class="btn primary" href="/index.html#signup">Sign Me Up</a>
       </div>
     </section>
   </main>
 
-  <div class="sticky-cta">
-    <div class="row">
-      <a class="btn btn-primary" href="/demo.html" aria-current="page">Try the Demo</a>
-      <a class="btn btn-secondary" href="/index.html#signup">Join Waitlist</a>
-    </div>
-  </div>
-
   <footer class="site-footer">
-    <p>&copy; <span id="y"></span> Swiftora. All rights reserved. | <a href="/privacy.html">Privacy Policy</a></p>
+    <p>&copy; <span id="y"></span> Swiftora LLC. All rights reserved. · <a href="/privacy.html">Privacy</a></p>
   </footer>
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js?v=' + window.__ASSET_VERSION__).catch(console.error);
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js?v="+(window.__ASSET_VERSION__||"")).catch(console.error);
       });
     }
   </script>
-
-  <script src="/demo.js?v=v2025-08-09-2" defer></script>
+  <script src="/demo.js?v=v2025-08-09-6" defer></script>
 </body>
 </html>
