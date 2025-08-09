@@ -4,48 +4,89 @@
   <meta charset="UTF-8" />
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Swiftora helps vintage and second-hand resellers create listings, price smarter, and track ROI with AI." />
   <title>Swiftora | Smarter Selling Starts Here</title>
+  <meta name="description" content="Swiftora helps vintage and second-hand resellers create listings, price smarter, and track ROI with AI." />
+  <meta name="theme-color" content="#7c4dff" />
 
-  <!-- Cache-bust via version -->
-  <script>window.__ASSET_VERSION__ = "v2025-08-09-1";</script>
-  <link rel="icon" href="swiftora_icon_192x192.png" />
-  <link rel="manifest" href="manifest.webmanifest?v=v2025-08-09-1" />
-  <link rel="stylesheet" href="style.css?v=v2025-08-09-1" />
+  <!-- Versioned assets (bump this to force fresh loads after deploys) -->
+  <script>window.__ASSET_VERSION__ = "v2025-08-09-3";</script>
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://swiftora.com/" />
+
+  <!-- Icons / Manifest -->
+  <link rel="icon" href="/swiftora_icon_192x192.png" />
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-3" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Swiftora | Smarter Selling Starts Here" />
+  <meta property="og:description" content="Create listings faster, price with confidence, and track ROI — purpose-built for vintage & resale." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://swiftora.com/" />
+  <meta property="og:image" content="https://swiftora.com/swiftora_logo_transparent%20v2.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Swiftora | Smarter Selling Starts Here" />
+  <meta name="twitter:description" content="Create listings faster, price with confidence, and track ROI." />
+  <meta name="twitter:image" content="https://swiftora.com/swiftora_logo_transparent%20v2.png" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-3" />
+  <!-- Minimal inline styles for the new sticky-cta and signup form so you don't need to touch style.css -->
+  <style>
+    .sticky-cta{position:sticky;bottom:0;z-index:999;background:rgba(12,12,18,.9);backdrop-filter:saturate(1.2) blur(6px);border-top:1px solid #23263a}
+    .sticky-cta .row{max-width:1200px;margin:0 auto;padding:12px 16px;display:flex;gap:12px;justify-content:flex-end}
+    .signup{max-width:980px;margin:0 auto;padding:48px 24px 72px}
+    .signup .card{background:var(--panel);border:1px solid #23263a;border-radius:16px;box-shadow:var(--shadow);padding:20px}
+    .signup .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .signup input,.signup button{width:100%}
+    .badge{font-size:12px;color:#9aa0a6}
+    .notice{color:#cfd3d8;font-size:13px}
+    @media (max-width:780px){.signup .grid{grid-template-columns:1fr}}
+  </style>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Swiftora",
+    "applicationCategory":"BusinessApplication",
+    "operatingSystem":"Web",
+    "description":"AI tools for vintage and second-hand resellers to draft listings, guide pricing with comps, and track ROI.",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
 </head>
 
 <body>
+  <!-- Header -->
   <header class="site-header">
     <div class="logo-wrap">
-      <!-- Tag badge with just the icon (no text), consistent sizing -->
       <a class="logo-badge" href="/">
-        <img
-          src="swiftora_logo_transparent v2.png"
-          alt="Swiftora logo"
-          decoding="async"
-          fetchpriority="high"
-        />
+        <img src="/swiftora_logo_transparent v2.png" alt="Swiftora logo" decoding="async" fetchpriority="high" />
       </a>
     </div>
 
     <nav class="site-nav">
-      <a href="index.html">Home</a>
-      <a href="demo.html">Live Demo</a>
-      <a href="about.html">About</a>
-      <a class="cta" href="thank-you.html">Get Updates</a>
+      <a class="active" href="/index.html">Home</a>
+      <a href="/demo.html">Live Demo</a>
+      <a href="/about.html">About</a>
+      <a class="cta" href="#signup">Get Updates</a>
     </nav>
   </header>
 
+  <!-- Hero -->
   <main class="hero">
     <div class="hero-copy">
       <h1>Smarter selling for vintage & resale</h1>
       <p>
-        Swiftora speeds up listings, guides pricing from real-world data,
-        and tracks ROI—so you spend less time typing and more time selling.
+        Swiftora speeds up listings, guides pricing from real-world data, and tracks ROI—so you spend less time typing and more time selling.
       </p>
       <div class="hero-cta">
-        <a class="btn primary" href="demo.html">Try the demo</a>
-        <a class="btn ghost" href="about.html">Learn more</a>
+        <a class="btn primary" href="/demo.html">Try the demo</a>
+        <a class="btn ghost" href="#signup">Join the waitlist</a>
       </div>
       <ul class="bullets">
         <li>AI-drafted titles & descriptions</li>
@@ -54,20 +95,18 @@
       </ul>
     </div>
 
+    <!-- Simple phone mock to keep the page visually alive -->
     <div class="hero-art">
-      <!-- Safe placeholder: replace later with app mock if you want -->
       <div class="phone-frame">
         <div class="phone-top"></div>
         <div class="phone-screen">
           <div class="screen-card">
             <div class="screen-title">Listing Draft</div>
-            <div class="screen-lines">
-              <span></span><span></span><span></span><span></span>
-            </div>
+            <div class="screen-lines"><span></span><span></span><span></span><span></span></div>
             <div class="screen-actions">
               <div class="chip">Vintage</div>
-              <div class="chip">1940s</div>
-              <div class="chip">Art Deco</div>
+              <div class="chip">Mid-Century</div>
+              <div class="chip">Glass</div>
             </div>
           </div>
         </div>
@@ -76,18 +115,74 @@
     </div>
   </main>
 
+  <!-- Sticky CTA -->
+  <div class="sticky-cta" role="complementary" aria-label="Quick actions">
+    <div class="row">
+      <a class="btn btn-primary" href="/demo.html">Try the Demo</a>
+      <a class="btn btn-ghost" href="#signup">Join Waitlist</a>
+    </div>
+  </div>
+
+  <!-- Signup (Netlify Forms ready) -->
+  <section id="signup" class="signup">
+    <h2 style="margin:0 0 12px">Get early access</h2>
+    <p class="notice" style="margin:0 0 16px">Join the waitlist and we’ll notify you when the live pricing + comps go live.</p>
+
+    <form class="card" name="signup" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="signup" />
+      <p style="display:none">
+        <label>Don’t fill this out: <input name="bot-field" /></label>
+      </p>
+
+      <div class="grid">
+        <label class="block-label">Name
+          <input type="text" name="name" autocomplete="name" />
+        </label>
+        <label class="block-label">Email
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+      </div>
+
+      <label class="block-label" style="margin-top:12px">Primary platform
+        <select name="platform">
+          <option value="Etsy">Etsy</option>
+          <option value="eBay">eBay</option>
+          <option value="Facebook Marketplace">Facebook Marketplace</option>
+          <option value="Multiple">Multiple</option>
+        </select>
+      </label>
+
+      <div class="actions" style="margin-top:16px;display:flex;gap:10px">
+        <button type="submit" class="btn primary">Join Waitlist</button>
+        <a class="btn ghost" href="/demo.html">Preview the Demo</a>
+      </div>
+      <p class="badge" style="margin-top:10px">Build <span id="buildId"></span></p>
+    </form>
+  </section>
+
+  <!-- Footer -->
   <footer class="site-footer">
-    <p>&copy; <span id="y"></span> Swiftora LLC. All rights reserved.</p>
+    <p>&copy; <span id="y"></span> Swiftora LLC. All rights reserved. · <a href="/privacy.html">Privacy</a></p>
   </footer>
 
+  <!-- Scripts -->
   <script>
+    // Year + build id
     document.getElementById("y").textContent = new Date().getFullYear();
-    // Register SW (cache bust via CACHE_VERSION inside service-worker.js)
+    const bid = (window.__ASSET_VERSION__ || "").toString();
+    const target = document.getElementById("buildId");
+    if (target) target.textContent = bid;
+
+    // Service worker with version query to ensure updates propagate
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("service-worker.js?v=" + window.__ASSET_VERSION__);
+        navigator.serviceWorker
+          .register("/service-worker.js?v=" + bid)
+          .catch(console.error);
       });
     }
   </script>
+
+  <noscript>This site works best with JavaScript enabled.</noscript>
 </body>
 </html>
