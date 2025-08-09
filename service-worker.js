@@ -1,36 +1,20 @@
-const CACHE_VERSION = "swiftora-v2025-08-09-14";
+// Swiftora SW v2025-08-09-16 — network only (no app cache)
+// Goal: avoid stale HTML/JS; still give us SW lifecycle control.
 
-self.addEventListener("install", () => self.skipWaiting());
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
+});
 
-self.addEventListener("activate", (e) => {
-  e.waitUntil((async () => {
-    const keys = await caches.keys();
-    await Promise.all(keys.map(k => k !== CACHE_VERSION ? caches.delete(k) : null));
+self.addEventListener('activate', (event) => {
+  event.waitUntil((async () => {
+    // Claim clients and let pages know we activated
     await self.clients.claim();
-    const clients = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
-    clients.forEach(c => c.postMessage({ type: "SW_ACTIVATED", cache: CACHE_VERSION }));
+    const clients = await self.clients.matchAll({ type: 'window' });
+    clients.forEach(c => c.postMessage({ type: 'SW_ACTIVATED' }));
   })());
 });
 
-self.addEventListener("fetch", (event) => {
-  const req = event.request;
-  const wantsHTML = req.mode === "navigate" || req.headers.get("accept")?.includes("text/html");
-
-  if (wantsHTML) {
-    event.respondWith(
-      fetch(req).then(r => {
-        caches.open(CACHE_VERSION).then(c => c.put(req, r.clone()));
-        return r;
-      }).catch(() => caches.match(req) || caches.match("/index.html"))
-    );
-    return;
-  }
-
-  event.respondWith(
-    caches.match(req).then(hit => hit || fetch(req).then(r => {
-      caches.open(CACHE_VERSION).then(c => c.put(req, r.clone()));
-      return r;
-    }))
-  );
+// Network passthrough (headers on the server handle HTML no-store)
+self.addEventListener('fetch', (event) => {
+  event.respondWith(fetch(event.request));
 });
-
