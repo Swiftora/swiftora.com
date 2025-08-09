@@ -1,4 +1,13 @@
 /* ===== Swiftora Demo – Light UI ===== */
+/* (Changelog)
+  - Added mobile/touch sizing + safe-area support
+  - Larger, clearer stepper dots; better focus states (a11y)
+  - Actions stack on phones; bigger tap targets
+  - Inputs/labels spacing tuned; preview helper class
+  - Attr table becomes horizontally scrollable on small screens
+  - Reduced-motion support; minor visual polish
+*/
+
 :root{
   --primary:#ff6b00;
   --secondary:#8e2de2;
@@ -13,43 +22,98 @@
   --bad:#b00020;
   --shadow:0 6px 24px rgba(0,0,0,.06);
   --radius:14px;
+
+  /* ADDED: base sizes for mobile */
+  --tap:44px;
+  --space:16px;
 }
 
-.app-container{max-width:1100px;margin:0 auto;padding:20px 16px 80px;background:#fff}
+/* ADDED: platform niceties */
+html{-webkit-text-size-adjust:100%}
+*{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--secondary);outline-offset:2px}
+
+/* Container */
+.app-container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:20px 16px 80px;
+  background:#fff;
+
+  /* ADDED: respect iOS safe area */
+  padding-bottom:calc(80px + env(safe-area-inset-bottom));
+}
+
 h1{font-size:clamp(20px,3.4vw,26px);margin:10px 0 12px;color:var(--ink)}
 
+/* Progress */
 .progress{height:8px;background:#f1f2f6;border-radius:999px;overflow:hidden;border:1px solid var(--line)}
 .progress-bar{height:100%;background:linear-gradient(90deg,var(--secondary),var(--primary))}
-.stepper{display:flex;gap:8px;justify-content:center;margin:14px 0 6px}
-.dot{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);color:#666;font-weight:800}
-.dot.active{background:var(--secondary);color:#fff;border-color:transparent}
 
+/* Stepper */
+.stepper{display:flex;gap:8px;justify-content:center;margin:14px 0 6px}
+.dot{
+  width:32px;height:32px;border-radius:10px;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--line);color:#666;font-weight:800;
+  cursor:pointer; /* ADDED: looks tappable even if it's a span */
+  min-height:var(--tap); /* ADDED: touch target height */
+  user-select:none;
+}
+.dot.active{background:var(--secondary);color:#fff;border-color:transparent}
+.dot:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+/* Cards & grids */
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
 .grid-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .grid{display:grid;gap:12px}
-.block-label{display:block;font-weight:700;color:#222}
+
+/* Forms */
+.block-label{display:block;font-weight:700;color:#222;line-height:1.2}
 input[type="text"],input[type="number"],textarea,select{
   width:100%;margin-top:8px;background:#fff;color:var(--ink);
-  border:1px solid #cfd3de;border-radius:10px;padding:12px 12px;outline:none
+  border:1px solid #cfd3de;border-radius:10px;padding:12px 12px;outline:none;
+  min-height:var(--tap); /* ADDED: easier to tap */
+  font-size:16px; /* ADDED: prevents iOS zoom */
 }
-.preview{width:100%;max-height:320px;object-fit:contain;display:none;margin-top:10px;border-radius:12px;border:1px dashed #cfd3de;background:#fafbff}
+input[type="text"]:focus,input[type="number"]:focus,textarea:focus,select:focus{
+  border-color:#c9b7ff; box-shadow:0 0 0 3px rgba(142,45,226,.12); /* ADDED */
+}
+
+/* Preview media */
+.preview{
+  width:100%;max-height:320px;object-fit:contain;display:none;margin-top:10px;
+  border-radius:12px;border:1px dashed #cfd3de;background:#fafbff
+}
+/* ADDED: utility to reveal preview when you toggle class in JS */
+.preview.show{display:block}
+
 .required::after{content:" *";color:#b26a00;font-weight:800}
 
+/* Help & errors */
 .hint,.mini-hint,.disclaimer{color:var(--muted)}
 .errors{color:#b00020;font-weight:700;margin-top:8px}
 
+/* Chips */
 .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.chip{background:#f5f2ff;border:1px solid #e3dafd;color:#4a3b78;padding:8px 12px;border-radius:999px;font-weight:700;cursor:pointer}
+.chip{
+  background:#f5f2ff;border:1px solid #e3dafd;color:#4a3b78;
+  padding:8px 12px;border-radius:999px;font-weight:700;cursor:pointer;
+  min-height:var(--tap); display:inline-flex;align-items:center; /* ADDED */
+}
 .chip.active{background:#8e2de2;color:#fff;border-color:transparent}
+.chip:focus-visible{outline:2px solid var(--secondary);outline-offset:2px}
 
+/* Listing preview text */
 .listing-title{font-weight:800;font-size:18px;margin-bottom:8px}
 .listing-body{color:#3d4350;white-space:pre-wrap}
 .listing-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .tag{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid #dfe3f0;background:#f7f8ff;font-size:12px;color:#3d4560}
 
+/* Status bullets */
 .status{margin:0;padding-left:18px;color:#4b5563}
 .status li{margin:6px 0}
 
+/* Comps */
 .comps{list-style:none;margin:0;padding:0}
 .comp-line{display:flex;justify-content:space-between;gap:10px;font-weight:600}
 .comp-title{color:#222}
@@ -57,11 +121,15 @@ input[type="text"],input[type="number"],textarea,select{
 .comp-meta{color:#6b7280;font-size:13px}
 .comp-summary{margin-top:10px}
 
-.attr-table{width:100%;border-collapse:separate;border-spacing:0}
+/* Attributes table */
+.attr-table{
+  width:100%;border-collapse:separate;border-spacing:0;
+}
 .attr-table th,.attr-table td{padding:10px 12px;border-bottom:1px dashed #dfe3f0}
 .attr-table th{text-align:left;width:28%;color:#222;font-weight:700}
 .attr-table tr:last-child th,.attr-table tr:last-child td{border-bottom:none}
 
+/* Bars */
 .bar{display:grid;grid-template-columns:120px 1fr 50px;gap:10px;align-items:center;margin:8px 0}
 .bar-outer{height:12px;border-radius:999px;background:#f0f2f8;border:1px solid #e0e4ef;overflow:hidden}
 .bar-inner{height:100%;width:0;background:linear-gradient(90deg,#ffccbc,#ffe082,#c8e6c9);transition:width .35s ease}
@@ -70,16 +138,61 @@ input[type="text"],input[type="number"],textarea,select{
 .bar-inner.low{background:#ffccbc}
 .pct{text-align:right;color:#222;font-weight:700}
 
-.actions{display:flex;gap:10px;margin-top:14px}
-.btn-next{appearance:none;border:0;cursor:pointer;border-radius:12px;font-weight:800;padding:12px 16px;background:var(--primary);color:#fff}
+/* Actions */
+.actions{display:flex;gap:10px;margin-top:14px;align-items:stretch;flex-wrap:wrap /* ADDED */}
+.btn-next{
+  appearance:none;border:0;cursor:pointer;border-radius:12px;font-weight:800;
+  padding:12px 16px;background:var(--primary);color:#fff;
+  min-height:var(--tap); /* ADDED */
+}
 .btn-next:disabled{opacity:.45;cursor:not-allowed}
+.btn-next:focus-visible{outline:2px solid #ffb380;outline-offset:2px} /* ADDED */
 
+/* Utilities */
 .center{text-align:center}
 .big{font-size:28px;font-weight:800}
 .meter{height:10px;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#f7f7fb;margin:10px auto;max-width:420px}
 #levelMeter{height:100%;width:0;background:linear-gradient(90deg,var(--secondary),var(--primary))}
 
+/* Responsive tweaks */
 @media (max-width:980px){
   .grid-two{grid-template-columns:1fr}
   .app-container{padding:16px 12px 80px}
+}
+
+/* ADDED: phone-first refinements */
+@media (max-width:640px){
+
+  /* Headings breathe a bit more */
+  h1{line-height:1.15; letter-spacing:-0.01em}
+
+  /* Stepper dots: larger hit area on phones */
+  .stepper{gap:10px}
+  .dot{width:40px;height:40px;border-radius:12px;font-size:15px}
+
+  /* Actions stack full-width */
+  .actions{gap:12px}
+  .actions .btn-next{width:100%}
+
+  /* Inputs: comfortable spacing */
+  .block-label{margin-top:2px}
+  input[type="text"],input[type="number"],textarea,select{padding:14px 14px}
+
+  /* Make long tables usable without cramping the layout */
+  .attr-table{
+    display:block; /* enables horizontal scroll without breaking the page */
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid #eef1f6;
+    border-radius:10px;
+  }
+  .attr-table table{min-width:520px} /* in case it’s nested */
+
+  /* Bars: tighter columns on narrow screens */
+  .bar{grid-template-columns:96px 1fr 44px}
+}
+
+/* ADDED: respect user’s motion preference */
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important}
 }
