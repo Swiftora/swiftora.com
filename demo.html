@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Swiftora Demo</title>
   <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="Upload multiple photos (front/back/base/close-up) and let Swiftora draft the listing. Add optional details if you want." />
+  <meta name="description" content="Upload multiple photos and let Swiftora draft the listing. Add optional details if you want." />
   <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
-  <script>window.__ASSET_VERSION__="v2025-08-09-15";</script>
-  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-15" />
+  <script>window.__ASSET_VERSION__="v2025-08-09-16";</script>
+
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-16" />
   <link rel="icon" href="/swiftora_icon_192x192.png" />
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-15" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-16" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- P&L (Profit step) minimal styles -->
+  <!-- P&L step helpers -->
   <style>
     .pnl .kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
     .pnl .kpi{background:#fff;border:1px solid #e8ebf3;border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
@@ -67,7 +68,6 @@
           <label class="block-label">Item photos (optional — multiple allowed)
             <input type="file" id="upload" accept="image/*" multiple />
           </label>
-
           <div id="thumbs" class="preview-grid" aria-live="polite"></div>
 
           <div class="coverage" id="coverageWrap" style="display:none">
@@ -75,7 +75,6 @@
             <div class="coverage-bar"><div id="coverageFill"></div></div>
             <small id="coverageLabel">0/3</small>
           </div>
-
           <p class="mini-hint">Recommended angles: <strong>Front</strong>, <strong>Back</strong> or <strong>Base/Mark</strong>, and a <strong>Close-up</strong>. No photos? We’ll still generate a draft.</p>
         </div>
 
@@ -117,7 +116,6 @@
       <p id="step1Errors" class="errors" aria-live="polite">
         Tip: you can leave everything blank and hit Next—Swiftora will fill in sensible defaults.
       </p>
-
       <div class="actions">
         <button class="btn btn-next" id="step1Btn">Next</button>
       </div>
@@ -250,24 +248,37 @@
   </footer>
 
   <script>
+  (() => {
     const V=(window.__ASSET_VERSION__||"").toString();
-    document.getElementById("y").textContent=new Date().getFullYear();
+    const KEY="__swiftora_build__";
+    const qp=new URLSearchParams(location.search);
 
-    // Version watcher ONLY (no link rewriting)
-    (function(){
-      const KEY="__swiftora_build__"; const prev=localStorage.getItem(KEY);
-      if(prev && prev!==V){
-        if('caches' in window){caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k))))}
-        if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.update()))}
-        localStorage.setItem(KEY,V); location.reload(); return;
-      }
-      localStorage.setItem(KEY,V);
-    })();
+    if(qp.get("flush")==="1"){
+      (async()=>{
+        if('caches' in window){const ks=await caches.keys(); await Promise.all(ks.map(k=>caches.delete(k)));}
+        if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister()));}
+        qp.delete("flush"); qp.set("v",V);
+        location.replace(location.pathname+"?"+qp.toString());
+      })(); return;
+    }
+
+    document.getElementById("y").textContent=new Date().getFullYear();
+    const prev=localStorage.getItem(KEY);
+    if(prev && prev!==V){
+      if('caches' in window){caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k))))}
+      if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.update()))}
+      localStorage.setItem(KEY,V); location.reload(); return;
+    }
+    localStorage.setItem(KEY,V);
 
     if("serviceWorker" in navigator){
       window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v="+V));
+      navigator.serviceWorker.addEventListener("message",(e)=>{ if(e.data?.type==="SW_ACTIVATED") location.reload(); });
     }
+  })();
   </script>
-  <script src="/demo.js?v=v2025-08-09-15" defer></script>
+
+  <script src="/demo.js?v=v2025-08-09-16" defer></script>
 </body>
 </html>
+
