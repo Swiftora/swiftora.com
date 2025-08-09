@@ -1,5 +1,5 @@
-// Basic offline cache for core pages/assets
-const CACHE_NAME = 'swiftora-cache-v2';
+// Simple PWA cache with offline fallback
+const CACHE_NAME = 'swiftora-cache-v3';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -7,10 +7,12 @@ const CORE_ASSETS = [
   '/privacy.html',
   '/demo.html',
   '/style.css',
+  '/demo.css',
   '/manifest.webmanifest',
   '/swiftora_logo_transparent v2.png',
   '/swiftora_icon_192x192.png',
   '/swiftora_icon_512x512.png',
+  '/offline.html'
 ];
 
 self.addEventListener('install', (e) => {
@@ -28,8 +30,16 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  const req = e.request;
+  const { request } = e;
   e.respondWith(
-    caches.match(req).then((cached) => cached || fetch(req))
+    caches.match(request).then((cached) => {
+      if (cached) return cached;
+      return fetch(request).catch(() => {
+        // If navigation fails (offline), show fallback
+        if (request.mode === 'navigate') {
+          return caches.match('/offline.html');
+        }
+      });
+    })
   );
 });
