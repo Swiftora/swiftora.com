@@ -7,78 +7,60 @@
   <title>Swiftora | Smarter Selling Starts Here</title>
   <meta name="description" content="Swiftora helps vintage and second-hand resellers create listings, price smarter, and track ROI with AI." />
   <meta name="theme-color" content="#7c4dff" />
-
-  <script>window.__ASSET_VERSION__="v2025-08-09-18";</script>
-
+  <script>window.__ASSET_VERSION__="v2025-08-09-20";</script>
   <link rel="canonical" href="https://swiftora.com/" />
   <link rel="icon" href="/swiftora_icon_192x192.png" />
-  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-18" />
-
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-20" />
   <meta property="og:title" content="Swiftora | Smarter Selling Starts Here" />
   <meta property="og:description" content="Create listings faster, price with confidence, and track ROI — purpose-built for vintage & resale." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://swiftora.com/" />
   <meta property="og:image" content="https://swiftora.com/swiftora_logo_transparent%20v2.png" />
-
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Swiftora | Smarter Selling Starts Here" />
   <meta name="twitter:description" content="Create listings faster, price with confidence, and track ROI." />
   <meta name="twitter:image" content="https://swiftora.com/swiftora_logo_transparent%20v2.png" />
-
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-18" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-20" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
-
   <style>
-    /* small header tweak for mobile */
-    .site-header .brand-name{font-weight:800}
-    @media (max-width:520px){.site-header{padding:12px 14px}.site-header .brand-name{font-size:18px}.site-header .site-nav a{padding:6px 8px}}
-
-    /* hero + phone */
-    .hero {display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center;padding:48px 24px 28px}
-    .hero .ai-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#f3f0ff;color:#6d28d9;font-weight:700;font-size:.85rem;margin-bottom:10px}
+    /* Small, page-local helpers so we don’t destabilize style.css */
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center;padding:48px 20px 14px}
+    .ai-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#f3f0ff;color:#6d28d9;font-weight:700;font-size:.85rem;margin-bottom:10px}
     .hero-cta{display:flex;gap:10px;margin:16px 0 8px}
     .hero .bullets{margin:10px 0 0 18px}
     .phone-wrap{display:flex;justify-content:center}
-    .phone{width:100%;max-width:380px;border-radius:28px;background:linear-gradient(#f7f8ff,#eef1ff);box-shadow:0 6px 30px rgba(17,24,39,.12);padding:16px 14px 18px;position:relative}
-    .phone-notch{width:60%;height:6px;border-radius:6px;background:#11182714;margin:6px auto}
+    .phone{width:100%;max-width:390px;border-radius:28px;background:linear-gradient(#f7f8ff,#eef1ff);box-shadow:0 6px 30px rgba(17,24,39,.12);padding:16px 14px 18px}
+    .phone-notch{width:62%;height:6px;border-radius:6px;background:#11182714;margin:6px auto}
     .card{background:#fff;border:1px solid #e8ebf3;border-radius:16px;padding:14px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
-    .row{display:flex;gap:10px;align-items:center}
+    .row{display:flex;gap:10px;align-items:center;justify-content:space-between}
     .thumbs{display:flex;gap:6px}
-    .thumb{width:30px;height:30px;border-radius:6px;background:#f3f4f6;border:1px solid #e5e7eb}
-    .image-box{height:120px;border-radius:12px;background:
+    .thumb{width:26px;height:26px;border-radius:6px;background:#f3f4f6;border:1px solid #e5e7eb}
+    .title-skel{height:8px;border-radius:6px;background:#eef2ff;width:78%;margin-top:8px}
+    .title-skel.short{width:58%}
+    .image-box{height:124px;border-radius:12px;background:
       radial-gradient(#f5f6ff 1px,transparent 1px) 0 0/8px 8px,
       linear-gradient(#fff,#fbfbff);
-      border:1px solid #e8ebf3;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+      border:1px solid #e8ebf3;display:flex;align-items:center;justify-content:center;margin:10px 0}
     .image-box img{max-height:82px;max-width:60%;opacity:.9}
-    .title-line{height:10px;border-radius:6px;background:#eef2ff;margin:6px 0;width:84%}
-    .title-line.short{width:62%}
-    .chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
+    .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 12px}
     .chip{padding:6px 10px;border-radius:999px;background:#f3f0ff;color:#6d28d9;font-weight:700;font-size:.75rem}
     .badge{display:inline-flex;align-items:center;gap:6px;background:#e7f7ee;color:#166534;border-radius:999px;padding:6px 10px;font-weight:700;font-size:.76rem}
-    .bars{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+    .bars{display:grid;gap:10px;margin-top:10px}
     .bar{font-size:.85rem;color:#374151}
-    .bar-outer{height:8px;border-radius:999px;background:#eef2ff;overflow:hidden;margin-top:6px}
-    .bar-inner{height:100%;width:0;border-radius:999px}
-    .bar-cat .bar-inner{background:linear-gradient(90deg,#8b5cf6,#a78bfa)}
-    .bar-era .bar-inner{background:linear-gradient(90deg,#0ea5e9,#38bdf8)}
-    .bar-mat .bar-inner{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
-    .bar-con .bar-inner{background:linear-gradient(90deg,#16a34a,#22c55e)}
-    .phone-foot{width:58%;height:6px;border-radius:6px;background:#11182714;margin:12px auto 0}
-    @media(max-width:900px){.hero{grid-template-columns:1fr;gap:24px}}
-
-    /* feature cards (the 3 you wanted) */
-    .features{padding:24px 16px 12px}
-    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1200px;margin:0 auto}
-    .feature-card{background:#fff;border:1px solid #e8ebf3;border-radius:16px;box-shadow:0 1px 3px rgba(16,24,40,.06);padding:18px}
-    .feature-card h3{display:flex;align-items:center;gap:10px;margin:0 0 8px}
-    .feature-card p{margin:0;color:#374151}
-    @media(max-width:900px){.feature-grid{grid-template-columns:1fr}}
+    .bar-outer{height:8px;border-radius:999px;background:#eef2ff;overflow:hidden}
+    .bar-fill{height:8px;border-radius:999px;width:0}
+    .features-3{display:grid;gap:14px;grid-template-columns:repeat(3,1fr);padding:18px 20px 6px}
+    .feat{border:1px solid #eee;border-radius:16px;padding:16px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.04)}
+    .feat h4{margin:8px 0 6px}
+    .icon-bubble{width:34px;height:34px;border-radius:999px;background:#fff3e8;display:flex;align-items:center;justify-content:center;font-weight:800;color:#ff6b00}
+    @media(max-width:980px){.hero{grid-template-columns:1fr;gap:20px}.phone{max-width:360px;margin:0 auto}.features-3{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header class="site-header">
-    <div class="brand"><span class="brand-name">Swiftora</span></div>
-    <nav class="site-nav" aria-label="Primary">
+    <div class="logo-wrap"><a class="brand" href="/index.html"><span class="brand-name">Swiftora</span></a></div>
+    <nav class="site-nav">
       <a class="active" href="/index.html">Home</a>
       <a href="/demo.html">Live Demo</a>
       <a href="/about.html">About</a>
@@ -86,10 +68,11 @@
     </nav>
   </header>
 
+  <!-- Hero -->
   <main class="hero">
-    <div class="hero-copy">
+    <div>
       <div class="ai-pill">Swiftora AI</div>
-      <h1>Smarter selling for<br/>vintage &amp; resale</h1>
+      <h1>Smarter selling for<br/>vintage & resale</h1>
       <p>Swiftora speeds up listings, guides pricing from real-world comps, and tracks ROI—so you spend less time typing and more time selling.</p>
       <div class="hero-cta">
         <a class="btn primary" href="/demo.html">Try the demo</a>
@@ -102,55 +85,59 @@
       </ul>
     </div>
 
-    <!-- detailed phone mock -->
+    <!-- Phone mock -->
     <div class="phone-wrap">
-      <div class="phone" aria-label="Phone mock">
+      <div class="phone">
         <div class="phone-notch"></div>
         <div class="card">
-          <div class="row" style="justify-content:space-between;margin-bottom:8px">
-            <div style="font-weight:800">Listing Draft</div>
-            <div class="thumbs" aria-hidden="true"><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div></div>
+          <div class="row">
+            <strong>Listing Draft</strong>
+            <div class="thumbs"><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div></div>
           </div>
           <div class="image-box">
-            <img src="/swiftora_logo_transparent v2.png" alt="Swiftora preview">
+            <img src="/swiftora_logo_transparent%20v2.png" alt="">
           </div>
-          <div class="title-line"></div>
-          <div class="title-line short"></div>
-          <div class="chips"><div class="chip">Vintage</div><div class="chip">Mid-Century</div><div class="chip">Glass</div></div>
-          <div class="badge">$47 • suggested</div>
+          <div class="title-skel"></div>
+          <div class="title-skel short"></div>
+          <div class="chips">
+            <span class="chip">Vintage</span>
+            <span class="chip">Mid-Century</span>
+            <span class="chip">Glass</span>
+          </div>
+          <span class="badge">$47 • suggested</span>
           <div class="bars">
-            <div class="bar bar-cat">Category
-              <div class="bar-outer"><div class="bar-inner" style="width:82%"></div></div>
+            <div class="bar">Category
+              <div class="bar-outer"><div class="bar-fill" style="width:82%;background:#8b5cf6"></div></div>
             </div>
-            <div class="bar bar-era">Era
-              <div class="bar-outer"><div class="bar-inner" style="width:66%"></div></div>
+            <div class="bar">Era
+              <div class="bar-outer"><div class="bar-fill" style="width:66%;background:#22c55e"></div></div>
             </div>
-            <div class="bar bar-con">Condition
-              <div class="bar-outer"><div class="bar-inner" style="width:92%"></div></div>
+            <div class="bar">Condition
+              <div class="bar-outer"><div class="bar-fill" style="width:74%;background:#10b981"></div></div>
             </div>
           </div>
         </div>
-        <div class="phone-foot"></div>
       </div>
     </div>
   </main>
 
-  <!-- Feature cards (restored) -->
-  <section class="features" aria-label="Highlights">
-    <div class="feature-grid">
-      <div class="feature-card">
-        <h3>⚡ Faster listings</h3>
-        <p>Turn a couple of details and photos into a clean, platform-ready draft.</p>
-      </div>
-      <div class="feature-card">
-        <h3>🏷️ Price with confidence</h3>
-        <p>Suggested prices informed by comparable sold items—no more guessing.</p>
-      </div>
-      <div class="feature-card">
-        <h3>📈 Know your ROI</h3>
-        <p>See cost, shipping, fees, and net profit at a glance for every item.</p>
-      </div>
-    </div>
+  <!-- Feature cards -->
+  <section class="features-3">
+    <article class="feat">
+      <div class="icon-bubble">⚡</div>
+      <h4>Faster listings</h4>
+      <p>Turn a couple of details and photos into a clean, platform-ready draft.</p>
+    </article>
+    <article class="feat">
+      <div class="icon-bubble">🏷️</div>
+      <h4>Price with confidence</h4>
+      <p>Suggested prices informed by comparable sold items—no more guessing.</p>
+    </article>
+    <article class="feat">
+      <div class="icon-bubble">📈</div>
+      <h4>Know your ROI</h4>
+      <p>See cost, shipping, fees, and net profit at a glance for every item.</p>
+    </article>
   </section>
 
   <!-- Signup -->
@@ -161,12 +148,14 @@
     <form class="card" name="signup" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="signup" />
       <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
-
-      <div class="grid">
-        <label class="block-label">Name <input type="text" name="name" autocomplete="name" /></label>
-        <label class="block-label">Email <input type="email" name="email" required autocomplete="email" /></label>
+      <div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <label class="block-label">Name
+          <input type="text" name="name" autocomplete="name" />
+        </label>
+        <label class="block-label">Email
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
       </div>
-
       <label class="block-label" style="margin-top:12px">Primary platform
         <select name="platform">
           <option value="Etsy">Etsy</option>
@@ -175,50 +164,48 @@
           <option value="Multiple">Multiple</option>
         </select>
       </label>
-
       <div class="actions" style="margin-top:16px;display:flex;gap:10px">
         <button type="submit" class="btn primary">Join Waitlist</button>
         <a class="btn ghost" href="/demo.html">Preview the Demo</a>
       </div>
-      <p class="badge" style="margin-top:10px">Build <span id="buildId"></span></p>
     </form>
   </section>
 
+  <!-- Footer -->
   <footer class="site-footer">
-    <p>&copy; <span id="y"></span> Swiftora LLC. All rights reserved. · <a href="/privacy.html">Privacy</a></p>
+    <p>&copy; <span id="y"></span> Swiftora LLC. All rights reserved. · <a href="/privacy.html">Privacy</a> · Build <span id="buildId"></span></p>
   </footer>
 
-  <!-- version + SW watcher -->
   <script>
-  (() => {
-    const V=(window.__ASSET_VERSION__||"").toString();
-    const KEY="__swiftora_build__";
-    const qp=new URLSearchParams(location.search);
+    // Year + build id
+    document.getElementById("y").textContent = new Date().getFullYear();
+    const bid = (window.__ASSET_VERSION__||"").toString();
+    document.getElementById("buildId").textContent = bid;
 
-    if(qp.get("flush")==="1"){
-      (async()=>{
-        if('caches' in window){const ks=await caches.keys(); await Promise.all(ks.map(k=>caches.delete(k)));}
-        if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister()));}
-        qp.delete("flush"); qp.set("v",V);
-        location.replace(location.pathname+"?"+qp.toString());
-      })(); return;
+    // Append version to internal links + optional flush flag
+    (function(){
+      const url = new URL(location.href);
+      if (url.searchParams.get("flush")==="1"){
+        try{ if('caches' in window){caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k))))} }catch{}
+        try{ if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()))} }catch{}
+      }
+      document.querySelectorAll('a[href^="/"]').forEach(a=>{
+        try{
+          const u=new URL(a.getAttribute("href"),location.origin);
+          if(u.origin===location.origin && !u.searchParams.get("v")){
+            u.searchParams.set("v",bid);
+            a.href=u.pathname+"?"+u.searchParams.toString()+(u.hash||"");
+          }
+        }catch{}
+      });
+    })();
+
+    // SW register
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js?v=" + (window.__ASSET_VERSION__||""));
+      });
     }
-
-    document.getElementById("y").textContent=new Date().getFullYear();
-    const t=document.getElementById("buildId"); if(t) t.textContent=V;
-
-    const prev=localStorage.getItem(KEY);
-    if(prev && prev!==V){
-      if('caches' in window){caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k))))}
-      if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.update()))}
-      localStorage.setItem(KEY,V); location.reload(); return;
-    }
-    localStorage.setItem(KEY,V);
-
-    if("serviceWorker" in navigator){
-      window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v="+V));
-    }
-  })();
   </script>
 </body>
 </html>
