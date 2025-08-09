@@ -6,15 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Swiftora</title>
   <meta name="description" content="Why Swiftora exists and how it helps secondhand sellers list faster, price smarter, and track ROI." />
-  <script>window.__ASSET_VERSION__="v2025-08-09-7";</script>
+  <script>window.__ASSET_VERSION__="v2025-08-09-10";</script>
   <link rel="icon" href="/swiftora_icon_192x192.png" />
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-7" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-10" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="wordmark">Swiftora</div>
+    <div class="brand">
+      <img class="brand-logo" src="/swiftora_logo_transparent v2.png" alt="" aria-hidden="true" />
+      <span class="brand-name">Swiftora</span>
+    </div>
     <nav class="site-nav">
       <a href="/index.html">Home</a>
       <a href="/demo.html">Live Demo</a>
@@ -51,6 +54,15 @@
   <footer class="site-footer">
     <p>&copy; <span id="y"></span> Swiftora LLC. All rights reserved. · <a href="/privacy.html">Privacy</a></p>
   </footer>
-  <script>document.getElementById("y").textContent=new Date().getFullYear();</script>
+  <script>
+    document.getElementById("y").textContent=new Date().getFullYear();
+    const V=(window.__ASSET_VERSION__||"").toString();
+    // Version internal links
+    document.querySelectorAll('a[href^="/"]').forEach(a=>{
+      const u=new URL(a.getAttribute("href"), location.origin);
+      if(!u.searchParams.get("v")){u.searchParams.set("v",V); a.href=u.pathname+"?"+u.searchParams.toString()+(u.hash||"");}
+    });
+    if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v="+V));
+  </script>
 </body>
 </html>
