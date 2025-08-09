@@ -5,23 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Swiftora Demo</title>
   <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="Upload a photo, describe your item in natural language, and preview a simulated listing, pricing, and ROI." />
-  <script>window.__ASSET_VERSION__="v2025-08-09-6";</script>
-
-  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-6" />
-  <link rel="icon" href="/swiftora_logo_transparent v2.png" />
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-6" />
-  <link rel="stylesheet" href="/demo.css?v=v2025-08-09-6" />
+  <meta name="description" content="Upload a photo, describe your item, and preview a simulated listing, pricing, and ROI." />
+  <script>window.__ASSET_VERSION__="v2025-08-09-7";</script>
+  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-7" />
+  <link rel="icon" href="/swiftora_icon_192x192.png" />
+  <link rel="stylesheet" href="/style.css?v=v2025-08-09-7" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="preload" href="/demo.js?v=v2025-08-09-6" as="script" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="logo-wrap">
-      <a class="logo-badge" href="/" aria-label="Swiftora home">
-        <img src="/swiftora_logo_transparent v2.png" alt="Swiftora logo" />
-      </a>
-    </div>
+    <div class="wordmark">Swiftora</div>
     <nav class="site-nav">
       <a href="/index.html">Home</a>
       <a class="active" href="/demo.html">Live Demo</a>
@@ -53,7 +47,7 @@
             <label class="block-label required">Describe your item (required)
               <textarea id="field-desc" rows="3" placeholder="e.g., amber glass vase, ribbed, 9 inches tall, likely 1960s. Marked Fenton on base."></textarea>
             </label>
-            <p class="mini-hint">Write naturally—Swiftora extracts category, color, brand/markings, age, and size.</p>
+            <p class="mini-hint">Write naturally—Swiftora extracts category, color, brand/markings, age, size.</p>
 
             <div class="block-label required">Condition (required)
               <div class="chip-row" id="condChips" role="group" aria-label="Condition">
@@ -73,19 +67,18 @@
         </div>
       </div>
 
-      <details class="card tips">
+      <details class="card">
         <summary><strong>Photo tips for better matches</strong></summary>
         <ul>
-          <li>Good lighting (window or daylight bulb)</li>
+          <li>Good lighting (window/daylight bulb)</li>
           <li>Neutral background (plain table or sheet)</li>
-          <li>Multiple angles: front, back, base/mark, close-up texture</li>
-          <li>Size reference (ruler/coin) for scale</li>
-          <li>No heavy filters; keep colors accurate</li>
+          <li>Angles: front, back, base/mark, close-up texture</li>
+          <li>Size reference (ruler/coin)</li>
         </ul>
       </details>
 
       <p id="step1Errors" class="errors" aria-live="polite"></p>
-      <div class="actions"><button class="btn-next" id="step1Btn" disabled>Next</button></div>
+      <div class="actions"><button class="btn btn-next" id="step1Btn" disabled>Next</button></div>
     </section>
 
     <!-- STEP 2 -->
@@ -98,29 +91,17 @@
       </div>
 
       <div class="grid-two">
-        <div class="card">
-          <h3>Draft Listing</h3>
-          <div id="listingCard" aria-live="polite"></div>
-        </div>
-        <div class="card">
-          <h3>Sold Comparables (sample)</h3>
-          <div id="compsCard"></div>
-        </div>
+        <div class="card"><h3>Draft Listing</h3><div id="listingCard" aria-live="polite"></div></div>
+        <div class="card"><h3>Sold Comparables (sample)</h3><div id="compsCard"></div></div>
       </div>
 
       <div class="grid-two">
-        <div class="card">
-          <h3>Attributes</h3>
-          <table class="attr-table" id="attrsCard"></table>
-        </div>
-        <div class="card">
-          <h3>Confidence</h3>
-          <div id="confidenceCard"></div>
-        </div>
+        <div class="card table"><h3 style="padding:16px">Attributes</h3><table class="attr-table" id="attrsCard"></table></div>
+        <div class="card"><h3>Confidence</h3><div id="confidenceCard"></div></div>
       </div>
 
       <p class="disclaimer">This is a simulated preview (no live AI yet). Real-time lookup arrives in the MVP.</p>
-      <div class="actions"><button class="btn-next" id="step2Btn">Next</button></div>
+      <div class="actions"><button class="btn btn-next" id="step2Btn">Next</button></div>
     </section>
 
     <!-- STEP 3 -->
@@ -128,13 +109,13 @@
       <h1>Profit Breakdown</h1>
       <div class="card">
         <div id="profitCard"></div>
-        <div class="grid-two">
+        <div class="grid-mini" style="margin-top:10px">
           <label class="block-label">Adjust shipping<input id="adj-ship" type="number" inputmode="decimal" step="0.01" /></label>
           <label class="block-label">Adjust platform fees (%)<input id="adj-fee" type="number" inputmode="decimal" step="0.1" /></label>
         </div>
       </div>
       <p class="hint">Tweak fees/shipping to see how net profit changes.</p>
-      <div class="actions"><button class="btn-next" id="step3Btn">Next</button></div>
+      <div class="actions"><button class="btn btn-next" id="step3Btn">Next</button></div>
     </section>
 
     <!-- STEP 4 -->
@@ -146,7 +127,7 @@
         <div class="meter"><div id="levelMeter"></div></div>
         <p class="hint">Keep listing to level up and unlock advanced price tools.</p>
       </div>
-      <div class="actions"><button class="btn-next" id="step4Btn">Next</button></div>
+      <div class="actions"><button class="btn btn-next" id="step4Btn">Next</button></div>
     </section>
 
     <!-- STEP 5 -->
@@ -164,13 +145,9 @@
   </footer>
 
   <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/service-worker.js?v="+(window.__ASSET_VERSION__||"")).catch(console.error);
-      });
-    }
+    document.getElementById("y").textContent=new Date().getFullYear();
+    if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v="+(window.__ASSET_VERSION__||"")).catch(console.error));}
   </script>
-  <script src="/demo.js?v=v2025-08-09-6" defer></script>
+  <script src="/demo.js?v=v2025-08-09-7" defer></script>
 </body>
 </html>
