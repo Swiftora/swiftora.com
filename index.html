@@ -2,255 +2,81 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Swiftora | Smarter Selling Starts Here</title>
-  <meta name="description" content="Swiftora helps vintage and second-hand resellers create listings, price smarter, and track ROI with AI." />
-  <meta name="theme-color" content="#7c4dff" />
-  <script>window.__ASSET_VERSION__="v2025-08-09-21";</script>
-  <link rel="canonical" href="https://swiftora.com/" />
-  <link rel="icon" href="/swiftora_icon_192x192.png" />
-  <link rel="manifest" href="/manifest.webmanifest?v=v2025-08-09-20" />
-  <meta property="og:title" content="Swiftora | Smarter Selling Starts Here" />
-  <meta property="og:description" content="Create listings faster, price with confidence, and track ROI — purpose-built for vintage & resale." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://swiftora.com/" />
-  <meta property="og:image" content="https://swiftora.com/swiftora_logo_transparent%20v2.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Swiftora | Smarter Selling Starts Here" />
-  <meta name="twitter:description" content="Create listings faster, price with confidence, and track ROI." />
-  <meta name="twitter:image" content="https://swiftora.com/swiftora_logo_transparent%20v2.png" />
-  <link rel="stylesheet" href="/style.css?v=v2025-08-09-20" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <title>Swiftora LLC — About & Careers</title>
+  <meta name="description" content="Swiftora LLC is a New Jersey–registered company building AI tools for online resellers. Private beta." />
+  <meta name="robots" content="noindex, nofollow" />
   <style>
-    /* Small, page-local helpers so we don’t destabilize style.css */
-    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center;padding:48px 20px 14px}
-    .ai-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#f3f0ff;color:#6d28d9;font-weight:700;font-size:.85rem;margin-bottom:10px}
-    .hero-cta{display:flex;gap:10px;margin:16px 0 8px}
-    .hero .bullets{margin:10px 0 0 18px}
-    .phone-wrap{display:flex;justify-content:center}
-
-    /* UPGRADED: phone now looks like a real device (no class renames) */
-    .phone{
-      width:min(340px,85vw);
-      aspect-ratio:9/19.5;
-      border-radius:36px;
-      background:#111;
-      box-shadow:0 20px 60px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.08);
-      padding:14px;
-      margin:0 auto;
-      position:relative;
-    }
-    .phone-notch{
-      position:absolute;top:8px;left:50%;transform:translateX(-50%);
-      width:32%;height:18px;background:#000;border-radius:0 0 16px 16px;
-      box-shadow:0 2px 6px rgba(0,0,0,.4);
-    }
-    /* NEW: inner screen wrapper to host your existing card */
-    .phone-screen{
-      width:100%;height:100%;
-      border-radius:28px;
-      background:linear-gradient(180deg,#fafafa,#f4f4f4);
-      overflow:hidden;
-      padding:16px;
-      display:flex;flex-direction:column;gap:10px;
-    }
-
-    .card{background:#fff;border:1px solid #e8ebf3;border-radius:16px;padding:14px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
-    .row{display:flex;gap:10px;align-items:center;justify-content:space-between}
-    .thumbs{display:flex;gap:6px}
-    .thumb{width:26px;height:26px;border-radius:6px;background:#f3f4f6;border:1px solid #e5e7eb}
-    .title-skel{height:8px;border-radius:6px;background:#eef2ff;width:78%;margin-top:8px}
-    .title-skel.short{width:58%}
-
-    /* TUNED: image area fits logo/device better on phones */
-    .image-box{
-      height:124px;border-radius:12px;
-      background:
-        radial-gradient(#f5f6ff 1px,transparent 1px) 0 0/8px 8px,
-        linear-gradient(#fff,#fbfbff);
-      border:1px solid #e8ebf3;display:flex;align-items:center;justify-content:center;margin:10px 0
-    }
-    .image-box img{
-      display:block;max-height:120px;max-width:85%;height:auto;width:auto;opacity:.98
-    }
-
-    .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 12px}
-    .chip{padding:6px 10px;border-radius:999px;background:#f3f0ff;color:#6d28d9;font-weight:700;font-size:.75rem}
-    .badge{display:inline-flex;align-items:center;gap:6px;background:#e7f7ee;color:#166534;border-radius:999px;padding:6px 10px;font-weight:700;font-size:.76rem}
-    .bars{display:grid;gap:10px;margin-top:10px}
-    .bar{font-size:.85rem;color:#374151}
-    .bar-outer{height:8px;border-radius:999px;background:#eef2ff;overflow:hidden}
-    .bar-fill{height:8px;border-radius:999px;width:0}
-
-    .features-3{display:grid;gap:14px;grid-template-columns:repeat(3,1fr);padding:18px 20px 6px}
-    .feat{border:1px solid #eee;border-radius:16px;padding:16px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.04)}
-    .feat h4{margin:8px 0 6px}
-    .icon-bubble{width:34px;height:34px;border-radius:999px;background:#fff3e8;display:flex;align-items:center;justify-content:center;font-weight:800;color:#ff6b00}
-
-    @media(max-width:980px){
-      .hero{grid-template-columns:1fr;gap:20px}
-      .phone{width:min(360px,90vw)} /* slightly larger on tablet-ish widths */
-      .features-3{grid-template-columns:1fr}
-    }
+    :root { --bg:#0f1115; --card:#151823; --text:#e7e9ee; --muted:#a7adba; --accent:#ff6a3d; }
+    *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif}
+    .wrap{max-width:900px;margin:40px auto;padding:0 20px}
+    header{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+    .badge{font-weight:700;letter-spacing:.3px}
+    .card{background:var(--card);border:1px solid #222636;border-radius:14px;padding:22px;margin:16px 0;box-shadow:0 6px 24px rgba(0,0,0,.24)}
+    h1{font-size:28px;margin:8px 0 4px}
+    h2{font-size:18px;margin:0 0 8px;color:var(--muted);font-weight:600}
+    p{margin:8px 0;color:#d7dbe6}
+    ul{margin:8px 0 0 18px;color:#d7dbe6}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    footer{margin:28px 0;color:var(--muted);font-size:14px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:720px){.row{grid-template-columns:1fr}}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #2a2f3e;background:#1a1f2d;color:var(--text);text-decoration:none}
+    .btn:hover{background:#1f2534}
+    .muted{color:var(--muted)}
+    .pill{display:inline-block;padding:2px 8px;border:1px solid #2a2f3e;border-radius:999px;font-size:12px;color:var(--muted)}
+    .logo {height:28px; width:auto; vertical-align:middle}
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="site-header">
-    <div class="logo-wrap"><a class="brand" href="/index.html"><span class="brand-name">Swiftora</span></a></div>
-    <nav class="site-nav">
-      <a class="active" href="/index.html">Home</a>
-      <a href="/demo.html">Live Demo</a>
-      <a href="/about.html">About</a>
-      <a class="cta" href="#signup">Get Updates</a>
-    </nav>
-  </header>
+  <div class="wrap">
+    <header>
+      <!-- If you have a logo file, keep the fallback text if it’s missing -->
+      <img src="/swiftora_logo_transparent.png" alt="Swiftora logo" class="logo" onerror="this.style.display='none'">
+      <span class="badge">Swiftora LLC</span>
+      <span class="pill">New Jersey • USA</span>
+    </header>
 
-  <!-- Hero -->
-  <main class="hero">
-    <div>
-      <div class="ai-pill">Swiftora AI</div>
-      <h1>Smarter selling for<br/>vintage & resale</h1>
-      <p>Swiftora speeds up listings, guides pricing from real-world comps, and tracks ROI—so you spend less time typing and more time selling.</p>
-      <div class="hero-cta">
-        <a class="btn primary" href="/demo.html">Try the demo</a>
-        <a class="btn ghost" href="#signup">Join the waitlist</a>
-      </div>
-      <ul class="bullets">
-        <li>AI-drafted titles & descriptions</li>
-        <li>Pricing guidance with comps</li>
-        <li>ROI tracking & simple analytics</li>
-      </ul>
+    <div class="card">
+      <h1>About</h1>
+      <p>Swiftora LLC builds practical AI tools for online resellers—helping sellers price smarter, create listings faster, and track ROI.</p>
+      <p class="muted">We’re in private beta and operate a lean, founder-led team. For verification or questions, email <a href="mailto:info@swiftora.com">info@swiftora.com</a>.</p>
     </div>
 
-    <!-- Phone mock -->
-    <div class="phone-wrap">
-      <div class="phone">
-        <div class="phone-notch"></div>
+    <div class="row">
+      <div class="card">
+        <h2>Open Role: Operations &amp; Digital Assistant (Remote · Part-Time · $20/hr)</h2>
+        <ul>
+          <li>Admin-first: calendar, vendor follow-ups, weekly summaries</li>
+          <li>Help build a new consumer brand from zero (light content cadence)</li>
+          <li>Flexible 4–6 hrs/week · Initial 3-month term</li>
+        </ul>
+        <p><a class="btn" href="mailto:info@swiftora.com?subject=Operations%20%26%20Digital%20Assistant%20Application">Apply via email</a>
+           <span class="muted">or search “Swiftora” on Handshake.</span></p>
+      </div>
 
-        <!-- NEW wrapper: phone-screen (content unchanged inside) -->
-        <div class="phone-screen">
-          <div class="card">
-            <div class="row">
-              <strong>Listing Draft</strong>
-              <div class="thumbs"><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div></div>
-            </div>
-            <div class="image-box">
-              <img src="/swiftora_logo_transparent%20v2.png" alt="">
-            </div>
-            <div class="title-skel"></div>
-            <div class="title-skel short"></div>
-            <div class="chips">
-              <span class="chip">Vintage</span>
-              <span class="chip">Mid-Century</span>
-              <span class="chip">Glass</span>
-            </div>
-            <span class="badge">$47 • suggested</span>
-            <div class="bars">
-              <div class="bar">Category
-                <div class="bar-outer"><div class="bar-fill" style="width:82%;background:#8b5cf6"></div></div>
-              </div>
-              <div class="bar">Era
-                <div class="bar-outer"><div class="bar-fill" style="width:66%;background:#22c55e"></div></div>
-              </div>
-              <div class="bar">Condition
-                <div class="bar-outer"><div class="bar-fill" style="width:74%;background:#10b981"></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /phone-screen -->
-
+      <div class="card">
+        <h2>Open Role: Full-Stack Developer (Remote · Equity/Milestones)</h2>
+        <ul>
+          <li>Build small, production-quality features end-to-end</li>
+          <li>Python/Django or Node + React; tests and docs valued</li>
+          <li>Milestone-based comp; part-time, flexible</li>
+        </ul>
+        <p><a class="btn" href="mailto:info@swiftora.com?subject=Full-Stack%20Developer%20Application">Apply via email</a>
+           <span class="muted">or search “Swiftora” on Handshake.</span></p>
       </div>
     </div>
-  </main>
 
-  <!-- Feature cards -->
-  <section class="features-3">
-    <article class="feat">
-      <div class="icon-bubble">⚡</div>
-      <h4>Faster listings</h4>
-      <p>Turn a couple of details and photos into a clean, platform-ready draft.</p>
-    </article>
-    <article class="feat">
-      <div class="icon-bubble">🏷️</div>
-      <h4>Price with confidence</h4>
-      <p>Suggested prices informed by comparable sold items—no more guessing.</p>
-    </article>
-    <article class="feat">
-      <div class="icon-bubble">📈</div>
-      <h4>Know your ROI</h4>
-      <p>See cost, shipping, fees, and net profit at a glance for every item.</p>
-    </article>
-  </section>
+    <div class="card">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:info@swiftora.com">info@swiftora.com</a> · Based in Mullica Hill, NJ</p>
+      <p class="muted">This page is provided for employer verification and candidate information. Product details are not public yet.</p>
+    </div>
 
-  <!-- Signup -->
-  <section id="signup" class="signup">
-    <h2 style="margin:0 0 12px">Get early access</h2>
-    <p class="notice" style="margin:0 0 16px">Join the waitlist and we’ll notify you when live pricing + comps roll out.</p>
-
-    <form class="card" name="signup" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="signup" />
-      <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
-      <div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <label class="block-label">Name
-          <input type="text" name="name" autocomplete="name" />
-        </label>
-        <label class="block-label">Email
-          <input type="email" name="email" required autocomplete="email" />
-        </label>
-      </div>
-      <label class="block-label" style="margin-top:12px">Primary platform
-        <select name="platform">
-          <option value="Etsy">Etsy</option>
-          <option value="eBay">eBay</option>
-          <option value="Facebook Marketplace">Facebook Marketplace</option>
-          <option value="Multiple">Multiple</option>
-        </select>
-      </label>
-      <div class="actions" style="margin-top:16px;display:flex;gap:10px">
-        <button type="submit" class="btn primary">Join Waitlist</button>
-        <a class="btn ghost" href="/demo.html">Preview the Demo</a>
-      </div>
-    </form>
-  </section>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <p>&copy; <span id="y"></span> Swiftora LLC. All rights reserved. · <a href="/privacy.html">Privacy</a> · Build <span id="buildId"></span></p>
-  </footer>
-
-  <script>
-    // Year + build id
-    document.getElementById("y").textContent = new Date().getFullYear();
-    const bid = (window.__ASSET_VERSION__||"").toString();
-    document.getElementById("buildId").textContent = bid;
-
-    // Append version to internal links + optional flush flag
-    (function(){
-      const url = new URL(location.href);
-      if (url.searchParams.get("flush")==="1"){
-        try{ if('caches' in window){caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k))))} }catch{}
-        try{ if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()))} }catch{}
-      }
-      document.querySelectorAll('a[href^="/"]').forEach(a=>{
-        try{
-          const u=new URL(a.getAttribute("href"),location.origin);
-          if(u.origin===location.origin && !u.searchParams.get("v")){
-            u.searchParams.set("v",bid);
-            a.href=u.pathname+"?"+u.searchParams.toString()+(u.hash||"");
-          }
-        }catch{}
-      });
-    })();
-
-    // SW register
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/service-worker.js?v=" + (window.__ASSET_VERSION__||""));
-      });
-    }
-  </script>
+    <footer>
+      <span class="muted">© <script>document.write(new Date().getFullYear())</script> Swiftora LLC. All rights reserved.</span>
+    </footer>
+  </div>
 </body>
 </html>
