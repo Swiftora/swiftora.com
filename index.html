@@ -6,60 +6,129 @@
   <title>Swiftora LLC — About & Careers</title>
   <meta name="description" content="Swiftora LLC is a US-registered company building practical AI tools for online resellers. Private beta." />
   <meta name="robots" content="noindex, nofollow" />
-  <meta property="og:title" content="Swiftora LLC — About & Careers" />
-  <meta property="og:description" content="US-registered company building AI tools for online resellers. Remote roles. Private beta." />
   <style>
-    :root { --bg:#0f1115; --card:#151823; --text:#e7e9ee; --muted:#a7adba; --accent:#ff6a3d; }
+    :root{--bg:#0f1115;--panel:#151823;--text:#e7e9ee;--muted:#9aa3b2;--line:#212636;--accent:#ff6a3d}
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    .wrap{max-width:960px;margin:40px auto;padding:0 20px}
-    header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-    .brand{font-weight:800;letter-spacing:.2px}
-    .card{background:var(--card);border:1px solid #222636;border-radius:14px;padding:22px;margin:16px 0;box-shadow:0 6px 24px rgba(0,0,0,.24)}
-    h1{font-size:28px;margin:8px 0 4px}
-    h2{font-size:18px;margin:0 0 8px;color:var(--muted);font-weight:600}
-    p{margin:8px 0;color:#d7dbe6}
-    ul{margin:8px 0 0 18px;color:#d7dbe6}
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
-    footer{margin:28px 0;color:var(--muted);font-size:14px}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    @media (max-width:720px){.row{grid-template-columns:1fr}}
-    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #2a2f3e;background:#1a1f2d;color:var(--text);text-decoration:none}
-    .btn:hover{background:#1f2534}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    .wrap{max-width:1024px;margin:0 auto;padding:0 20px}
+    /* --- header / brandbar --- */
+    .brandbar{position:sticky;top:0;z-index:10;background:rgba(15,17,21,.9);backdrop-filter:saturate(120%) blur(6px);border-bottom:1px solid var(--line)}
+    .brandbar .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .lockup{display:flex;align-items:center;gap:12px}
+    .logo-badge{display:inline-flex;align-items:center;justify-content:center;height:48px;width:auto;padding:4px 6px;background:#0b0d12;border:1px solid var(--line);border-radius:10px;box-shadow:0 3px 12px rgba(0,0,0,.25)}
+    .logo{height:44px;width:auto;display:block}
+    #wordmark{display:none;font-weight:800;letter-spacing:.2px}
+    .brandname{font-weight:800;letter-spacing:.2px}
+    nav a{color:var(--text);text-decoration:none;margin-left:18px;font-weight:600}
+    nav a:hover{text-decoration:underline}
+    @media (max-width:720px){
+      .logo{height:36px}
+      nav a{margin-left:12px}
+    }
+    /* --- sections --- */
+    section{scroll-margin-top:80px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;margin:18px 0;box-shadow:0 6px 24px rgba(0,0,0,.24)}
+    h1{font-size:30px;margin:10px 0 4px}
+    h2{font-size:20px;color:var(--muted);margin:0 0 10px}
+    h3{margin:0 0 8px}
+    p{margin:8px 0;color:#dbe0ea}
+    ul{margin:8px 0 0 18px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    @media (max-width:900px){.row{grid-template-columns:1fr}}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#1a1f2d;color:var(--text);text-decoration:none;font-weight:600}
+    .btn:hover{background:#21283a}
     .muted{color:var(--muted)}
-    .logo{height:28px;width:auto;vertical-align:middle}
+    footer{padding:28px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--line);margin-top:22px}
     .kicker{font-size:14px;color:var(--muted)}
+    .trust{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+    .pill{border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--muted);font-size:13px}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <img src="/swiftora_logo_transparent.png" alt="Swiftora logo" class="logo" onerror="this.style.display='none'">
-      <span class="brand">Swiftora LLC</span>
-      <span class="kicker">US-registered • Remote-friendly • Private beta</span>
-    </header>
+  <header class="brandbar">
+    <div class="wrap inner">
+      <div class="lockup">
+        <span class="logo-badge">
+          <img id="logo" class="logo" src="/swiftora_logo_transparent.png" alt="Swiftora logo">
+        </span>
+        <span id="wordmark" class="brandname">Swiftora LLC</span>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#roles">Roles</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <div class="card">
+  <main class="wrap">
+    <section id="about" class="panel">
       <h1>About</h1>
       <p>Swiftora builds practical AI tools for online resellers—helping sellers price smarter, create listings faster, and track ROI.</p>
-      <p class="muted">We’re operating a lean, founder-led team. For verification or questions, email <a href="mailto:info@swiftora.com">info@swiftora.com</a>.</p>
-    </div>
+      <div class="trust">
+        <span class="pill">US-registered company</span>
+        <span class="pill">Remote-friendly</span>
+        <span class="pill">Paid assistant role</span>
+        <span class="pill">Private beta</span>
+      </div>
+      <p class="kicker">For verification or questions, email <a href="mailto:info@swiftora.com">info@swiftora.com</a>.</p>
+    </section>
 
-    <div class="row">
-      <div class="card">
-        <h2>Open Role: Executive Assistant &amp; Growth Coordinator (Remote · Part-Time · $20/hr)</h2>
+    <section id="roles" class="row">
+      <article class="panel">
+        <h2>Open Role</h2>
+        <h3>Executive Assistant &amp; Growth Coordinator (Remote · Part-Time · $20/hr)</h3>
         <ul>
           <li><strong>Admin-first:</strong> calendar, vendor follow-ups, weekly summaries</li>
           <li>Help build a new consumer brand from zero; simple content cadence + basic metrics</li>
           <li>Flexible 4–6 hrs/week · Initial 3-month term · Training on AI workflows provided</li>
         </ul>
         <p><a class="btn" href="mailto:info@swiftora.com?subject=Executive%20Assistant%20%26%20Growth%20Coordinator%20Application">Apply via email</a>
-           <span class="muted">or search “Swiftora” on Handshake.</span></p>
-      </div>
+           <span class="kicker"> or search “Swiftora” on Handshake.</span></p>
+      </article>
 
-      <div class="card">
-        <h2>Open Role: Full-Stack Developer (Remote · Equity/Milestones)</h2>
+      <article class="panel">
+        <h2>Open Role</h2>
+        <h3>Full-Stack Developer (Remote · Equity/Milestones)</h3>
         <ul>
           <li>Build small, production-quality features end-to-end</li>
-          <li>Python/Django or Node&nbsp;+&nbsp;React; tests and docs valued</li>
+          <li>Python/Django or Node + React; tests and docs valued</li>
+          <li>Milestone-based comp; part-time, flexible</li>
+        </ul>
+        <p><a class="btn" href="mailto:info@swiftora.com?subject=Full-Stack%20Developer%20Application">Apply via email</a>
+           <span class="kicker"> or search “Swiftora” on Handshake.</span></p>
+      </article>
+    </section>
+
+    <section id="contact" class="panel">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:info@swiftora.com">info@swiftora.com</a></p>
+      <p class="muted">This page is provided for employer verification and candidate information. Product details are not public yet. Swiftora LLC is an equal opportunity employer.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <script>document.write(new Date().getFullYear())</script> Swiftora LLC. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Fallbacks for the logo path -->
+  <script>
+    (function(){
+      const img = document.getElementById('logo');
+      const wordmark = document.getElementById('wordmark');
+      if(!img) return;
+      img.onerror = function(){
+        if(!img.dataset.triedAlt){
+          img.dataset.triedAlt = 1;
+          img.src = "/swiftora_logo_transparent v2.png"; // fallback file name
+        }else{
+          img.parentElement.style.display = "none";
+          wordmark.style.display = "inline-block";
+        }
+      };
+    })();
+  </script>
+</body>
+</html>
