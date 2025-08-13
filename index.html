@@ -60,6 +60,73 @@
 </head>
 
 <body>
+  <!-- ===== Swiftora Hero (Handshake-friendly) ===== -->
+<section id="hero" class="hero">
+  <div class="hero__inner">
+    <div class="hero__copy">
+      <span class="badge">Swiftora LLC</span>
+      <h1>AI-powered tools for online resellers</h1>
+      <p class="lead">
+        We help vintage, antique, and collectible sellers save time, optimize pricing, and track ROI—without revealing their trade secrets.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://www.linkedin.com/company/swiftora/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        <a class="btn btn-ghost" href="mailto:info@swiftora.com">Email us: info@swiftora.com</a>
+      </div>
+
+      <div class="founder">
+        <img src="/assets/founder-placeholder.jpg" alt="" class="founder__avatar" loading="lazy">
+        <p class="founder__blurb">
+          <strong>Founded by Eric Elder</strong> — a sales & technology leader focused on practical AI for small business sellers. Based in Mullica Hill, NJ, USA.
+        </p>
+      </div>
+    </div>
+
+    <!-- Decorative mock device (generic, not your UI) -->
+    <div class="hero__visual" aria-hidden="true">
+      <div class="device">
+        <div class="device__screen">
+          <div class="screen__top">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+          <div class="screen__content">
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Credibility / Connect ===== -->
+<section class="cred">
+  <div class="cred__grid">
+    <div>
+      <h2>What we do</h2>
+      <p>Swiftora builds AI-powered tools for online resellers—purpose-built for secondhand markets. Our aim is simple: automate listings, price smarter, and measure results.</p>
+    </div>
+    <div>
+      <h2>Company credentials</h2>
+      <ul class="list">
+        <li><strong>Legal entity:</strong> Swiftora LLC</li>
+        <li><strong>Founded:</strong> 2025</li>
+        <li><strong>Type:</strong> Privately held</li>
+        <li><strong>Location:</strong> Mullica Hill, NJ, United States</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Connect</h2>
+      <ul class="list">
+        <li><a href="https://www.linkedin.com/company/swiftora/" target="_blank" rel="noopener">LinkedIn: Swiftora</a></li>
+        <li><a href="mailto:info@swiftora.com">info@swiftora.com</a></li>
+      </ul>
+      <p class="note">We welcome opportunities to connect with students and emerging talent through platforms like Handshake.</p>
+    </div>
+  </div>
+</section>
+
   <header class="brandbar">
     <div class="wrap inner">
       <div class="lockup">
@@ -146,11 +213,33 @@
     </section>
   </main>
 
-  <footer>
-    <div class="wrap">
-      © <script>document.write(new Date().getFullYear())</script> Swiftora LLC. All rights reserved.
+ <footer class="site-footer">
+  <div class="wrap">
+    <div class="left">Swiftora LLC • Mullica Hill, NJ • <a href="mailto:info@swiftora.com">info@swiftora.com</a></div>
+    <div class="right">
+      <a href="https://www.linkedin.com/company/swiftora/" target="_blank" rel="noopener" aria-label="Swiftora on LinkedIn">
+        <!-- tiny inline SVG so no asset path issues -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.07C13.62 8.84 15.3 8 17.5 8 22.1 8 24 10.7 24 15.2V24h-5v-7.6c0-1.8-.03-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4V24H8z"/></svg>
+        LinkedIn
+      </a>
+      <span class="dot">•</span>
+      <a href="/privacy.html">Privacy</a>
+      <span class="dot">•</span>
+      <a href="/contact.html">Contact</a>
     </div>
-  </footer>
+  </div>
+</footer>
+
+<style>
+.site-footer{ background:#0b0d12; color:#b8bfd0; border-top:1px solid var(--line); }
+.site-footer .wrap{
+  max-width:1100px; margin:0 auto; padding:16px 20px;
+  display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+}
+.site-footer a{ color:#e7e9ee; text-decoration:none; }
+.site-footer .dot{ opacity:.45; margin:0 8px; }
+</style>
+
 
   <!-- Logo fallback: try a second filename, else just keep the brand text -->
   <script>
@@ -169,3 +258,4 @@
   </script>
 </body>
 </html>
+
