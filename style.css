@@ -8,7 +8,8 @@
   --ink:#222; --ink-2:#444; --muted:#6b7280;
   --bg:#fff; --bg-soft:#f7f8ff; --line:#e5e7eb;
   --shadow:0 8px 28px rgba(0,0,0,.08);
-  --radius:14px; --maxw:1200px;
+  --radius:14px; --maxw:1100px;
+  --gutter:20px;
 
   /* Brand/hero gradient accents */
   --violet:#6b4efc; --pink:#ff4fd8; --sunset:#ff8a3d;
@@ -27,23 +28,34 @@ body{
 img{max-width:100%;height:auto}
 a{text-decoration:none;color:inherit}
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+#content{padding:22px 0 44px}
 
 /* ================= Header ================= */
 .site-header{
   position:sticky; top:0; z-index:1000;
   display:flex; align-items:center; justify-content:space-between;
-  padding:10px 16px;
-  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  padding:16px 0;
+  background:linear-gradient(90deg, #FF6A2B 0%, #E85A5A 25%, #C44BC4 50%, #8E3AE6 75%, #6C2BD9 100%);
   color:#fff; box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
+.header-inner{
+  display:flex; align-items:center; justify-content:flex-start;
+  gap:16px; padding:12px 0;
+  width:100%;
+}
+.site-header .wrap{max-width:100%;margin:0;padding-left:0;padding-right:var(--gutter)}
+.site-header .header-inner{padding-left:0}
 .brand{display:flex;align-items:center;gap:12px}
 .brand img{
-  height:36px; width:auto; display:block;
-  background:var(--brand-chip-bg);
-  padding:4px 8px; border-radius:12px;
-  border:1px solid var(--brand-chip-border);
-  box-shadow:var(--shadow);
+  height:56px; width:auto; display:block;
+  background:rgba(255,255,255,.4);
+  padding:4px 10px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
 }
+.brand{margin-left:-48px;margin-right:auto}
+.nav{margin-left:auto; justify-content:flex-end}
 .brand-name{
   color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.18);
   font-weight:900; letter-spacing:.2px; font-size:clamp(22px,2.8vw,28px);
@@ -72,38 +84,50 @@ a{text-decoration:none;color:inherit}
 .btn.ghost:hover,.btn-ghost:hover{border-color:#b7bed6}
 
 /* ================= Hero (layout) ================= */
-.hero{
-  max-width:var(--maxw); margin:0 auto; padding:56px 16px;
-  display:grid; grid-template-columns:1.05fr .95fr; gap:36px;
+.hero-gradient{
+  position:relative; isolation:isolate; color:#fff;
+  width:100%;
+  margin:0;
+  border:0;
+  border-radius:0;
 }
-.hero-copy h1{font-size:clamp(28px,5.2vw,46px);font-weight:800;line-height:1.15;margin:0 0 12px}
-.hero-copy p{color:var(--ink-2);margin:0 0 16px;max-width:640px}
+.hero-gradient::before{
+  content:""; position:absolute; inset:-2%;
+  background:
+    radial-gradient(900px 600px at 15% 25%, rgba(108, 99, 255, 0.55), transparent 60%),
+    radial-gradient(900px 600px at 70% 40%, rgba(255, 79, 216, 0.45), transparent 60%),
+    radial-gradient(900px 600px at 95% 80%, rgba(255, 107, 53, 0.35), transparent 60%),
+    linear-gradient(120deg, #5B7CFF 0%, #6C63FF 30%, #FF4FD8 65%, #FF6B35 100%);
+  z-index:-2;
+}
+.hero-gradient::after{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(70% 45% at 50% 100%, rgba(0,0,0,.28), transparent 65%);
+  z-index:-1;
+}
+.hero{
+  max-width:var(--maxw); margin:0 auto; padding:64px var(--gutter);
+}
+.hero-grid{
+  display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;
+}
+.hero h1{
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-size:clamp(28px,5.2vw,46px);
+  font-weight:800;
+  line-height:1.15;
+  margin:0 0 12px;
+}
+.hero p{
+  font-size:16.5px;
+  line-height:1.6;
+}
 .hero-cta{display:flex;gap:10px;margin-bottom:8px}
 .bullets{color:var(--ink-2);padding-left:18px}
 .bullets li{margin:6px 0}
 
 /* Optional “Swiftora AI” micro-label */
 .hero-ai{font-weight:800;color:var(--secondary);margin:6px 0 2px}
-
-/* Gradient skin without overriding layout */
-.hero-gradient{
-  position:relative; isolation:isolate; color:#fff;
-  border-radius:24px; overflow:hidden;
-}
-.hero-gradient::before{
-  content:""; position:absolute; inset:-2%;
-  background:
-    radial-gradient(60% 80% at 10% 10%, rgba(255,79,216,.20), transparent 60%),
-    radial-gradient(50% 70% at 90% 10%, rgba(255,138,61,.18), transparent 60%),
-    linear-gradient(120deg, var(--violet) 0%, #6aa5ff 30%, var(--pink) 60%, var(--sunset) 100%);
-  z-index:-2;
-}
-.hero-gradient::after{
-  content:""; position:absolute; inset:0;
-  background: radial-gradient(60% 50% at 50% 100%, rgba(0,0,0,.35), transparent 60%);
-  z-index:-1;
-}
-.hero-gradient .hero-copy p{color:#fff;opacity:.92}
 
 /* Founder chip */
 .founder{ display:flex; align-items:center; gap:12px; margin-top:16px; color:#fff }
@@ -142,14 +166,14 @@ a{text-decoration:none;color:inherit}
 
 /* ================= Features / Differentiators ================= */
 .features{
-  max-width:var(--maxw); margin:0 auto; padding:16px 16px 40px;
+  max-width:var(--maxw); margin:0 auto; padding:16px var(--gutter) 40px;
   display:grid; gap:16px; grid-template-columns:repeat(3,minmax(0,1fr));
 }
 .feature{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
 .feature h3{margin-bottom:6px}
 .feature p{color:var(--ink-2)}
 .icon{font-size:22px;color:var(--secondary);margin-right:8px}
-.diff{max-width:var(--maxw);margin:0 auto 40px;display:grid;gap:12px;padding:0 16px}
+.diff{max-width:var(--maxw);margin:0 auto 40px;display:grid;gap:12px;padding:0 var(--gutter)}
 .diff h2{font-size:22px}
 .diff ul{margin-left:18px;color:var(--ink-2)}
 .diff li{margin:6px 0}
@@ -161,10 +185,10 @@ a{text-decoration:none;color:inherit}
   border-top:1px solid var(--line);
   backdrop-filter:saturate(1.2) blur(6px);
 }
-.sticky-cta .row{max-width:var(--maxw);margin:0 auto;padding:12px 16px;display:flex;gap:12px;justify-content:flex-end}
+.sticky-cta .row{max-width:var(--maxw);margin:0 auto;padding:12px var(--gutter);display:flex;gap:12px;justify-content:flex-end}
 
 /* ================= Signup ================= */
-.signup{max-width:980px;margin:0 auto;padding:48px 16px 72px}
+.signup{max-width:980px;margin:0 auto;padding:48px var(--gutter) 72px}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
@@ -179,7 +203,7 @@ a{text-decoration:none;color:inherit}
 .socials a{display:inline-flex;align-items:center;gap:6px;color:#5b21b6;font-weight:700}
 
 /* ================= Content (About) ================= */
-.content{max-width:980px;margin:0 auto;padding:40px 16px}
+.content{max-width:980px;margin:0 auto;padding:40px var(--gutter)}
 .content h1{font-size:clamp(26px,4.8vw,40px);margin-bottom:8px}
 .content h2{font-size:clamp(20px,3.8vw,26px);margin:22px 0 6px}
 .content p{color:var(--ink-2)}
@@ -187,14 +211,14 @@ a{text-decoration:none;color:inherit}
 .content li{margin:6px 0}
 
 /* ================= Demo / Wizard ================= */
-.app-container{max-width:1100px;margin:0 auto;padding:20px 16px 80px;background:#fff}
+.app-container{max-width:1100px;margin:0 auto;padding:20px var(--gutter) 80px;background:#fff}
 .progress{height:8px;background:#f1f2f6;border-radius:999px;overflow:hidden;border:1px solid var(--line)}
 .progress-bar{height:100%;background:linear-gradient(90deg,var(--secondary),var(--primary))}
 .stepper{display:flex;gap:8px;justify-content:center;margin:14px 0 6px}
 .dot{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);color:#666;font-weight:800}
 .dot.active{background:var(--secondary);color:#fff;border-color:transparent}
-.screen{display:none}
-.screen.active{display:block}
+.app-container .screen{display:none}
+.app-container .screen.active{display:block}
 .card.table{padding:0}
 .card{margin-bottom:16px}
 .grid-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -245,9 +269,10 @@ input[type="text"],input[type="number"],textarea,select{
 
 /* ================= Responsive ================= */
 @media (max-width:980px){
-  .site-header{padding:12px 16px}
+  .site-header{padding:12px 0}
   .site-nav{gap:16px;font-size:14px}
-  .hero{grid-template-columns:1fr;gap:16px;padding:32px 16px}
+  .hero{padding:32px var(--gutter)}
+  .hero-grid{grid-template-columns:1fr}
   .hero-art{order:-1}
   .features{grid-template-columns:1fr}
   .grid{grid-template-columns:1fr}
