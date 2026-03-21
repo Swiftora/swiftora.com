@@ -196,21 +196,12 @@ div[id] {
   gap: var(--sp-4);
 }
 
-/* Logo link pill — white bg ensures logo is readable over any page content */
-.header-inner > a:first-child {
-  display: flex;
-  align-items: center;
-  background-color: #FFFFFF;
-  padding: 6px 10px;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
-
-/* Logo — 44px height, no border, no circle */
+/* Logo — 44px height, no background, no border, no circle */
 .brand-logo {
   height: 44px;
   width: auto;
   display: block;
+  flex-shrink: 0;
   background: none;
   border: none;
   border-radius: 0;
@@ -1091,13 +1082,11 @@ div[id] {
   margin-bottom: 40px;
 }
 
-/* Footer logo — 28px height, white-tinted via filter */
+/* Footer logo — natural colors on dark background (orange icon + white wordmark) */
 .footer-brand-logo {
-  height: 28px;
+  height: 36px;
   width: auto;
   display: block;
-  filter: brightness(0) invert(1);
-  opacity: .88;
 }
 
 .footer-tagline {
