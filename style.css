@@ -1046,6 +1046,12 @@ div[id] {
 
 .form-submit:active { transform: translateY(1px); }
 
+.form-notice {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
 .form-success {
   display: none;
   background: rgba(34, 197, 94, .10);

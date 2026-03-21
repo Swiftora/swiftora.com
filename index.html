@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Swiftora — AI listing tool for vintage and resale sellers</title>
   <meta name="description" content="Swiftora turns photos into listing-ready copy and confident pricing for eBay, Etsy, Facebook Marketplace, and Ruby Lane sellers. Built for vintage, antique, and collectibles resellers." />
-  <meta name="keywords" content="reseller tools, vintage listing tool, eBay listing generator, Etsy listing tool, AI pricing tool, resale AI, antique seller, hobby seller tools" />
+  <meta name="keywords" content="reseller tools, vintage listing tool, eBay listing generator, Etsy listing AI, antique seller app, resale pricing tool, hobby seller, collectibles" />
   <link rel="canonical" href="https://www.swiftora.com/" />
   <meta property="og:title" content="Swiftora — Stop guessing what your items are worth" />
   <meta property="og:description" content="Swiftora turns photos into listing-ready copy and confident pricing in seconds. Built for vintage, collectibles, and antique sellers." />
@@ -13,12 +13,12 @@
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Swiftora — AI listing tool for resellers" />
-  <meta name="twitter:description" content="Photo → listing-ready copy and pricing confidence in seconds." />
+  <meta name="twitter:description" content="Photo to listing-ready copy and pricing confidence in seconds." />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/Logos/swiftora_icon_192x192.png" sizes="192x192" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -29,9 +29,10 @@
       <a href="index.html" aria-label="Swiftora home">
         <img class="brand-logo" src="Logos/swiftora_logo_transparent.png" alt="Swiftora" />
       </a>
-      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="hamburger-label" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
-      </button>
+      </label>
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
         <a href="index.html" class="active">Home</a>
         <a href="demo.html">Demo</a>
@@ -46,27 +47,27 @@
   <section class="hero-dark" id="top">
     <div class="wrap">
       <div class="hero-grid">
+
         <div>
           <div class="hero-eyebrow">AI-powered listing assistant</div>
           <h1 class="hero-h1">Stop guessing what your items are worth.</h1>
-          <p class="hero-sub">Swiftora turns photos into listing-ready copy and confident pricing — in seconds. Built for vintage, collectibles, and antique sellers.</p>
+          <p class="hero-sub">Swiftora turns photos into listing-ready copy and confident pricing — built for vintage, collectibles, and antique sellers.</p>
           <div class="hero-cta">
             <a class="btn btn-primary btn-lg" href="demo.html">Try the Live Demo</a>
-            <a class="btn btn-ghost-white btn-lg" href="#waitlist">Join the Waitlist</a>
+            <a class="btn btn-ghost btn-lg" href="#waitlist">Join the Waitlist</a>
           </div>
-          <p class="hero-note">Built for eBay · Etsy · Facebook Marketplace · Ruby Lane sellers</p>
+          <p class="hero-note">No credit card required · Early access is limited</p>
         </div>
-        <div class="hero-art">
+
+        <div class="hero-art" aria-hidden="true">
           <div class="phone-wrap">
-            <div class="phone" aria-hidden="true">
+            <div class="phone">
               <div class="phone-screen">
                 <div class="phone-progress-track">
                   <div class="phone-progress-fill"></div>
                 </div>
-                <div>
-                  <div class="phone-label">Swiftora AI · Generating listing</div>
-                  <div class="phone-generated-title">Vintage Fenton Hobnail Milk Glass Vase — 8", Ruffled Edge, 1950s, No Chips</div>
-                </div>
+                <div class="phone-label">Swiftora AI · Generating listing</div>
+                <div class="phone-generated-title">Vintage Fenton Hobnail Milk Glass Vase — 8&quot;, Ruffled Edge, 1950s, No Chips</div>
                 <div class="phone-divider"></div>
                 <div class="phone-label">Suggested Price</div>
                 <div class="phone-price-badge">$38 — $54</div>
@@ -90,14 +91,15 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ===== PROOF BAR ===== -->
-  <div class="proof-bar" aria-label="Platform compatibility">
+  <!-- ===== TRUST BAR ===== -->
+  <div class="proof-bar" role="complementary" aria-label="Platform compatibility">
     <div class="wrap proof-bar-inner">
-      <strong>Built for</strong>
+      <strong>Built for sellers on</strong>
       <span class="proof-dot" aria-hidden="true"></span>
       <span>eBay</span>
       <span class="proof-dot" aria-hidden="true"></span>
@@ -106,50 +108,48 @@
       <span>Facebook Marketplace</span>
       <span class="proof-dot" aria-hidden="true"></span>
       <span>Ruby Lane</span>
-      <span class="proof-dot" aria-hidden="true"></span>
-      <span>sellers</span>
     </div>
   </div>
 
   <main>
 
     <!-- ===== HOW IT WORKS ===== -->
-    <section class="section section-alt" id="how">
+    <section class="section" id="how">
       <div class="wrap">
         <div class="section-header centered">
           <div class="section-label">How it works</div>
-          <h2 class="section-h2">Photo to listing in three steps</h2>
-          <p class="section-sub">No spreadsheets. No research rabbit holes. Swiftora handles the heavy lifting so you can focus on sourcing.</p>
+          <h2 class="section-h2">From photo to listing in seconds</h2>
+          <p class="section-sub">No spreadsheets, no research rabbit holes. Swiftora handles the heavy lifting.</p>
         </div>
         <div class="steps-grid">
           <div class="step">
             <div class="step-num" aria-hidden="true">1</div>
-            <h3>Upload your photos</h3>
+            <h3>Upload photos</h3>
             <p>Add a few photos of your item and any details you know — brand, size, condition. That's it.</p>
           </div>
           <div class="step">
             <div class="step-num" aria-hidden="true">2</div>
             <h3>Swiftora identifies and prices</h3>
-            <p>Swiftora identifies key attributes, pulls sold comps, and gives you a pricing range with confidence signals — not a guess.</p>
+            <p>Swiftora identifies key attributes, pulls sold comps, and gives you a pricing range grounded in real data — not a guess.</p>
           </div>
           <div class="step">
             <div class="step-num" aria-hidden="true">3</div>
             <h3>Copy and post anywhere</h3>
-            <p>Get a ready-to-post listing draft with title, description, tags, and condition notes. Copy, paste, sell.</p>
+            <p>Get a ready-to-post listing with title, description, tags, and condition notes. Copy, paste, sell.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== FEATURES ===== -->
-    <section class="section" id="features">
+    <section class="section section-alt" id="features">
       <div class="wrap">
         <div class="section-header centered">
           <div class="section-label">What you get</div>
           <h2 class="section-h2">Everything a reseller actually needs</h2>
-          <p class="section-sub">Not a generic AI chatbot. A purpose-built tool for the way secondhand selling actually works.</p>
+          <p class="section-sub">Purpose-built for secondhand selling — not a generic AI tool repurposed for it.</p>
         </div>
-        <div class="cards-grid">
+        <div class="feature-grid">
           <div class="card">
             <div class="card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4V6Zm0 5h10v2H4v-2Zm0 5h16v2H4v-2Z"/></svg>
@@ -162,11 +162,11 @@
               <svg viewBox="0 0 24 24"><path d="M4 12h2.5l2.5-5 4 10 2.5-5H20v2h-3.5l-3 6-4-10-1.5 3H4v-1Z"/></svg>
             </div>
             <h3>Pricing confidence from real comps</h3>
-            <p>Suggested ranges grounded in actual sold data, not guesswork. See the rationale so you know you're not leaving money on the table.</p>
+            <p>Suggested ranges grounded in actual sold data. See the rationale so you know you're not leaving money on the table.</p>
           </div>
           <div class="card">
             <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 5H17M9 19a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm10 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M4 18h16v2H4v-2Zm1-4 4-4 3 3 6-6 1.5 1.5-7.5 7.5-3-3-2.5 2.5L5 14Z"/></svg>
             </div>
             <h3>ROI built in</h3>
             <p>Track cost vs. sale outcome across your inventory. Know which categories are worth your time — and which aren't.</p>
@@ -180,26 +180,28 @@
       <div class="wrap">
         <div class="section-header centered">
           <div class="section-label">Pricing</div>
-          <h2 class="section-h2 section-h2-white">Simple, seller-friendly pricing.</h2>
-          <p class="section-sub-white">Built for real sellers at every volume — from side-hustle to serious reseller.</p>
+          <h2 class="section-h2 section-h2-white">Simple pricing for every seller.</h2>
+          <p class="section-sub-white">From side-hustle to serious reseller — one plan for every volume.</p>
         </div>
         <div class="pricing-grid">
+
           <div class="price-card">
-            <div class="price-tier-label">Tier 1</div>
+            <div class="price-tier-label">Starter</div>
             <div class="price-name">Starter</div>
-            <div class="price-reveal">Pricing revealed at launch</div>
+            <span class="price-reveal">Pricing revealed at launch</span>
             <ul class="price-features">
               <li>Photo-to-listing workflow</li>
               <li>Pricing guidance with comps</li>
               <li>Saved drafts and history</li>
               <li>Basic ROI tracking</li>
             </ul>
-            <a href="#waitlist" class="btn btn-ghost-white btn-sm">Join Waitlist</a>
+            <a href="#waitlist" class="btn btn-ghost btn-sm">Join Waitlist</a>
           </div>
+
           <div class="price-card featured">
-            <div class="price-tier-label">Tier 2 — Most Popular</div>
+            <div class="price-tier-label">Most Popular</div>
             <div class="price-name">Seller</div>
-            <div class="price-reveal">Pricing revealed at launch</div>
+            <span class="price-reveal">Pricing revealed at launch</span>
             <ul class="price-features">
               <li>Everything in Starter</li>
               <li>Higher monthly volume</li>
@@ -208,20 +210,22 @@
             </ul>
             <a href="#waitlist" class="btn btn-primary btn-sm">Join Waitlist</a>
           </div>
+
           <div class="price-card">
-            <div class="price-tier-label">Tier 3</div>
+            <div class="price-tier-label">Scale</div>
             <div class="price-name">Scale</div>
-            <div class="price-reveal">Pricing revealed at launch</div>
+            <span class="price-reveal">Pricing revealed at launch</span>
             <ul class="price-features">
               <li>Everything in Seller</li>
               <li>Bulk workflows and templates</li>
               <li>Social content packs</li>
-              <li>API access (integrations)</li>
+              <li>API access for integrations</li>
             </ul>
-            <a href="#waitlist" class="btn btn-ghost-white btn-sm">Join Waitlist</a>
+            <a href="#waitlist" class="btn btn-ghost btn-sm">Join Waitlist</a>
           </div>
+
         </div>
-        <p class="pricing-footnote">Pricing revealed at launch — early access members get first look and locked-in rates.</p>
+        <p class="pricing-footnote">Early access members get first look and locked-in rates at launch.</p>
       </div>
     </section>
 
@@ -233,7 +237,7 @@
           <h2 class="section-h2">Be one of the first sellers to get access.</h2>
           <p class="section-sub">We're keeping early access limited. Drop your details and we'll reach out personally.</p>
         </div>
-        <form class="waitlist-form-wrap" id="waitlist-form" method="POST" action="thank-you.html" novalidate>
+        <form class="waitlist-form-wrap" id="waitlist-form" novalidate>
           <div class="form-row-2">
             <div class="form-field">
               <label class="form-label" for="wl-name">Your name</label>
@@ -260,7 +264,7 @@
             <input class="form-input" type="text" id="wl-items" name="what_you_sell" placeholder="e.g. vintage ceramics, sports cards, antique furniture…" />
           </div>
           <button class="btn btn-primary btn-lg btn-full" type="submit">Claim My Spot →</button>
-          <p class="text-center text-muted" style="font-size:13px">No spam, ever. We'll only reach out about Swiftora.</p>
+          <p class="form-notice">No spam, ever. We'll only reach out about Swiftora.</p>
         </form>
         <div class="form-success" id="waitlist-success" aria-live="polite">
           ✓ You're on the list! We'll be in touch when early access opens.
@@ -309,61 +313,48 @@
   </footer>
 
   <script>
-    // ---- Hamburger ----
-    const hamburger = document.getElementById('hamburger');
-    const nav = document.getElementById('site-nav');
-    hamburger.addEventListener('click', () => {
-      const open = hamburger.classList.toggle('is-open');
-      nav.classList.toggle('is-open', open);
-      hamburger.setAttribute('aria-expanded', open);
-    });
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
-        hamburger.classList.remove('is-open');
-        nav.classList.remove('is-open');
-        hamburger.setAttribute('aria-expanded', 'false');
-      }
-    });
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      hamburger.classList.remove('is-open');
-      nav.classList.remove('is-open');
-      hamburger.setAttribute('aria-expanded', 'false');
-    }));
+    window.__V = 'v2026-03-20-02';
 
     // ---- Footer year ----
     document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-    // ---- Waitlist form: save to localStorage, then redirect ----
+    // ---- Waitlist form: save to localStorage then redirect ----
     const form = document.getElementById('waitlist-form');
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
-      const name  = form.name.value.trim();
-      const email = form.email.value.trim();
-      if (!name || !email) {
-        const missing = !name ? form.name : form.email;
-        missing.focus();
-        missing.style.borderColor = '#ef4444';
-        return;
-      }
+      const name  = document.getElementById('wl-name').value.trim();
+      const email = document.getElementById('wl-email').value.trim();
+
+      if (!name) { focusError(document.getElementById('wl-name')); return; }
+      if (!email) { focusError(document.getElementById('wl-email')); return; }
+
       const entry = {
-        name,
-        email,
-        platform:      form.platform.value,
-        what_you_sell: form.what_you_sell.value.trim(),
+        name:          name,
+        email:         email,
+        platform:      document.getElementById('wl-platform').value,
+        what_you_sell: document.getElementById('wl-items').value.trim(),
         timestamp:     new Date().toISOString(),
         source:        'homepage'
       };
+
       try {
-        const existing = JSON.parse(localStorage.getItem('swiftora_waitlist') || '[]');
-        existing.push(entry);
-        localStorage.setItem('swiftora_waitlist', JSON.stringify(existing));
+        var list = JSON.parse(localStorage.getItem('swiftora_waitlist') || '[]');
+        list.push(entry);
+        localStorage.setItem('swiftora_waitlist', JSON.stringify(list));
       } catch (_) {}
+
       window.location.href = 'thank-you.html';
     });
-    // Reset border on input
-    form.querySelectorAll('.form-input').forEach(inp => {
-      inp.addEventListener('input', () => inp.style.borderColor = '');
-    });
+
+    function focusError(el) {
+      el.focus();
+      el.style.borderColor = '#ef4444';
+      el.addEventListener('input', function reset() {
+        el.style.borderColor = '';
+        el.removeEventListener('input', reset);
+      });
+    }
   </script>
+
 </body>
 </html>
