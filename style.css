@@ -312,7 +312,7 @@ div[id] {
 .site-nav a {
   font-size: 15px;
   font-weight: 500;
-  color: var(--text);
+  color: #111111;
   padding: var(--sp-2) var(--sp-3);
   border-radius: 10px;
   white-space: nowrap;
@@ -320,12 +320,12 @@ div[id] {
 }
 
 .site-nav a:hover {
-  color: var(--orange);
+  color: #FF6B35;
   background: rgba(255, 107, 53, .06);
 }
 
 .site-nav a.active {
-  color: var(--orange);
+  color: #FF6B35;
   font-weight: 700;
 }
 
