@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Swiftora — Built for Secondhand Sellers</title>
-  <meta name="description" content="Swiftora is purpose-built for vintage, antique, and resale sellers. Learn our story, who we're building for, and what's coming next." />
+  <meta name="description" content="Swiftora is purpose-built for vintage, antique, and resale sellers. Every item is unique. We're building the tool to match." />
   <link rel="canonical" href="https://www.swiftora.com/about.html" />
   <link rel="icon" href="/Logos/swiftora_icon_192x192.png" sizes="192x192" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -20,9 +20,10 @@
       <a href="index.html" aria-label="Swiftora home">
         <img class="brand-logo" src="Logos/swiftora_logo_transparent.png" alt="Swiftora" />
       </a>
-      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="hamburger-label" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
-      </button>
+      </label>
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
         <a href="index.html">Home</a>
         <a href="demo.html">Demo</a>
@@ -36,8 +37,9 @@
   <!-- ===== HERO ===== -->
   <section class="about-hero">
     <div class="wrap about-hero-inner">
+      <div class="section-label">About Swiftora</div>
       <h1>Built for the way secondhand selling actually works.</h1>
-      <p>Condition, era, provenance, and quirks matter. Swiftora is purpose-built for vintage and resale — not repurposed for it.</p>
+      <p>Most tools are made for new retail. Secondhand is different.</p>
     </div>
   </section>
 
@@ -46,51 +48,100 @@
     <!-- ===== STORY ===== -->
     <section class="section">
       <div class="wrap">
-        <div class="section-label">Our story</div>
-        <h2 class="section-h2">Why we're building this</h2>
-        <div class="about-story">
-          <p>
-            Most listing tools are built around new retail products — fixed SKUs, standardized descriptions, predictable pricing. Secondhand is completely different. Every item has a unique history. Condition, maker marks, era, and small details that buyers care deeply about all change the equation. Generic AI tools don't know the difference between a valuable Fenton vase and a common dime-store piece.
-          </p>
-          <p>
-            Swiftora is being built by sellers, for sellers. We're building a tool that understands the vocabulary of vintage and resale — one that can identify an item, pull real sold comps, and write a listing that actually converts. Not a chatbot you have to wrestle with, but a focused workflow that gets you from photos to posting in minutes.
-          </p>
-          <p>
-            The goal is simple: give independent sellers the kind of pricing confidence and listing speed that previously only professional resellers with years of experience could access.
-          </p>
+        <div class="about-story-layout">
+          <div>
+            <div class="section-label">Our story</div>
+            <h2 class="section-h2">Why we're building this</h2>
+          </div>
+          <div class="about-story">
+            <p>Swiftora exists because listing vintage and resale items is genuinely hard. Every item is unique. Condition, era, and quirks matter. Pricing requires research most sellers don't have time for.</p>
+            <p>Generic AI tools don't know the difference between a valuable Fenton vase and a common dime-store piece. They're built around fixed SKUs and standardized descriptions — the opposite of secondhand.</p>
+            <p>We're building the tool we wish existed: one that understands the vocabulary of vintage and resale, pulls real sold comps, and writes listings that actually convert — without the research rabbit hole.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== ICP ===== -->
+    <!-- ===== WHO IT'S FOR ===== -->
     <section class="section section-alt">
       <div class="wrap">
-        <div class="section-header">
-          <div class="section-label">Ideal customer</div>
-          <h2 class="section-h2">Who Swiftora is for</h2>
-          <p class="section-sub">If you're selling secondhand items and spending too much time on listings and pricing, Swiftora is for you.</p>
+        <div class="section-header centered">
+          <div class="section-label">Who it's for</div>
+          <h2 class="section-h2">Built for every kind of secondhand seller</h2>
+          <p class="section-sub">If you're spending too much time on listings and pricing, Swiftora is for you.</p>
         </div>
         <div class="icp-grid">
+
           <div class="icp-card">
-            <div class="icp-emoji" aria-hidden="true">🔍</div>
+            <div class="icp-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm0 10H4V9h16v8ZM6 5h12v2H6V5Z"/></svg>
+            </div>
             <h3>Side-hustle flippers</h3>
-            <p>Thrift store and garage sale finds. List faster on nights and weekends without losing hours to research.</p>
+            <p>Turning weekend finds into income. List faster on nights and weekends without losing hours to research.</p>
           </div>
+
           <div class="icp-card">
-            <div class="icp-emoji" aria-hidden="true">🏺</div>
+            <div class="icp-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18A9 9 0 0 0 12 3Zm0 2a7 7 0 1 1 0 14A7 7 0 0 1 12 5Zm0 2a5 5 0 0 0-5 5h2a3 3 0 0 1 3-3V7Zm0 4a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"/></svg>
+            </div>
             <h3>Vintage and antique sellers</h3>
-            <p>Ceramics, glass, furniture, textiles. Get accurate pricing from real comps, not guesswork.</p>
+            <p>Every item unique, every listing different. Get accurate pricing from real comps — not guesswork.</p>
           </div>
+
           <div class="icp-card">
-            <div class="icp-emoji" aria-hidden="true">🃏</div>
+            <div class="icp-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2ZM4 6h16v2H4V6Zm0 12V10h16v8H4Zm2-5h4v2H6v-2Zm6 0h4v2h-4v-2Z"/></svg>
+            </div>
             <h3>Collectors who sell</h3>
-            <p>Cards, games, memorabilia, comics. Know what's worth listing and how to price it before you post.</p>
+            <p>You know your items inside and out — but not always what they're worth today. Know before you post.</p>
           </div>
+
           <div class="icp-card">
-            <div class="icp-emoji" aria-hidden="true">🏠</div>
+            <div class="icp-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 13h2v7H3v-7Zm4-4h2v11H7V9Zm4-5h2v16h-2V4Zm4 3h2v13h-2V7Zm4 4h2v9h-2v-9Z"/></svg>
+            </div>
             <h3>Estate sale resellers</h3>
-            <p>High volume, varied inventory, time pressure. Batch through items faster with consistent, quality listings.</p>
+            <p>Volume and speed matter. Batch through varied inventory faster with consistent, quality listings every time.</p>
           </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WHAT SWIFTORA DOES ===== -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-header centered">
+          <div class="section-label">What you get</div>
+          <h2 class="section-h2">Everything a reseller actually needs</h2>
+          <p class="section-sub">Purpose-built for secondhand selling — not a generic AI tool repurposed for it.</p>
+        </div>
+        <div class="feature-grid">
+
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4V6Zm0 5h10v2H4v-2Zm0 5h16v2H4v-2Z"/></svg>
+            </div>
+            <h3>Listing drafts in seconds</h3>
+            <p>Titles, descriptions, tags, and condition notes — ready to copy and paste into any marketplace. Never stare at a blank listing form again.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 12h2.5l2.5-5 4 10 2.5-5H20v2h-3.5l-3 6-4-10-1.5 3H4v-1Z"/></svg>
+            </div>
+            <h3>Pricing confidence from real comps</h3>
+            <p>Suggested ranges grounded in actual sold data. See the rationale so you know you're not leaving money on the table.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 18h16v2H4v-2Zm1-4 4-4 3 3 6-6 1.5 1.5-7.5 7.5-3-3-2.5 2.5L5 14Z"/></svg>
+            </div>
+            <h3>ROI built in</h3>
+            <p>Track cost vs. sale outcome across your inventory. Know which categories are worth your time — and which aren't.</p>
+          </div>
+
         </div>
       </div>
     </section>
@@ -99,11 +150,11 @@
     <section class="section section-dark">
       <div class="wrap text-center">
         <div class="section-label">Get started</div>
-        <h2 class="section-h2 section-h2-white">See it in action — or get in line.</h2>
-        <p class="section-sub-white" style="margin: 0 auto 32px;">Try the live demo now, or join the waitlist to be first in the door when we launch.</p>
-        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <h2 class="section-h2 section-h2-white">Try the demo, then join the waitlist.</h2>
+        <p class="section-sub-white">See what Swiftora does in 60 seconds, then get in line for early access.</p>
+        <div class="about-cta-buttons">
           <a href="demo.html" class="btn btn-primary btn-lg">Try the Live Demo</a>
-          <a href="index.html#waitlist" class="btn btn-ghost-white btn-lg">Join the Waitlist</a>
+          <a href="index.html#waitlist" class="btn btn-ghost btn-lg">Join the Waitlist</a>
         </div>
       </div>
     </section>
@@ -149,21 +200,9 @@
   </footer>
 
   <script>
-    const hamburger = document.getElementById('hamburger');
-    const nav = document.getElementById('site-nav');
-    hamburger.addEventListener('click', () => {
-      const open = hamburger.classList.toggle('is-open');
-      nav.classList.toggle('is-open', open);
-      hamburger.setAttribute('aria-expanded', open);
-    });
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
-        hamburger.classList.remove('is-open');
-        nav.classList.remove('is-open');
-        hamburger.setAttribute('aria-expanded', 'false');
-      }
-    });
+    window.__V = 'v2026-03-20-02';
     document.getElementById('footer-year').textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>

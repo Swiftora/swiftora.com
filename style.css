@@ -1535,9 +1535,24 @@ div[id] {
 
 .about-hero p { font-size: 18px; color: rgba(255, 255, 255, .70); max-width: 52ch; }
 
-.about-story { font-size: 17px; line-height: 1.78; color: var(--muted); max-width: 66ch; }
+.about-story-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.about-story { font-size: 17px; line-height: 1.78; color: var(--muted); }
 .about-story p { margin-bottom: var(--sp-5); }
 .about-story p:last-child { margin-bottom: 0; }
+
+.about-cta-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
 
 /* ICP grid */
 .icp-grid {
@@ -1564,6 +1579,22 @@ div[id] {
 .icp-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
 
 .icp-emoji { font-size: 30px; }
+
+.icp-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 107, 53, .10);
+  border: 1px solid rgba(255, 107, 53, .18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+
+.icp-icon svg { width: 24px; height: 24px; fill: currentColor; }
+
 .icp-card h3 { font-size: 15px; font-weight: 700; }
 .icp-card p  { font-size: 13px; color: var(--muted); line-height: 1.55; }
 
@@ -1770,7 +1801,8 @@ div[id] {
   .footer-grid   { grid-template-columns: 1fr; gap: 28px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
 
-  /* About ICP */
+  /* About */
+  .about-story-layout { grid-template-columns: 1fr; gap: 28px; }
   .icp-grid { grid-template-columns: repeat(2, 1fr); }
 
   /* Demo */
