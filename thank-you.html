@@ -1,35 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Thank You – Swiftora</title>
-  <link rel="icon" href="swiftora_logo_transparent v2.png">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>You're on the list — Swiftora</title>
+  <meta name="description" content="Thank you for joining the Swiftora waitlist. We'll reach out personally when early access opens." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/Logos/swiftora_icon_192x192.png" sizes="192x192" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="logo">
-      <!-- Only the brand name in the header -->
-      <a href="index.html"><span>Swiftora</span></a>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" role="banner">
+    <div class="wrap header-inner">
+      <a href="index.html" aria-label="Swiftora home">
+        <img class="brand-logo" src="Logos/swiftora_logo_transparent.png" alt="Swiftora" />
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="demo.html">Demo</a>
+        <a href="about.html">About</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="index.html#waitlist" class="nav-cta">Get Early Access</a>
+      </nav>
     </div>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="demo.html">Demo</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-      </ul>
-    </nav>
   </header>
-  <main class="content-section">
-    <h1>🎉 You're on the list!</h1>
-    <p>Thank you for signing up — we’ll be in touch as soon as early access opens.</p>
-    <p><a href="index.html">← Back to Home</a></p>
+
+  <main>
+    <div class="thankyou-wrap">
+      <div class="thankyou-inner">
+        <div class="thankyou-icon" aria-hidden="true">🎉</div>
+        <h1>You're on the list!</h1>
+        <p>
+          Thanks for signing up for Swiftora early access. We're keeping this cohort small and reaching out personally — you'll hear from us when the doors open.
+        </p>
+        <p>
+          In the meantime, try the live demo to see what Swiftora already does.
+        </p>
+        <div class="thankyou-links">
+          <a href="demo.html" class="btn btn-primary">Try the Live Demo</a>
+          <a href="index.html" class="btn btn-secondary">Back to Home</a>
+        </div>
+      </div>
+    </div>
   </main>
+
+  <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
-    <p>&copy; 2025 Swiftora. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <img class="footer-brand-logo" src="Logos/swiftora_logo_transparent.png" alt="Swiftora" loading="lazy" />
+          <p class="footer-tagline">List faster. Price smarter.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="demo.html">Live Demo</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="about.html">About</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="mailto:info@swiftora.com">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="footer-year">2026</span> Swiftora LLC · All rights reserved</span>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('site-nav');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('is-open');
+      nav.classList.toggle('is-open', open);
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
+        hamburger.classList.remove('is-open');
+        nav.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

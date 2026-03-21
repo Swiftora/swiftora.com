@@ -1,4 +1,4 @@
-// Swiftora SW v2025-08-09-16 — network only (no app cache)
+// Swiftora SW v2026-03-20-01 — network only (no app cache)
 // Goal: avoid stale HTML/JS; still give us SW lifecycle control.
 
 self.addEventListener('install', (event) => {
