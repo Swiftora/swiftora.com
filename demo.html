@@ -37,35 +37,44 @@
   <!-- ===== PAGE HERO ===== -->
   <div class="demo-page-hero">
     <h1>See Swiftora in action</h1>
-    <p>Describe any vintage or resale item and watch Swiftora build a complete listing.</p>
+    <p>Upload photos of any vintage or resale item and watch Swiftora build a complete listing.</p>
   </div>
 
   <!-- ===== INPUT ===== -->
   <div class="demo-input-section">
-    <div class="demo-input-row">
-      <textarea
-        class="demo-textarea"
-        id="item-input"
-        placeholder="Describe your item — e.g. amber glass Fenton vase, 9 inches, ribbed, 1960s, no chips. The more detail, the better the output."
-        rows="3"
-        aria-label="Item description"
-      ></textarea>
-      <button class="btn btn-primary btn-lg" id="generate-btn" type="button">
-        Generate Listing
-      </button>
-    </div>
 
-    <label class="demo-upload-area" id="upload-area" tabindex="0" role="button" aria-label="Upload item photos">
+    <!-- Step 1: Photo upload (primary) -->
+    <label class="demo-upload-area demo-upload-primary" id="upload-area" tabindex="0" role="button" aria-label="Upload item photos">
       <input type="file" id="photo-input" accept="image/*" multiple />
       <div class="upload-icon-wrap" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M12 3v13M8 7l4-4 4 4"/></svg>
       </div>
       <div class="upload-label">
-        <strong>Add photos (optional)</strong> — drag &amp; drop or click to browse. Multiple files supported.
+        <strong>Drop photos here or click to upload</strong>
+        <span>Front, back, base, and close-up work best. Multiple files supported.</span>
       </div>
     </label>
 
     <div class="thumb-grid" id="thumb-grid" aria-label="Uploaded photo thumbnails"></div>
+
+    <!-- Step 2: Optional text details -->
+    <div class="demo-details-row">
+      <textarea
+        class="demo-textarea"
+        id="item-input"
+        placeholder="Add any details you know (optional) — brand, size, era, condition"
+        rows="2"
+        aria-label="Additional item details"
+      ></textarea>
+    </div>
+
+    <!-- Step 3: Generate -->
+    <div class="demo-generate-row">
+      <button class="btn btn-primary btn-lg demo-generate-btn" id="generate-btn" type="button">
+        Generate Listing
+      </button>
+    </div>
+
   </div>
 
   <!-- ===== OUTPUT ===== -->
@@ -75,7 +84,7 @@
     <div class="output-card" id="output-analyzing" hidden>
       <div class="output-loading">
         <div class="spinner" aria-hidden="true"></div>
-        <span>Swiftora is analyzing your item…</span>
+        <span>Swiftora is reading your photos…</span>
       </div>
     </div>
 

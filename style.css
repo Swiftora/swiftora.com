@@ -196,9 +196,10 @@ div[id] {
   gap: var(--sp-4);
 }
 
-/* Logo — 44px height, no background, no border, no circle */
+/* Logo — 48px height, clean display, no wrapper styling */
+.site-header .logo img,
 .brand-logo {
-  height: 44px;
+  height: 48px;
   width: auto;
   display: block;
   flex-shrink: 0;
@@ -207,6 +208,16 @@ div[id] {
   border-radius: 0;
   padding: 0;
   box-shadow: none;
+}
+
+/* Logo link — no decoration, no background */
+.header-inner > a:first-child {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  background: none;
+  padding: 0;
+  border-radius: 0;
 }
 
 /* Hidden checkbox for CSS-only hamburger */
@@ -1082,11 +1093,13 @@ div[id] {
   margin-bottom: 40px;
 }
 
-/* Footer logo — natural colors on dark background (orange icon + white wordmark) */
+/* Footer logo — white on dark background via filter (intentional) */
 .footer-brand-logo {
   height: 36px;
   width: auto;
   display: block;
+  filter: brightness(0) invert(1);
+  opacity: .90;
 }
 
 .footer-tagline {
@@ -1217,18 +1230,66 @@ div[id] {
   transition: border-color .2s, background .2s;
 }
 
+/* Primary (photo-first) upload zone — taller, more prominent */
+.demo-upload-primary {
+  margin-top: 0;
+  padding: 40px var(--sp-8);
+  flex-direction: column;
+  text-align: center;
+  border-color: rgba(255, 107, 53, .30);
+  background: rgba(255, 107, 53, .02);
+  gap: var(--sp-3);
+}
+
+.demo-upload-primary .upload-icon-wrap svg {
+  width: 40px;
+  height: 40px;
+}
+
+.demo-upload-primary .upload-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.demo-upload-primary .upload-label span {
+  font-size: 13px;
+  color: var(--muted);
+}
+
 .demo-upload-area:hover {
   border-color: var(--orange);
-  background: rgba(255, 107, 53, .03);
+  background: rgba(255, 107, 53, .04);
 }
 
 .demo-upload-area input { display: none; }
 
-.upload-icon-wrap { color: var(--muted); flex-shrink: 0; }
-.upload-icon-wrap svg { width: 24px; height: 24px; fill: currentColor; }
+.upload-icon-wrap { color: var(--orange); flex-shrink: 0; }
+.upload-icon-wrap svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
 .upload-label { font-size: 14px; color: var(--muted); }
-.upload-label strong { color: var(--text); font-weight: 600; }
+.upload-label strong { color: var(--text); font-weight: 600; display: block; font-size: 15px; margin-bottom: 2px; }
+
+/* Optional details row */
+.demo-details-row {
+  margin-top: var(--sp-4);
+}
+
+.demo-details-row .demo-textarea {
+  min-height: 56px;
+  border-color: var(--stroke);
+}
+
+/* Generate button row */
+.demo-generate-row {
+  margin-top: var(--sp-4);
+  display: flex;
+}
+
+.demo-generate-btn {
+  width: 100%;
+  justify-content: center;
+}
 
 .thumb-grid {
   display: flex;
