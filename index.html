@@ -502,21 +502,21 @@
     <div class="hero">
       <div class="wrap hero-grid">
       <div class="hero-panel">
-        <h1>List faster. Price smarter. Without becoming a full-time reseller.</h1>
+        <h1>Know what to charge. List it in minutes.</h1>
         <p>
-          Swiftora turns a few photos into listing-ready copy and pricing guidance—so you can sell vintage, collectibles, games, cards, and more with confidence.
+          Swiftora turns your photos into a priced, ready-to-post listing—no research rabbit holes, no pricing guesswork. Built for hobby sellers who list nights and weekends.
         </p>
         <div class="pill-strip">
-          <span>Built for hobby sellers</span>
-          <span>No complex workflows</span>
-          <span>Works with your existing marketplaces</span>
+          <span>Stop underpricing your finds</span>
+          <span>Save 45+ min per listing</span>
+          <span>Etsy · eBay · Facebook Marketplace</span>
         </div>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#contact" id="hero-waitlist-btn">Join the Waitlist</a>
-          <a class="btn btn-ghost" href="#how">See how it works</a>
+          <a class="btn btn-ghost" href="#demo">Try the demo</a>
         </div>
         <div class="hero-small">
-          Built for casual and growing sellers. No complex workflows. Just better listings—fast.
+          From side-hustle to serious seller — Swiftora grows with you.
         </div>
       </div>
 
@@ -634,30 +634,38 @@
       </p>
     </section>
 
-    <section class="panel">
-      <div class="section-title">Example output</div>
-      <div class="example-card">
-        <div class="example-header">
-          <strong>Suggested listing draft</strong>
-          <span class="example-pill">Confidence: Medium</span>
-        </div>
-        <div class="example-grid">
-          <div class="example-box">
-            <div class="metric-label">Suggested title</div>
-            <div class="metric-value">Vintage Mid-Century Ceramic Vase, 8&quot; Tall</div>
+    <section class="panel" id="demo">
+      <div class="section-title">Try it — type any item</div>
+      <p class="muted" style="margin-bottom:14px;">Type what you're selling and see the kind of output Swiftora generates.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <input type="text" id="demo-item-input" placeholder="e.g. vintage pyrex bowl, Pokemon card lot, 1980s Atari game…" autocomplete="off" style="flex:1;min-width:220px;padding:12px;border-radius:12px;border:1px solid var(--stroke);font-size:14px;font-family:inherit" />
+        <button class="btn btn-primary" id="demo-run-btn" type="button" style="background:var(--brand-orange);color:#fff;border-color:var(--brand-orange);white-space:nowrap">Generate</button>
+      </div>
+      <div id="demo-output" hidden style="margin-top:16px">
+        <div class="example-card">
+          <div class="example-header">
+            <strong id="demo-category-label">—</strong>
+            <span class="example-pill" id="demo-confidence-pill">Confidence: Medium-High</span>
+          </div>
+          <div class="example-grid">
+            <div class="example-box">
+              <div class="metric-label">Suggested title</div>
+              <div class="metric-value" id="demo-title">—</div>
+            </div>
+            <div class="example-box">
+              <div class="metric-label">Suggested price range</div>
+              <div class="metric-value" id="demo-price" style="color:#1a7a47;font-weight:800">—</div>
+            </div>
           </div>
           <div class="example-box">
-            <div class="metric-label">Suggested price range</div>
-            <div class="metric-value">$38–$52</div>
+            <div class="metric-label">Condition summary</div>
+            <ul class="checklist" id="demo-condition"></ul>
           </div>
-        </div>
-        <div class="example-box">
-          <div class="metric-label">Condition summary</div>
-          <ul class="checklist">
-            <li>No chips or cracks visible.</li>
-            <li>Light surface wear consistent with age.</li>
-            <li>Maker mark present on base.</li>
-          </ul>
+          <div class="example-box" style="margin-top:10px">
+            <div class="metric-label">Suggested tags</div>
+            <div id="demo-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"></div>
+          </div>
+          <p style="margin-top:12px;font-size:12px;color:var(--muted)">Preview only. Real outputs are grounded in live sold comps and your actual item photos.</p>
         </div>
       </div>
     </section>
@@ -668,25 +676,21 @@
         <div>
           <div class="contact-title">Get early access</div>
           <p>
-            Join the waitlist for early access to Swiftora.
+            Be among the first to try Swiftora when we launch. We’ll reach out with access details.
           </p>
-          <div class="contact-actions">
-            <button class="btn btn-dark" type="button" id="waitlist-btn">Join Waitlist</button>
-            <button class="btn btn-outline" type="button" id="general-contact-btn">Email us</button>
-          </div>
-          <div class="contact-note">For partnerships or beta inquiries, email us.</div>
-          <div class="confirm-message" id="general-confirm" aria-live="polite">
-            Your email app should open with a prefilled request. If it didn’t, click here.
-          </div>
+          <div class="contact-note" style="margin-top:12px">For partnerships or beta inquiries, email <a href="mailto:info@swiftora.com" style="color:var(--brand-violet);font-weight:700">info@swiftora.com</a></div>
         </div>
-        <form class="contact-form is-hidden" id="waitlist-form">
+        <!-- Formspree: replace YOUR_FORM_ID with the ID from your Formspree dashboard at formspree.io -->
+        <form class="contact-form" id="waitlist-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="hidden" name="_redirect" value="https://www.swiftora.com/thank-you.html" />
+          <input type="hidden" name="_subject" value="New Swiftora Waitlist Signup" />
           <label class="form-field">
             <span>Name <span class="field-meta">Required</span></span>
-            <input type="text" name="name" required />
+            <input type="text" name="name" required autocomplete="name" />
           </label>
           <label class="form-field">
             <span>Email <span class="field-meta">Required</span></span>
-            <input type="email" name="email" required />
+            <input type="email" name="email" required autocomplete="email" />
           </label>
           <div class="form-field">
             <span>I sell on <span class="field-meta">Optional</span></span>
@@ -695,19 +699,16 @@
               <label class="check-option"><input type="checkbox" name="platforms" value="eBay" /> eBay</label>
               <label class="check-option"><input type="checkbox" name="platforms" value="Etsy" /> Etsy</label>
               <label class="check-option"><input type="checkbox" name="platforms" value="Ruby Lane" /> Ruby Lane</label>
-              <label class="check-option"><input type="checkbox" name="platforms" value="Other" /> Other</label>
+              <label class="check-option"><input type="checkbox" name="platforms" value="Other" id="platform-other-check" /> Other</label>
             </div>
-            <input type="text" name="platforms_other" placeholder="Other platform (optional)" />
+            <input type="text" name="platforms_other" id="platform-other-input" placeholder="Other platform (optional)" style="display:none;margin-top:8px" />
           </div>
           <label class="form-field">
             <span>Approx items listed/month <span class="field-meta">Optional</span></span>
-            <input type="text" name="items" placeholder="e.g., 50" />
+            <input type="text" name="items_per_month" placeholder="e.g., 20" />
           </label>
-          <button class="btn btn-dark" type="submit">Join Waitlist</button>
+          <button class="btn btn-dark" type="submit">Join Waitlist →</button>
         </form>
-        <div class="confirm-message" id="waitlist-confirm" aria-live="polite">
-          Your email app should open with a prefilled request. If it didn’t, click here.
-        </div>
       </div>
     </section>
 
@@ -740,121 +741,137 @@
     </div>
   </footer>
   <script>
-    const waitlistBtn = document.getElementById("waitlist-btn");
-    const heroWaitlistBtn = document.getElementById("hero-waitlist-btn");
-    const navWaitlistBtn = document.getElementById("nav-waitlist-btn");
-    const generalBtn = document.getElementById("general-contact-btn");
-    const generalConfirm = document.getElementById("general-confirm");
-    const waitlistForm = document.getElementById("waitlist-form");
-    const waitlistConfirm = document.getElementById("waitlist-confirm");
-    const otherPlatformCheck = waitlistForm?.querySelector('input[name="platforms"][value="Other"]');
-    const otherPlatformInput = waitlistForm?.querySelector('input[name="platforms_other"]');
-
-    const showConfirm = (node, fallbackHref) => {
-      if (!node) return;
-      node.classList.add("is-visible");
-      node.innerHTML = `Your email app should open with a prefilled request. If it didn’t, <a href="${fallbackHref}">click here</a>.`;
-    };
-
-    const revealWaitlistForm = () => {
-      if (!waitlistForm) return;
-      waitlistForm.classList.remove("is-hidden");
-      waitlistConfirm?.classList.remove("is-visible");
-      waitlistForm.scrollIntoView({ behavior: "smooth", block: "start" });
-      const firstInput = waitlistForm.querySelector("input[name=\"name\"]");
-      if (firstInput) firstInput.focus();
-    };
-
-    if (generalBtn) {
-      generalBtn.addEventListener("click", () => {
-        const subject = "Swiftora General Inquiry";
-        const body = [
-          "Hi Swiftora team,",
-          "",
-          "",
-          "—"
-        ].join("\n");
-        const href = `mailto:info@swiftora.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.location.href = href;
-        showConfirm(generalConfirm, href);
-      });
-    }
-
-    if (waitlistBtn && waitlistForm) {
-      waitlistBtn.addEventListener("click", revealWaitlistForm);
-    }
-
-    if (heroWaitlistBtn) {
-      heroWaitlistBtn.addEventListener("click", () => {
-        setTimeout(revealWaitlistForm, 200);
-      });
-    }
-
-    if (navWaitlistBtn) {
-      navWaitlistBtn.addEventListener("click", () => {
-        setTimeout(revealWaitlistForm, 200);
-      });
-    }
-
-    if (waitlistForm) {
-      if (otherPlatformCheck && otherPlatformInput) {
-        const toggleOtherInput = () => {
-          if (otherPlatformCheck.checked) {
-            otherPlatformInput.classList.add("is-visible");
-            otherPlatformInput.focus();
-          } else {
-            otherPlatformInput.classList.remove("is-visible");
-            otherPlatformInput.value = "";
-          }
-        };
-        otherPlatformCheck.addEventListener("change", toggleOtherInput);
-        toggleOtherInput();
-      }
-      waitlistForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const data = new FormData(waitlistForm);
-        const name = data.get("name") || "";
-        const email = data.get("email") || "";
-        const platforms = Array.from(waitlistForm.querySelectorAll("input[name=\"platforms\"]:checked"))
-          .map((input) => input.value);
-        const platformsOther = data.get("platforms_other") || "";
-        if (platformsOther) platforms.push(`Other: ${platformsOther}`);
-        const platformsText = platforms.length ? platforms.join(", ") : "";
-        const items = data.get("items") || "";
-        const subject = `Swiftora Waitlist Request — ${name}`.trim();
-        const bodyLines = [
-          "Hi Swiftora team,",
-          "",
-          "Please add me to the Swiftora waitlist.",
-          "",
-          `Name: ${name}`,
-          `Email: ${email}`
-        ];
-        if (platformsText) bodyLines.push(`I sell on: ${platformsText}`);
-        if (items) bodyLines.push(`Approx items listed/month: ${items}`);
-        bodyLines.push("", "—");
-        const body = bodyLines.join("\n");
-        const href = `mailto:info@swiftora.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.location.href = href;
-        showConfirm(waitlistConfirm, href);
-        waitlistForm.classList.add("is-hidden");
-      });
-    }
-
-    const tabs = document.querySelectorAll(".chip-tabs .chip");
-    const panels = document.querySelectorAll(".tab-panel");
-    if (tabs.length) {
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          const target = tab.getAttribute("data-tab");
-          tabs.forEach((btn) => btn.classList.remove("is-active"));
-          tab.classList.add("is-active");
-          panels.forEach((panel) => {
-            panel.classList.toggle("is-active", panel.getAttribute("data-tab-panel") === target);
-          });
+    /* ---- Chip tabs (Who it’s for) ---- */
+    document.querySelectorAll(".chip-tabs .chip").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.tab;
+        document.querySelectorAll(".chip-tabs .chip").forEach(b => b.classList.remove("is-active"));
+        tab.classList.add("is-active");
+        document.querySelectorAll(".tab-panel").forEach(p => {
+          p.classList.toggle("is-active", p.dataset.tabPanel === target);
         });
       });
+    });
+
+    /* ---- "Other" platform toggle in Formspree form ---- */
+    const otherCheck = document.getElementById("platform-other-check");
+    const otherInput = document.getElementById("platform-other-input");
+    if (otherCheck && otherInput) {
+      otherCheck.addEventListener("change", () => {
+        otherInput.style.display = otherCheck.checked ? "block" : "none";
+        if (!otherCheck.checked) otherInput.value = "";
+      });
     }
+
+    /* ---- Interactive demo ---- */
+    const ITEMS = [
+      {
+        match: ["pokemon","magic","mtg","yugioh","yu-gi-oh","trading card","baseball card","sports card","card lot","foil card"],
+        label: "Trading Cards",
+        title: q => `${tc(q)} — Collectible Card, Near Mint Condition`,
+        price: [8, 48],
+        condition: ["Card is near mint with no visible creases.","Corners are sharp; surface is clean and scratch-free.","No whitening or print defects on face."],
+        tags: ["trading cards","collectible cards","card games","near mint","TCG","PSA ready"]
+      },
+      {
+        match: ["atari","nintendo","sega","game boy","n64","nes","snes","ps1","genesis","video game","gameboy","gamecube"],
+        label: "Retro Video Games",
+        title: q => `${tc(q)} — Tested & Working, Original Cartridge`,
+        price: [14, 85],
+        condition: ["Cartridge tested and confirmed working.","Label intact with minor shelf wear only.","Contacts cleaned; saves and loads correctly."],
+        tags: ["retro gaming","vintage video game","nintendo","collectible game","working tested"]
+      },
+      {
+        match: ["pyrex","fiesta","mccoy","pottery","ceramic","stoneware","vase","bowl","plate","dish","casserole","crock"],
+        label: "Vintage Ceramics",
+        title: q => `Vintage ${tc(q)} — Mid-Century Collectible`,
+        price: [22, 72],
+        condition: ["No chips or cracks visible under close inspection.","Light surface crazing consistent with age and use.","Maker mark or stamp present on base."],
+        tags: ["vintage ceramics","mid century modern","collectible","kitchen collectibles","estate sale find"]
+      },
+      {
+        match: ["camera","lens","pentax","canon","nikon","minolta","film camera","slr","35mm","rangefinder"],
+        label: "Vintage Camera / Lens",
+        title: q => `${tc(q)} — Film Camera, Shutter Tested`,
+        price: [35, 130],
+        condition: ["Shutter fires cleanly at all speeds.","Viewfinder clear; minor dust is cosmetic only.","Light seals intact; no fungus or haze on glass."],
+        tags: ["film camera","35mm photography","vintage camera","analog photography","retro camera"]
+      },
+      {
+        match: ["levi","levis","denim","jeans","jacket","flannel","band tee","band shirt","graphic tee","sweatshirt","vintage shirt","crewneck"],
+        label: "Vintage Clothing",
+        title: q => `Vintage ${tc(q)} — Single Stitch, Great Wear-In`,
+        price: [18, 95],
+        condition: ["Single-stitched seams suggest pre-1994 production.","No holes, stains, or pilling present.","Natural fading adds authentic vintage character."],
+        tags: ["vintage clothing","thrifted fashion","streetwear","vintage denim","resale fashion"]
+      },
+      {
+        match: ["sterling","silver","gold","ring","necklace","bracelet","brooch","jewelry","earring","pendant","locket"],
+        label: "Vintage Jewelry",
+        title: q => `Vintage ${tc(q)} — Tested, Stamped, Ready to Ship`,
+        price: [15, 110],
+        condition: ["Metal tested and verified to marked purity.","Clasp or setting is functional with no damage.","Light tarnish present; polishes out easily."],
+        tags: ["vintage jewelry","sterling silver","estate jewelry","costume jewelry","boho jewelry"]
+      },
+      {
+        match: ["book","hardcover","first edition","signed","rare book","vintage book","paperback","novel","textbook"],
+        label: "Collectible Book",
+        title: q => `${tc(q)} — Vintage Edition, Collector Copy`,
+        price: [6, 45],
+        condition: ["Binding is tight; pages are clean and unmarked.","Dust jacket present with minor edge wear only.","No water damage, foxing, or musty odor."],
+        tags: ["vintage book","first edition","collectible book","rare book","estate find"]
+      },
+      {
+        match: ["vinyl","record","lp","45","album","7 inch","12 inch"],
+        label: "Vinyl Record",
+        title: q => `${tc(q)} — Original Press, Plays Clean`,
+        price: [8, 55],
+        condition: ["Plays through without skips or surface noise.","Label centered and legible with minor ring wear.","Sleeve shows typical storage wear; record is VG+."],
+        tags: ["vinyl record","LP","music collectible","vintage music","original press"]
+      }
+    ];
+
+    const DEFAULT = {
+      label: "Collectible Item",
+      title: q => `${tc(q)} — Vintage Collectible, Estate Find`,
+      price: [12, 58],
+      condition: ["No visible damage under close inspection.","Light wear consistent with age and prior use.","Cleaned and ready to ship."],
+      tags: ["vintage","collectible","estate sale","thrifted","resale"]
+    };
+
+    function tc(s) {
+      return s.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+    }
+    function rand(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function getItem(input) {
+      const lower = input.toLowerCase();
+      return ITEMS.find(cat => cat.match.some(kw => lower.includes(kw))) || DEFAULT;
+    }
+
+    function runDemo() {
+      const input = document.getElementById("demo-item-input").value.trim();
+      if (!input) return;
+      const cat = getItem(input);
+      const lo = rand(cat.price[0], cat.price[1]);
+      const hi = lo + rand(9, 24);
+      document.getElementById("demo-category-label").textContent = cat.label + " · Suggested Listing Draft";
+      document.getElementById("demo-title").textContent = cat.title(input);
+      document.getElementById("demo-price").textContent = `$${lo}–$${hi}`;
+      const condEl = document.getElementById("demo-condition");
+      condEl.innerHTML = cat.condition.map(c => `<li>${c}</li>`).join("");
+      const tagsEl = document.getElementById("demo-tags");
+      tagsEl.innerHTML = cat.tags.map(t => `<span class="tag">${t}</span>`).join("");
+      const out = document.getElementById("demo-output");
+      out.hidden = false;
+      out.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    document.getElementById("demo-run-btn")?.addEventListener("click", runDemo);
+    document.getElementById("demo-item-input")?.addEventListener("keydown", e => {
+      if (e.key === "Enter") runDemo();
+    });
   </script>
 </body>
 </html>

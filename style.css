@@ -3,8 +3,8 @@
 /* ---- THEME ---- */
 :root{
   /* Light site */
-  --primary:#ff6b00; --primary-900:#d95d00;
-  --secondary:#8e2de2; --secondary-900:#5a189a;
+  --primary:#FF6B35; --primary-900:#e8521f;
+  --secondary:#6C63FF; --secondary-900:#4a42e0;
   --ink:#222; --ink-2:#444; --muted:#6b7280;
   --bg:#fff; --bg-soft:#f7f8ff; --line:#e5e7eb;
   --shadow:0 8px 28px rgba(0,0,0,.08);
