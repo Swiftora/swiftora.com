@@ -184,10 +184,8 @@ div[id] {
   top: 0;
   z-index: 1000;
   height: var(--header-h);
-  background: rgba(255, 255, 255, 0.97);
-  border-bottom: 1px solid var(--stroke);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: #FFFFFF;
+  border-bottom: 1px solid #E5E7EB;
 }
 
 .header-inner {
@@ -198,12 +196,21 @@ div[id] {
   gap: var(--sp-4);
 }
 
-/* Logo — 36px height, no background, no border, no circle */
+/* Logo link pill — white bg ensures logo is readable over any page content */
+.header-inner > a:first-child {
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  padding: 6px 10px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* Logo — 44px height, no border, no circle */
 .brand-logo {
-  height: 36px;
+  height: 44px;
   width: auto;
   display: block;
-  flex-shrink: 0;
   background: none;
   border: none;
   border-radius: 0;
