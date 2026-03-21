@@ -146,6 +146,7 @@ div[id] {
 .text-muted   { color: var(--muted); }
 .text-orange  { color: var(--orange); }
 .text-white   { color: #fff; }
+.flex-center  { display: flex; justify-content: center; }
 
 .flex         { display: flex; }
 .flex-center  { display: flex; align-items: center; justify-content: center; }
@@ -1742,7 +1743,140 @@ div[id] {
 
 
 /* ============================================================
-   20. RESPONSIVE — 768px breakpoint
+   20. THANK YOU PAGE — dark hero variant
+============================================================ */
+.thankyou-hero {
+  background: linear-gradient(135deg, var(--hero-dark) 0%, var(--hero-mid) 55%, #3a1020 100%);
+  padding: var(--sp-20) 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.thankyou-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 700px 400px at 50% 120%, rgba(108, 99, 255, .20) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.thankyou-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-5);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.thankyou-checkmark {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: rgba(34, 197, 94, .15);
+  border: 1.5px solid rgba(34, 197, 94, .35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.thankyou-checkmark svg {
+  width: 32px;
+  height: 32px;
+  stroke: #4ade80;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.thankyou-hero h1 {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: #fff;
+}
+
+.thankyou-hero p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, .68);
+  line-height: 1.6;
+  max-width: 42ch;
+}
+
+
+/* ============================================================
+   21. LEGAL / PRIVACY PAGE
+============================================================ */
+.legal-hero {
+  background: var(--surface);
+  border-bottom: 1px solid var(--stroke);
+  padding: var(--sp-12) 0 40px;
+}
+
+.legal-hero h1 {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  margin: var(--sp-2) 0 var(--sp-2);
+}
+
+.legal-hero p {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.legal-wrap {
+  padding-top: var(--sp-12);
+  padding-bottom: var(--sp-20);
+}
+
+.legal-content {
+  max-width: 68ch;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.legal-content p { margin-bottom: var(--sp-4); }
+
+.legal-content h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: var(--sp-8) 0 var(--sp-3);
+  color: var(--text);
+}
+
+.legal-content ul {
+  margin: 0 0 var(--sp-4) var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.legal-content ul li { color: var(--muted); }
+
+.legal-content a {
+  color: var(--orange);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal-content a:hover { color: var(--orange-dark); }
+
+.legal-back { margin-top: var(--sp-10); }
+
+/* Pricing CTA sub spacing */
+.pricing-cta-sub { margin-bottom: var(--sp-6); }
+
+
+/* ============================================================
+   22. RESPONSIVE — 768px breakpoint
 ============================================================ */
 @media (max-width: 768px) {
 
