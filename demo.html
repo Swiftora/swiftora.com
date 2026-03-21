@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Try Swiftora — Live AI Listing Demo</title>
-  <meta name="description" content="Describe any vintage or resale item and watch Swiftora generate a listing-ready title, description, pricing guidance, and tags in seconds." />
+  <title>Try Swiftora — See AI Listings Built in Seconds</title>
+  <meta name="description" content="Describe any vintage or resale item and watch Swiftora build a complete listing — title, description, pricing, tags, and condition notes in seconds." />
   <link rel="canonical" href="https://www.swiftora.com/demo.html" />
   <link rel="icon" href="/Logos/swiftora_icon_192x192.png" sizes="192x192" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -20,9 +20,10 @@
       <a href="index.html" aria-label="Swiftora home">
         <img class="brand-logo" src="Logos/swiftora_logo_transparent.png" alt="Swiftora" />
       </a>
-      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="hamburger-label" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
-      </button>
+      </label>
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
         <a href="index.html">Home</a>
         <a href="demo.html" class="active">Demo</a>
@@ -33,68 +34,117 @@
     </div>
   </header>
 
-  <!-- ===== DEMO HERO ===== -->
+  <!-- ===== PAGE HERO ===== -->
   <div class="demo-page-hero">
     <h1>See Swiftora in action</h1>
-    <p>Describe any item you'd sell on eBay, Etsy, or Facebook Marketplace — and watch the listing write itself.</p>
+    <p>Describe any vintage or resale item and watch Swiftora build a complete listing.</p>
   </div>
 
-  <!-- ===== INPUT AREA ===== -->
+  <!-- ===== INPUT ===== -->
   <div class="demo-input-section">
     <div class="demo-input-row">
       <textarea
         class="demo-textarea"
         id="item-input"
-        placeholder="Describe your item — e.g. amber glass Fenton vase, 9 inches, ribbed, 1960s, no chips"
+        placeholder="Describe your item — e.g. amber glass Fenton vase, 9 inches, ribbed, 1960s, no chips. The more detail, the better the output."
         rows="3"
         aria-label="Item description"
       ></textarea>
-      <button class="btn btn-primary" id="generate-btn" type="button">
+      <button class="btn btn-primary btn-lg" id="generate-btn" type="button">
         Generate Listing
       </button>
     </div>
 
-    <!-- Photo upload -->
     <label class="demo-upload-area" id="upload-area" tabindex="0" role="button" aria-label="Upload item photos">
       <input type="file" id="photo-input" accept="image/*" multiple />
       <div class="upload-icon-wrap" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M12 3v13M8 7l4-4 4 4"/></svg>
       </div>
       <div class="upload-label">
-        <strong>Add photos (optional)</strong> — drag &amp; drop or click to upload. Multiple files supported.
+        <strong>Add photos (optional)</strong> — drag &amp; drop or click to browse. Multiple files supported.
       </div>
     </label>
-    <div class="thumb-grid" id="thumb-grid" aria-label="Uploaded photos"></div>
+
+    <div class="thumb-grid" id="thumb-grid" aria-label="Uploaded photo thumbnails"></div>
   </div>
 
-  <!-- ===== OUTPUT AREA ===== -->
-  <div class="demo-output-section" id="output-section" hidden aria-live="polite">
-    <div class="output-card" id="output-card">
-      <!-- Loading, result, or error state rendered by JS -->
-    </div>
-  </div>
+  <!-- ===== OUTPUT ===== -->
+  <div class="demo-output-section" id="output-section" hidden>
 
-  <!-- ===== INLINE WAITLIST ===== -->
-  <div class="demo-waitlist-banner">
-    <div class="demo-waitlist-inner">
-      <div class="demo-waitlist-copy">
-        <strong>Love what you see? Get early access →</strong>
-        <span>We'll reach out when Swiftora launches. First in, first served.</span>
+    <!-- Analyzing pulse -->
+    <div class="output-card" id="output-analyzing" hidden>
+      <div class="output-loading">
+        <div class="spinner" aria-hidden="true"></div>
+        <span>Swiftora is analyzing your item…</span>
       </div>
-      <form class="demo-waitlist-form" id="demo-waitlist-form" novalidate>
+    </div>
+
+    <!-- Result card -->
+    <div class="output-card demo-result-card" id="output-result" hidden aria-live="polite">
+      <div class="output-result">
+
+        <div class="demo-result-header">
+          <div class="output-row-label">Generated listing</div>
+          <span class="demo-result-badge" id="result-category">Vintage Collectible</span>
+        </div>
+
+        <div id="result-title" class="output-title-text"></div>
+
+        <div class="output-price-row">
+          <span class="price-badge" id="result-price"></span>
+          <span class="price-rationale-text" id="result-rationale"></span>
+        </div>
+
+        <div>
+          <div class="output-row-label">Description</div>
+          <div id="result-description" class="output-desc-text"></div>
+        </div>
+
+        <div>
+          <div class="output-row-label">Condition notes</div>
+          <div id="result-condition" class="output-condition-text"></div>
+        </div>
+
+        <div>
+          <div class="output-row-label">Tags</div>
+          <div id="result-tags" class="tags-flex"></div>
+        </div>
+
+        <div class="output-actions">
+          <button class="btn btn-primary" id="copy-btn" type="button">Copy Listing</button>
+          <button class="btn btn-secondary" id="reset-btn" type="button">Try Another Item</button>
+          <span class="copy-confirm" id="copy-confirm" aria-live="polite">✓ Copied to clipboard</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== DARK CTA ===== -->
+  <section class="demo-cta-dark" id="demo-cta">
+    <div class="wrap demo-cta-inner">
+      <div class="demo-cta-copy">
+        <div class="section-label">Early access</div>
+        <h2 class="demo-cta-heading">Ready to use the real thing?</h2>
+        <p class="demo-cta-sub">The live product pulls real sold comps, identifies items from photos, and writes complete listings in seconds. Join the waitlist to get in first.</p>
+      </div>
+      <form class="demo-cta-form" id="demo-cta-form" novalidate>
         <input
           class="demo-email-input"
           type="email"
+          id="demo-cta-email"
           name="email"
           placeholder="your@email.com"
           required
           autocomplete="email"
-          aria-label="Email address for early access"
+          aria-label="Email address"
         />
-        <button class="btn btn-primary" type="submit">Notify Me</button>
+        <button class="btn btn-primary" type="submit">Get Early Access →</button>
       </form>
+      <p class="demo-cta-note">Or <a href="index.html#waitlist">fill out the full waitlist form</a> to tell us what you sell.</p>
     </div>
-  </div>
+  </section>
 
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
@@ -136,35 +186,22 @@
 
   <script src="demo.js"></script>
   <script>
-    // Shared nav + footer
-    const hamburger = document.getElementById('hamburger');
-    const nav = document.getElementById('site-nav');
-    hamburger.addEventListener('click', () => {
-      const open = hamburger.classList.toggle('is-open');
-      nav.classList.toggle('is-open', open);
-      hamburger.setAttribute('aria-expanded', open);
-    });
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
-        hamburger.classList.remove('is-open');
-        nav.classList.remove('is-open');
-        hamburger.setAttribute('aria-expanded', 'false');
-      }
-    });
+    window.__V = 'v2026-03-20-02';
     document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-    // Inline demo waitlist capture — save to localStorage
-    document.getElementById('demo-waitlist-form').addEventListener('submit', (e) => {
+    // Demo CTA email capture — save to localStorage then redirect
+    document.getElementById('demo-cta-form').addEventListener('submit', function (e) {
       e.preventDefault();
-      const email = e.target.email.value.trim();
+      var email = document.getElementById('demo-cta-email').value.trim();
       if (!email) return;
       try {
-        const existing = JSON.parse(localStorage.getItem('swiftora_waitlist') || '[]');
-        existing.push({ email, timestamp: new Date().toISOString(), source: 'demo-page' });
-        localStorage.setItem('swiftora_waitlist', JSON.stringify(existing));
+        var list = JSON.parse(localStorage.getItem('swiftora_waitlist') || '[]');
+        list.push({ email: email, timestamp: new Date().toISOString(), source: 'demo-cta' });
+        localStorage.setItem('swiftora_waitlist', JSON.stringify(list));
       } catch (_) {}
-      window.location.href = 'thank-you.html';
+      window.location.href = 'index.html#waitlist';
     });
   </script>
+
 </body>
 </html>
