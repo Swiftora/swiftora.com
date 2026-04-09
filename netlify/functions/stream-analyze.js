@@ -1,4 +1,17 @@
+const ALLOWED_ORIGINS = ["https://www.swiftora.com", "https://swiftora.com"];
+
+function corsHeaders(req) {
+  const origin = req.headers.get("origin") || "";
+  return {
+    "access-control-allow-origin": ALLOWED_ORIGINS.includes(origin) ? origin : "",
+    "access-control-allow-methods": "POST, OPTIONS",
+    "access-control-allow-headers": "content-type",
+  };
+}
+
 export default async (req) => {
+  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(req) });
+
   const { key, text } = await req.json().catch(() => ({}));
 
   const stream = new ReadableStream({
@@ -37,7 +50,7 @@ export default async (req) => {
     headers: {
       "content-type": "text/event-stream",
       "cache-control": "no-cache",
-      "access-control-allow-origin": "*"
+      ...corsHeaders(req)
     }
   });
 };
